@@ -12,7 +12,6 @@ import 'View/Account/center_signup.dart';
 import 'View/Home/Pages/admin_pages/posts_view.dart';
 import 'View/Home/Pages/admin_pages/register_post.dart';
 import 'View/Home/Pages/mypage/useage.dart';
-import 'View/Home/Pages/nomar_pages/pt_detail.dart';
 
 void main() {
   runApp(
@@ -40,7 +39,6 @@ class MyApp extends StatelessWidget {
         '/search': (context) => Search_Page(),
         '/register_post': (context) => Register_Post(),
         '/register_pt': (context) => Register_Pt(),
-        '/pt_detail': (context) => Pt_detail(),
         '/admin_posts_view': (context) => Posts_View(),
         '/admin_pt_view': (context) => Pt_View(),
         '/useage': (context) => Useage_Page(),

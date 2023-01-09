@@ -17,7 +17,9 @@ class _Posts_ViewState extends State<Posts_View> {
 
   @override
   Widget build(BuildContext context) {
+
     Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
@@ -29,8 +31,8 @@ class _Posts_ViewState extends State<Posts_View> {
             height: size.height * 0.7,
             child: ListView(
               children: [
-                List_Item(size),
-                List_Item(size),
+                Gym_Trainer_Item(size,context),
+                Gym_Trainer_Item(size,context),
               ],
             )),
       ),

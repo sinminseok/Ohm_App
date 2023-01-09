@@ -14,7 +14,6 @@ import '../../Utils/http_urls.dart';
 class Http_Posts with ChangeNotifier {
 
 
-
   Future<Post?> register_post(title,content,images) async {
     //url 로 post(이메일 컨트롤러 , 패스워드 컨트롤러)
     var res = await http.post(Uri.parse(Http_Url().search_gym),

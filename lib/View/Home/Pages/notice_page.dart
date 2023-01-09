@@ -38,9 +38,7 @@ class _Notice_Page extends State<Notice_Page> {
             Align(
               alignment: Alignment.center,
               child: SingleChildScrollView(
-                  child: admin_autority == "off"
-                      //일반회원모드 일때
-                      ? Column(
+                  child: Column(
                           children: [
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -108,32 +106,32 @@ class _Notice_Page extends State<Notice_Page> {
                             ),
                             check_ontap == false
                                 ? Container(
-                                    width: size.width * 0.8,
+                                    width: size.width * 1,
                                     height: size.height * 0.7,
                                     child: ListView(
                                       children: [
-                                        List_Item(size),
-                                        List_Item(size),
+                                        Gym_Post_Item(size,context),
+                                        Gym_Post_Item(size,context),
+                                        Gym_Post_Item(size,context),
                                       ],
                                     ))
                                 : Container(
-                                    width: size.width * 0.9,
+                                    width: size.width * 1,
                                     height: size.height * 0.7,
                                     child: ListView(
                                       children: [
                                         InkWell(
                                             onTap: () {
-                                              Navigator.pushNamed(
-                                                  context, '/pt_detail');
+
                                             },
-                                            child: List_Pt(size)),
-                                        List_Pt(size),
+                                            child: Gym_Trainer_Item(size,context)),
+                                        Gym_Trainer_Item(size,context),
                                       ],
                                     ))
                           ],
                         )
                       //관리자모드 (센터로 로그인했을경우)
-                      : Admin_notice()),
+                   ),
             )
           ],
         ));

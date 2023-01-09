@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shopping_tool/Utils/toast.dart';
 import 'package:shopping_tool/View/Account/login_page.dart';
+import 'package:shopping_tool/View/Account/signup_detail_page.dart';
 
 import '../../Utils/components/rounded_button.dart';
 import '../../Utils/components/rounded_input.dart';
@@ -58,8 +59,6 @@ class _Signup_page extends State<Signup_page>
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
                 ),
 
-
-
                 SizedBox(height: size.height*0.05),
                 RoundedInput(
                     controller: _userIDController,
@@ -68,7 +67,7 @@ class _Signup_page extends State<Signup_page>
                 RoundedPasswordInput(
                     controller: _passwordController, hint: 'Password'),
                 RoundedPasswordInput(
-                    controller: _checkpasswordController, hint: 'checkpw'),
+                    controller: _checkpasswordController, hint: 'check pw'),
                 InkWell(
                   onTap: (){
                     showtoast("가입번호는 고객센터에 문의해주세요!");
@@ -81,12 +80,34 @@ class _Signup_page extends State<Signup_page>
                 SizedBox(
                   height: size.height * 0.02,
                 ),
-                RoundedButton(
-                  id_controller: _userIDController,
-                  pw_controller: _passwordController,
-                  title: 'Register',
-                  check_pw_controller: _checkpasswordController,
+              InkWell(
+                onTap: () {
+                  // if(_passwordController != _checkpasswordController){
+                  //   showtoast("비밀번호가 일치하지 않습니다");
+                  // }
+                  Navigator.push(context,
+                      PageTransition(type: PageTransitionType.fade, child: Signup_Detail_page()));
+
+                },
+                borderRadius: BorderRadius.circular(10),
+                child: Container(
+                  width: size.width * 0.8,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: kPrimaryColor,
+                  ),
+
+                  padding: EdgeInsets.symmetric(vertical: 20),
+                  alignment: Alignment.center,
+                  child: Text(
+                    "가입 하기",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18
+                    ),
+                  ),
                 ),
+              ),
 
 
                 SizedBox(height: 30),

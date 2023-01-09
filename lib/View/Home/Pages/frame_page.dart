@@ -21,6 +21,7 @@ class _Frame_page extends State<Frame_page> {
   final screens = [
     HomePage(),
     Notice_Page(),
+    Search_Page(),
     User_page(),
   ];
 
@@ -37,6 +38,7 @@ class _Frame_page extends State<Frame_page> {
           iconList: [
             Icons.home,
             Icons.speaker_notes_outlined,
+            Icons.search,
             Icons.person,
           ],
           onChange: (val) {

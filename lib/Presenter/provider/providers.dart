@@ -1,6 +1,8 @@
 
 
 import 'package:flutter/widgets.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -9,9 +11,27 @@ import '../../Utils/toast.dart';
 
 class Providers with ChangeNotifier{
   String? admin_check_disk;
+  double? _user_latitude;
+  double? _user_longitude;
 
   String? _admin_authority = "off";
+
   String? get admin_authority => _admin_authority;
+
+  double? get user_latitude => _user_latitude;
+  double? get user_longitude => _user_longitude;
+
+   get_user_position(double latitude ,double longitude){
+    _user_latitude = latitude;
+    _user_longitude = longitude;
+    notifyListeners();
+    if(_user_latitude == null || _user_longitude == null){
+      return false;
+    }else{
+      return true;
+    }
+
+  }
 
   //관리자 모드 on/off
   void change_admin_authority()async{
@@ -30,5 +50,7 @@ class Providers with ChangeNotifier{
     }
     notifyListeners();
 
-}}
+}
+
+}
 

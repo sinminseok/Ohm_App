@@ -26,11 +26,9 @@ class _User_pageState extends State<User_page> {
                 child: Column(
                   children: [
                     SizedBox(height: size.height*0.07,),
-
                     InkWell(
                       onTap: ()async{
-                        Navigator.pushNamed(context, '/center_login');
-                        Provider.of<Providers>(context,listen: false).change_admin_authority();
+
                       },
                       child: Container(
                         decoration: BoxDecoration(
@@ -45,10 +43,32 @@ class _User_pageState extends State<User_page> {
                               borderRadius: BorderRadius.circular(0.0)),
                           selectedTileColor: Colors.grey[200],
                           leading: Icon(Icons.home_work_outlined),
-                          title: Text('센터 로그인 및 회원가입 하러가기'),
+                          title: Text('서비스 문의하기'),
                         ),
                       ),
                     ),
+                    // InkWell(
+                    //   onTap: ()async{
+                    //     Navigator.pushNamed(context, '/center_login');
+                    //     Provider.of<Providers>(context,listen: false).change_admin_authority();
+                    //   },
+                    //   child: Container(
+                    //     decoration: BoxDecoration(
+                    //       color: Colors.white38,
+                    //       border: Border(
+                    //           bottom: BorderSide(
+                    //             color: Colors.grey,
+                    //           )),
+                    //     ),
+                    //     child: ListTile(
+                    //       shape: RoundedRectangleBorder(
+                    //           borderRadius: BorderRadius.circular(0.0)),
+                    //       selectedTileColor: Colors.grey[200],
+                    //       leading: Icon(Icons.home_work_outlined),
+                    //       title: Text('센터 로그인 및 회원가입 하러가기'),
+                    //     ),
+                    //   ),
+                    // ),
                     SizedBox(height: size.height*0.1,),
                     InkWell(
                       onTap: (){

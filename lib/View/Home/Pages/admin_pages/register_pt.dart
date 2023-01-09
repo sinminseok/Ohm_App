@@ -142,37 +142,7 @@ class _Register_Pt extends State<Register_Pt> {
             SizedBox(
               height: 20,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                FlatButton.icon(
-                  icon: Icon(
-                    Icons.camera,
-                    size: 50,
-                  ),
-                  onPressed: () {
-                    takePhoto(ImageSource.camera);
-                  },
-                  label: Text(
-                    'Camera',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                ),
-                FlatButton.icon(
-                  icon: Icon(
-                    Icons.photo_library,
-                    size: 50,
-                  ),
-                  onPressed: () {
-                    takePhoto(ImageSource.gallery);
-                  },
-                  label: Text(
-                    'Gallery',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                )
-              ],
-            )
+
           ],
         ));
   }
