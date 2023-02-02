@@ -4,7 +4,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 void showtoast(String message) async {
   Fluttertoast.showToast(
     msg: message,
-
     timeInSecForIosWeb: 3,
     textColor: Colors.black,
     backgroundColor: Colors.white,

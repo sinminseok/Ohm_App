@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:shopping_tool/Presenter/provider/providers.dart';
-import 'package:shopping_tool/View/Account/signup_page.dart';
-import 'package:shopping_tool/View/Home/Pages/admin_pages/pt_view.dart';
-import 'package:shopping_tool/View/Home/Pages/admin_pages/register_pt.dart';
-import 'package:shopping_tool/View/Home/Pages/frame_page.dart';
-import 'package:shopping_tool/View/Home/Pages/mypage/servie_center.dart';
-import 'package:shopping_tool/View/Home/Pages/search_page.dart';
-import 'View/Account/center_signup.dart';
-import 'View/Home/Pages/admin_pages/posts_view.dart';
-import 'View/Home/Pages/admin_pages/register_post.dart';
-import 'View/Home/Pages/mypage/useage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'Client/Controller/provider/providers.dart';
+import 'Client/View/frame/frame_page.dart';
+import 'Manager/View/frame/AdminFrame.dart';
 
 void main() {
   runApp(
@@ -24,28 +18,48 @@ void main() {
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  var authority;
+
+  @override
+  void initState() {
+    check_authority();
+    super.initState();
+  }
+
+  check_authority()async{
+    final prefs = await SharedPreferences.getInstance();
+    authority = prefs.getString("admin_authority");
+    print("DDDD");
+    print(authority);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      initialRoute: '/',
-      routes: {
-        '/': (context) => Frame_page(),
-        // "/second" route로 이동하면, SecondScreen 위젯을 생성합니다.
-        '/signup': (context) => Signup_page(),
-        '/center_login': (context) => Center_Login(),
-        '/search': (context) => Search_Page(),
-        '/register_post': (context) => Register_Post(),
-        '/register_pt': (context) => Register_Pt(),
-        '/admin_posts_view': (context) => Posts_View(),
-        '/admin_pt_view': (context) => Pt_View(),
-        '/useage': (context) => Useage_Page(),
-        '/service_center': (context) => ServiceCenter_Page(),
+    return ScreenUtilInit(
+      designSize: const Size(360, 690),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context , child) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'First Method',
+          // You can use the library anywhere in the app even in theme
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+            textTheme: Typography.englishLike2018.apply(fontSizeFactor: 1.sp),
+          ),
+          home: child,
+        );
       },
-      title: 'Flutter Animated Login',
-      debugShowCheckedModeBanner: false,
+      child:  authority==null?AdminFrame():FramePage(),
     );
   }
 }

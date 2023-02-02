@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shopping_tool/Utils/toast.dart';
-import 'package:shopping_tool/View/Home/Pages/frame_page.dart';
+import '../../Client/View/frame/frame_page.dart';
+import '../../Manager/Controller/http_manager.dart';
 import '../constants.dart';
 
 
@@ -23,17 +24,7 @@ class RoundedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    return InkWell(
-      onTap: () {
-        if(pw_controller != check_pw_controller){
-          showtoast("비밀번호가 일치하지 않습니다");
-        }
-        Navigator.push(context,
-            PageTransition(type: PageTransitionType.fade, child: Frame_page()));
-
-      },
-      borderRadius: BorderRadius.circular(10),
-      child: Container(
+    return Container(
         width: size.width * 0.8,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
@@ -49,7 +40,6 @@ class RoundedButton extends StatelessWidget {
               fontSize: 18
           ),
         ),
-      ),
-    );
+      );
   }
 }
