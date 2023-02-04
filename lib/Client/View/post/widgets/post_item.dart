@@ -1,19 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:shopping_tool/Model/PostDto.dart';
 
-import '../../search/detail_views/Gym_Post_Detail_Page.dart';
+import '../../search/detail_views/Gym_Detail.dart';
+import '../detail_views/post_detail.dart';
 
-Widget Gym_Post_Item(Size size,context) {
+Widget Post_Item(Size size,context,PostDto postDto) {
+
   return InkWell(
     onTap: (){
-      // Navigator.push(
-      //     context,
-      //     PageTransition(
-      //         type: PageTransitionType.fade,
-      //         child: Gym_Post_Detail_Page()));
+      Navigator.push(
+          context,
+          PageTransition(
+              type: PageTransitionType.fade,
+              child: Post_Detail(postDto:postDto)));
     },
     child:Padding(
-      padding: const EdgeInsets.only(bottom: 8.0),
+      padding: const EdgeInsets.only(bottom: 50.0),
       child: Container(
           height: size.height * 0.62,
           decoration: BoxDecoration(
@@ -41,7 +45,7 @@ Widget Gym_Post_Item(Size size,context) {
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text("헬스장 창립기념 이벤트! 2022년 12월까지 3개월 99000원 ",style: TextStyle(fontFamily: "boldfont",fontSize: 21),),
+                child: Text("${postDto.title}",style: TextStyle(fontFamily: "boldfont",fontSize: 21),),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),

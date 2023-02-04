@@ -7,7 +7,7 @@ class ManagerApi_Url{
 
   String save_trainer = endpoint +  "trainer";
 
-  String info_manager = endpoint + "manager";
+  String info_manager = endpoint + "manager/info/";
 
   String login_manager = endpoint + "manager/login";
 
@@ -26,18 +26,20 @@ class GymApi_Url{
 
   String increase_count = endpoint + "gym/count-increase/";
 
-  String current_count = endpoint + "gym/count";
+  String current_count = endpoint + "gym/count/";
 
-  String find_byName = endpoint + "gym/name";
+  String find_byName = endpoint + "gym/name/";
 
-  String findall = endpoint + "gyms";
+  String findall = endpoint + "gyms/";
 
 }
 
 
 class PostApi_Url{
 
-  String find_byId = endpoint+"post";
+  String find_byId = endpoint+"post/";
 
-  String findall_bygymId = endpoint + "posts";
+  String findall_bygymId = endpoint + "posts/";
+
+  String save_post = endpoint +"post/";
 }

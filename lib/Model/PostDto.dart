@@ -3,23 +3,35 @@ import 'package:flutter/cupertino.dart';
 
 import 'PostImgDto.dart';
 
-class Post {
+class PostDto {
+  late int id;
   late String title;
   late String content;
   late List<PostImgDto> imgs;
 
 
-  Post(
-      {required this.title, required this.content, required this.imgs});
+  PostDto(
+      {required this.id,required this.title, required this.content, required this.imgs});
 
-  factory Post.fromJson(Map<String, dynamic> json) {
-    return Post(
+  PostDto.makeDto(String title,String content):
+      this.title = title,
+      this.content = content;
 
+
+  factory PostDto.fromJson(Map<String, dynamic> json,List<PostImgDto> imgs) {
+    return PostDto(
+      id: json['id'],
       title: json['title'],
       content: json['content'],
-      imgs: json['imgs'],
+      imgs: imgs,
     );
   }
+
+  Map<String, dynamic> toJson() =>
+      {
+        'title': title,
+        'content': content,
+      };
 
 
 

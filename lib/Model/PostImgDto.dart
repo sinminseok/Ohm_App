@@ -3,7 +3,7 @@ import 'dart:ffi';
 
 class PostImgDto{
 
-  late Long id;
+  late int id;
   late String origFileName;
   late String filePath;
 

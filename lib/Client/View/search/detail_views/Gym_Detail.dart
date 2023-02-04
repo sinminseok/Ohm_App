@@ -2,18 +2,24 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shopping_tool/Model/GymDto.dart';
+import 'package:shopping_tool/Model/PostDto.dart';
 import 'package:shopping_tool/Utils/constants.dart';
 
 import '../../Components/basic_appbar.dart';
 
-class Gym_Post_Detail_Page extends StatefulWidget {
-  const Gym_Post_Detail_Page({Key? key}) : super(key: key);
+class Gym_Detail extends StatefulWidget {
+
+
+  GymDto gymDto;
+
+  Gym_Detail({required this.gymDto});
 
   @override
-  _Gym_Post_Detail_PageState createState() => _Gym_Post_Detail_PageState();
+  _Gym_Detail createState() => _Gym_Detail();
 }
 
-class _Gym_Post_Detail_PageState extends State<Gym_Post_Detail_Page> {
+class _Gym_Detail extends State<Gym_Detail> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;

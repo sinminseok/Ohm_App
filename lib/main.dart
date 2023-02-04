@@ -28,18 +28,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   var authority;
 
-  @override
-  void initState() {
-    check_authority();
-    super.initState();
-  }
 
-  check_authority()async{
-    final prefs = await SharedPreferences.getInstance();
-    authority = prefs.getString("admin_authority");
-    print("DDDD");
-    print(authority);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +48,7 @@ class _MyAppState extends State<MyApp> {
           home: child,
         );
       },
-      child:  authority==null?AdminFrame():FramePage(),
+      child:  FramePage(),
     );
   }
 }

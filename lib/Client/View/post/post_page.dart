@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../Utils/constants.dart';
-import 'widgets/announcement_widget.dart';
+import 'widgets/post_item.dart';
 
 class PostPage extends StatefulWidget {
   const PostPage({Key? key}) : super(key: key);
@@ -95,28 +95,28 @@ class _PostPage extends State<PostPage> {
                                 ))),
                     ],
                   ),
-                  check_ontap == false
-                      ? Container(
-                          width: 360.w,
-                          height: size.height * 0.7,
-                          child: ListView(
-                            children: [
-                              Gym_Post_Item(size, context),
-                              Gym_Post_Item(size, context),
-                              Gym_Post_Item(size, context),
-                            ],
-                          ))
-                      : Container(
-                          width: size.width * 1,
-                          height: size.height * 0.7,
-                          child: ListView(
-                            children: [
-                              InkWell(
-                                  onTap: () {},
-                                  child: Gym_Trainer_Item(size, context)),
-                              Gym_Trainer_Item(size, context),
-                            ],
-                          ))
+                  // check_ontap == false
+                  //     ? Container(
+                  //         width: 360.w,
+                  //         height: size.height * 0.7,
+                  //         child: ListView(
+                  //           children: [
+                  //             Gym_Post_Item(size, context,),
+                  //             Gym_Post_Item(size, context),
+                  //             Gym_Post_Item(size, context),
+                  //           ],
+                  //         ))
+                  //     : Container(
+                  //         width: size.width * 1,
+                  //         height: size.height * 0.7,
+                  //         child: ListView(
+                  //           children: [
+                  //             InkWell(
+                  //                 onTap: () {},
+                  //                 child: Gym_Trainer_Item(size, context)),
+                  //             Gym_Trainer_Item(size, context),
+                  //           ],
+                  //         ))
                 ],
               )
                   //관리자모드 (센터로 로그인했을경우)

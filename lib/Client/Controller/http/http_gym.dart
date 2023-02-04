@@ -16,7 +16,7 @@ class Http_Gym with ChangeNotifier {
   String? get gym_name => _gym_name;
 
   Future<List<GymDto>?> search_allgym() async {
-    print("JJ");
+
     var res = await http.get(
       Uri.parse(GymApi_Url().findall),
       headers: {'Content-Type': 'application/json'},
@@ -47,11 +47,12 @@ class Http_Gym with ChangeNotifier {
 
 
 
-  Future<GymDto?> search_byId(int gymId) async{
+    Future<GymDto?> search_byId(int gymId) async{
     var res = await http.get(
-      Uri.parse(GymApi_Url().find_byId + "/${gymId}"),
+      Uri.parse(GymApi_Url().find_byId + "${gymId}"),
       headers: {'Content-Type': 'application/json'},
     );
+
 
     if(res.statusCode == 200){
       List<GymImgDto> imgs = [];

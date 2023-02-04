@@ -1,16 +1,22 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:shopping_tool/Model/GymDto.dart';
 import 'package:shopping_tool/Model/TrainerDto.dart';
 import 'package:http/http.dart' as http;
 import 'package:shopping_tool/Model/requestDto/ManagerRequestDto.dart';
 import 'package:shopping_tool/Utils/http_urls.dart';
 import 'package:shopping_tool/Utils/toast.dart';
 
+import '../../Client/Controller/http/http_gym.dart';
+
 class Http_Manager with ChangeNotifier {
 
-  Future<TrainerDto?> getinfo_manager(String? id,String? token)async{
-    var res = await http.get(Uri.parse(ManagerApi_Url().info_manager),
+
+  //managerId로 Gym정보조회
+  Future<GymDto?> gyminfo_byManager(String? id,String? token)async{
+
+    var res = await http.get(Uri.parse(ManagerApi_Url().info_manager + "${id}"),
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
@@ -18,20 +24,25 @@ class Http_Manager with ChangeNotifier {
         },);
 
 
-
     if (res.statusCode == 200) {
 
       final decodeData = utf8.decode(res.bodyBytes);
       final data = jsonDecode(decodeData);
-      TrainerDto trainerDto = TrainerDto.fromJson(data);
 
-      return trainerDto;
+
+      GymDto? search_byId =await Http_Gym().search_byId(data['gymDto']['id']);
+
+  //    GymDto gymDto = GymDto.fromJson(data['gymDto']);
+
+      return search_byId;
     }else{
       showtoast("ERROR");
       return null;
     }
 
   }
+
+
 
 
   Future<int?> register_manager(
