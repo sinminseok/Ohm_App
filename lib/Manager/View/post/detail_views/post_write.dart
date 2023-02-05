@@ -1,7 +1,8 @@
 
 import 'dart:io';
 import 'dart:typed_data';
-
+import 'package:dio/dio.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -27,6 +28,8 @@ class _Post_WriteState extends State<Post_Write> {
   PickedFile? _image;
   var imim;
   List<File> imageFileList = [];
+
+
 
 
   Future getImageFromGallery() async {
@@ -142,8 +145,9 @@ class _Post_WriteState extends State<Post_Write> {
                     final prefs = await SharedPreferences.getInstance();
                     print(prefs.getString("token"));
                     imageFileList.add(File(_image!.path));
-                    PostApiController().save_post(_titleController.text,_contentController.text,imageFileList,"2",prefs.getString("token").toString());
-
+                    var save_post =await PostApiController().save_post(_titleController.text,_contentController.text,imageFileList,"2",prefs.getString("token").toString());
+                    print(save_post.runtimeType);
+                    PostApiController().save_postimg(save_post.toString(), imageFileList, prefs.getString("token").toString());
                   },
                   child: Text("글 작성 클릭!"))
 

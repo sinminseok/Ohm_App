@@ -10,6 +10,7 @@ Widget Post_Item(Size size,context,PostDto postDto) {
 
   return InkWell(
     onTap: (){
+    //  print(postDto.imgs[0].filePath);
       Navigator.push(
           context,
           PageTransition(
@@ -39,7 +40,7 @@ Widget Post_Item(Size size,context,PostDto postDto) {
                 child: ClipRRect(
                     borderRadius: BorderRadius.circular(1.0),
                     child: Image.asset(
-                      "assets/images/img2.jpeg",
+                      "${postDto.imgs[0].filePath}",
                       fit: BoxFit.cover,
                     )),
               ),

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
-
+import 'package:http_parser/http_parser.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shopping_tool/Model/GymDto.dart';
 import 'package:shopping_tool/Model/PostDto.dart';
@@ -16,46 +17,76 @@ import '../../Client/Controller/http/http_gym.dart';
 class PostApiController with ChangeNotifier {
 
 
-  save_post(String title, String content, List<File> imageFileList,
+    Future<String?> save_post(String title, String content, List<File> imageFileList,
       String gymId, String token) async {
     PostDto postDto = PostDto.makeDto(title, content);
 
     String postdto = jsonEncode(postDto);
-    String messageRes = '';
-    print(imageFileList);
-
-    var request = new http.MultipartRequest(
-        "POST", Uri.parse(PostApi_Url().save_post + "${gymId}"));
-
-    Map<String, String> headers = {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      'Authorization': 'Bearer $token',
-    };
-
-    request.headers.addAll(headers);
-    print("postdto == ");
-    print(postdto.runtimeType);
-    request.['PostDto'] = postdto;
-
-    for (var imageFile in imageFileList) {
-      request.files.add(
-          await http.MultipartFile.fromPath('images', imageFile!.path)
 
 
-      );
-    }
 
-   var res = await http.Response.fromStream(await request.send());
-    print(res.statusCode);
+    var res = await http.post(Uri.parse(PostApi_Url().save_post+"${gymId}"),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token'
+        },
+        body: json.encode({
+          'title': title,
+          'content':content
+
+        }));
 
     if (res.statusCode == 200) {
-      messageRes = '200';
-    } else {
-      messageRes = '${res.statusCode} ${res.reasonPhrase}';
-      print(messageRes);
+
+      final decodeData = utf8.decode(res.bodyBytes);
+      final data = jsonDecode(decodeData);
+      print(data.runtimeType);
+
+      return data.toString();
+
+    }else{
+      showtoast("ERRORR");
+      return null;
     }
+
   }
+
+
+    save_postimg(String postId,List<File> imageFileList,
+        String token) async {
+
+
+
+      FormData _formData;
+
+      if(imageFileList.isNotEmpty){
+
+        final List<MultipartFile> _files = imageFileList.map((img) => MultipartFile.fromFileSync(img.path,contentType: MediaType("image", "jpg"))).toList();
+
+        final baseOptions = BaseOptions(
+
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            'Authorization': 'Bearer $token' },
+
+          // contentType = 'multipart/form-data' // 'Application/json'
+        );
+        Dio dio = Dio(baseOptions);
+
+
+
+        // if(imgList.isNotEmpty){
+        _formData = FormData.fromMap({
+          "images": _files,
+
+        });
+
+        var res =await dio.post(PostApi_Url().save_postimgs + "${postId}", data :_formData);
+        print(res.data);
+
+
+
+      }}
 
   //Gym에 종속된 Post 모두 조회
   Future<List<PostDto>?> findall_posts(String gymId) async {

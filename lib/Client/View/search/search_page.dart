@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
+import 'package:shopping_tool/Utils/toast.dart';
 import '../../../Model/GymDto.dart';
 import '../../../Utils/constants.dart';
 import '../../../Utils/key_values.dart';
@@ -23,6 +25,7 @@ class _Search_PageState extends State<Search_Page> {
 
   //모든 헬스장
   List<GymDto> all_gyms = [];
+  List<GymDto> find_gyms = [];
   var addrData;
 
   //현재 사용자 위치 도로명주소 가져오는 함수
@@ -63,9 +66,7 @@ class _Search_PageState extends State<Search_Page> {
   }
 
   get_allgym() async {
-    all_gyms = Http_Gym().search_allgym() as List<GymDto>;
-    print(all_gyms.length);
-    print("ASDASD");
+    all_gyms = await Http_Gym().search_allgym() as List<GymDto>;
     return all_gyms;
   }
 
@@ -77,82 +78,125 @@ class _Search_PageState extends State<Search_Page> {
   }
 
   @override
+  void dispose(){
+    print("dispose");
+    find_gyms = [];
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     double? user_latitude = Provider.of<Providers>(context).user_latitude;
     double? user_longitude = Provider.of<Providers>(context).user_longitude;
+    TextEditingController _searchController = TextEditingController();
 
     Size size = MediaQuery.of(context).size;
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
           backgroundColor: kBackgroundColor,
-          actions: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: InkWell(
-                  onTap: () {
-                    get_allgym();
-                    //showSearch(context: context, delegate: CustomSearchPage());
-                  },
-                  child: Icon(
-                    Icons.search,
-                    color: Colors.black,
-                  )),
-            )
-          ],
         ),
         backgroundColor: kBackgroundColor,
         body: InkWell(
           onTap: () {},
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              //user_latitude는 사용자가 직접 위치를 지정했는지 안했는지 판별하는 변수
+          child: SingleChildScrollView(
+            child: Column(
 
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  width: size.width * 1,
-                  height: size.height * 0.001,
-                  decoration: BoxDecoration(color: Colors.grey),
-                ),
-              ),
+              children: [
+                //user_latitude는 사용자가 직접 위치를 지정했는지 안했는지 판별하는 변수
+                Center(
+                    child: Container(
+                        margin: EdgeInsets.only(bottom: 20.h),
 
-              FutureBuilder(
-                  future: get_allgym(),
-                  builder: (BuildContext context, AsyncSnapshot snapshot) {
-                    if (all_gyms.length == 0) {
-                      return Container(
-                        child: Text("검색 결과가 없습니다."),
-                      );
-                    }
-                    if (snapshot.connectionState == false) {
-                      return Center(
-                          child: CircularProgressIndicator());
-                    }
-                    if (snapshot.hasData == false) {
-                      return Center(
-                          child: CircularProgressIndicator());
-                    }
-                    //error가 발생하게 될 경우 반환하게 되는 부분
-                    else if (snapshot.hasError) {
-                      return Center(
-                        child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: CircularProgressIndicator()),
-                      );
-                    } else {
-                      return Container(
-                          width: size.width * 0.9,
-                          height: size.height * 0.67,
-                          child: ListView.builder(
-                              itemCount: all_gyms.length,
-                              itemBuilder: (BuildContext ctx, int idx) {
-                                return Gym_Container(size: size, gymDto: all_gyms[idx]);
-                              }));
-                    }
-                  }),
-            ],
+                        height: size.height * 0.05,
+                        child: TextField(
+                          maxLines: 10,
+                          textInputAction: TextInputAction.done,
+                          controller: _searchController,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.only(left: 20, top: 20),
+                            hintText: "헬스장 이름",
+                            hintStyle: TextStyle(
+                                fontFamily: "gilogfont", fontSize: 21),
+                            border: InputBorder.none,
+                            suffixIcon: Padding(
+                              padding:
+                                  const EdgeInsets.only(top: 10.0, right: 10),
+                              child: IconButton(
+                                onPressed: () async{
+                                  if(_searchController.text == ""){
+                                    showtoast("내용을 입력해주세요");
+                                  }else{
+
+                                    var result = await Http_Gym().search_byname(_searchController.text);
+                                    if(result.length == 0){
+                                      showtoast("검색 결과가 없습니다.");
+                                    }
+
+                                    setState(() {
+                                      find_gyms = result;
+                                    });
+                                  }
+                                  print("object");
+                                  print(find_gyms);
+
+
+                                },
+                                icon: Icon(
+                                  Icons.search,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ))),
+
+                find_gyms.length != 0 ?
+                Container(
+                    width: size.width * 0.9,
+                    height: 700.h,
+                    child: ListView.builder(
+                        itemCount: find_gyms.length,
+                        itemBuilder: (BuildContext ctx, int idx) {
+                          return Gym_Container(
+                              size: size, gymDto: find_gyms[idx]);
+                        }))
+
+                    : FutureBuilder(
+                    future: get_allgym(),
+                    builder: (BuildContext context, AsyncSnapshot snapshot) {
+                      if (all_gyms.length == 0) {
+                        return Container(
+                          child: Text("검색 결과가 없습니다."),
+                        );
+                      }
+                      if (snapshot.connectionState == false) {
+                        return Center(child: CircularProgressIndicator());
+                      }
+                      if (snapshot.hasData == false) {
+                        return Center(child: CircularProgressIndicator());
+                      }
+                      //error가 발생하게 될 경우 반환하게 되는 부분
+                      else if (snapshot.hasError) {
+                        return Center(
+                          child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: CircularProgressIndicator()),
+                        );
+                      } else {
+                        return Container(
+                            width: size.width * 0.9,
+                            height: 700.h,
+                            child: ListView.builder(
+                                itemCount: all_gyms.length,
+                                itemBuilder: (BuildContext ctx, int idx) {
+                                  return Gym_Container(
+                                      size: size, gymDto: all_gyms[idx]);
+                                }));
+                      }
+                    }),
+              ],
+            ),
           ),
         ));
   }

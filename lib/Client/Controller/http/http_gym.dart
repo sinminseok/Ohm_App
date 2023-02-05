@@ -22,6 +22,7 @@ class Http_Gym with ChangeNotifier {
       headers: {'Content-Type': 'application/json'},
     );
 
+
     List<GymDto> result = [];
 
 
@@ -36,8 +37,7 @@ class Http_Gym with ChangeNotifier {
 
         result.add(GymDto.fromJson(data[i],imgs));
       }
-      print("result =");
-      print(result);
+
       return result;
     }else{
       showtoast("ERROR");
@@ -71,12 +71,13 @@ class Http_Gym with ChangeNotifier {
   }
 
 
-  Future<List<GymDto>> search_gym(gym_name) async {
+  Future<List<GymDto>> search_byname(gym_name) async {
     //url 로 post(이메일 컨트롤러 , 패스워드 컨트롤러)
     var res = await http.get(
-      Uri.parse(GymApi_Url().find_byName + "/${gym_name}"),
+      Uri.parse(GymApi_Url().find_byName + "${gym_name}"),
       headers: {'Content-Type': 'application/json'},
     );
+    print(res.statusCode);
 
 
     List<GymDto> result = [];
@@ -94,6 +95,7 @@ class Http_Gym with ChangeNotifier {
         }
         result.add(GymDto.fromJson(data[i],imgs));
       }
+      print(result);
       return result;
     } else {
 

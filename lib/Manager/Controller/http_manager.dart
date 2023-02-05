@@ -50,6 +50,7 @@ class Http_Manager with ChangeNotifier {
     var res = await http.post(Uri.parse(ManagerApi_Url().save_manager),
         headers: {
           'Content-Type': 'application/json',
+
           'Accept': 'application/json'
         },
         body: json.encode({

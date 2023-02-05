@@ -30,7 +30,7 @@ class GymApi_Url{
 
   String find_byName = endpoint + "gym/name/";
 
-  String findall = endpoint + "gyms/";
+  String findall = endpoint + "gyms";
 
 }
 
@@ -42,4 +42,6 @@ class PostApi_Url{
   String findall_bygymId = endpoint + "posts/";
 
   String save_post = endpoint +"post/";
+
+  String save_postimgs = endpoint +"post/img/";
 }
