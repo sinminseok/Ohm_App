@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shopping_tool/Utils/toast.dart';
-import '../../Client/View/frame/frame_page.dart';
-import '../../Manager/Controller/http_manager.dart';
 import '../constants.dart';
 
 
