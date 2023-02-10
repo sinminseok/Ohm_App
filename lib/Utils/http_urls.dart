@@ -5,6 +5,8 @@ class ManagerApi_Url{
 
   String save_manager = endpoint + "manager";
 
+  String findall_trainer = endpoint + "manager/findall/";
+
   String save_trainer = endpoint +  "trainer";
 
   String info_manager = endpoint + "manager/info/";

@@ -2,8 +2,9 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shopping_tool/Model/dto/trainerDto.dart';
 
-Widget Trainer_Widget(Size size,context) {
+Widget Trainer_Widget(Size size,context,TrainerDto trainerDto) {
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: Container(

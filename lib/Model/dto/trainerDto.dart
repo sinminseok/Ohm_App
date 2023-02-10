@@ -18,10 +18,9 @@ class TrainerDto {
 
   late int age;
 
-  late GymDto gym;
 
   TrainerDto(
-      {required this.gym,
+      {
       required this.id,
       required this.name,
       required this.profile,
@@ -32,7 +31,6 @@ class TrainerDto {
 
   factory TrainerDto.fromJson(Map<String, dynamic> json) {
     return TrainerDto(
-      gym: json['gym'],
       id: json['id'],
       name: json['name'],
       profile: json['profile'],

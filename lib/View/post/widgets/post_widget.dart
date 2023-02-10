@@ -6,7 +6,7 @@ import 'package:shopping_tool/Model/dto/postDto.dart';
 import '../../search/detail_views/Gym_Detail.dart';
 import '../detail_views/post_detail.dart';
 
-Widget Post_Item(Size size,context,PostDto postDto) {
+Widget Post_Widget(Size size,context,PostDto postDto) {
 
   return InkWell(
     onTap: (){
@@ -34,7 +34,6 @@ Widget Post_Item(Size size,context,PostDto postDto) {
               borderRadius: BorderRadius.all(Radius.circular(1))),
           child: Column(
             children: [
-
               postDto.imgs.length == 0?Container(
                 child: Text("게시물 이미지 없을때",style: TextStyle(fontSize: 23),),
               ):Container(
