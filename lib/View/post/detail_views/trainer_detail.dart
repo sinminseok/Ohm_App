@@ -10,6 +10,8 @@ import '../../Components/basic_appbar.dart';
 
 class Trainer_Detail extends StatefulWidget {
 
+  TrainerDto trainerDto;
+  Trainer_Detail({required this.trainerDto});
 
   @override
   _Trainer_Detail createState() => _Trainer_Detail();

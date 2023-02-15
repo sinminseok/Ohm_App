@@ -2,15 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shopping_tool/Model/dto/postDto.dart';
-
-import '../../search/detail_views/Gym_Detail.dart';
 import '../detail_views/post_detail.dart';
 
 Widget Post_Widget(Size size,context,PostDto postDto) {
 
   return InkWell(
     onTap: (){
-    //  print(postDto.imgs[0].filePath);
       Navigator.push(
           context,
           PageTransition(

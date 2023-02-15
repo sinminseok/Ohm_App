@@ -2,6 +2,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:shopping_tool/Utils/constants.dart';
 
 import '../../../Model/entity/Chart_Bar_Model.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
@@ -37,7 +38,7 @@ class Bar_Chart_Data_Widget{
         data: data,
         id: 'sales',
         colorFn: (_, __) =>
-            charts.ColorUtil.fromDartColor(Colors.green.shade600),
+            charts.ColorUtil.fromDartColor(kPrimaryColor),
         domainFn: (BarMmodel barModeel, _) => barModeel.year,
         measureFn: (BarMmodel barModeel, _) => barModeel.value,
       )
@@ -60,7 +61,7 @@ class Bar_Chart_Data_Widget{
         data: data,
         id: 'sales',
         colorFn: (_, __) =>
-            charts.ColorUtil.fromDartColor(Colors.green.shade600),
+            charts.ColorUtil.fromDartColor(Colors.black),
         domainFn: (BarMmodel barModeel, _) => barModeel.year,
         measureFn: (BarMmodel barModeel, _) => barModeel.value,
       )

@@ -35,8 +35,7 @@ class _HomePageState extends State<HomePage> {
   Future<GymDto?> get_gymInfo()async{
     final prefs = await SharedPreferences.getInstance();
     gymId = prefs.getInt("gymId");
-    print("object");
-    print(gymId);
+
     if(gymId == null){
       return null;
     }else{
@@ -58,216 +57,201 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(50.h),
+          preferredSize: Size.fromHeight(30.h),
           child: AppBar(
             automaticallyImplyLeading: false,
-            backgroundColor: kBackgroundColor,
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  'assets/images/main_text.png',
-                  fit: BoxFit.contain,
-                  height: 40.h,
-                ),
-              ],
-            ),
+            backgroundColor: kBottomColor,
+            title: Text(""),
             elevation: 0,
           ),
         ),
-        backgroundColor: kBackgroundColor,
-        body: SingleChildScrollView(
-            child: Column(
-          children: [
-            Container(
-                margin: EdgeInsets.fromLTRB(0, 10.h, 0, 10.h),
-                child: Gray_Line(size: size)),
-            FutureBuilder(
-                future: future,
-                builder: (BuildContext context, AsyncSnapshot snapshot) {
-                  //해당 부분은 data를 아직 받아 오지 못했을때 실행되는 부분을 의미한다.
-                  if (snapshot.hasData == false) {
-                    return Container(
-                      child: Text("다니는 헬스장을 등록해보세요!"),
-                    );
-                  }
-                  //error가 발생하게 될 경우 반환하게 되는 부분
-                  else if (snapshot.hasError) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        'Error: ${snapshot.error}',
-                        style: TextStyle(fontSize: 15),
-                      ),
-                    );
-                  }
-                  // 데이터를 정상적으로 받아오게 되면 다음 부분을 실행하게 되는 것이다.
-                  else {
-                    return Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child: Container(
-                            width: 350.w,
-                            height: 180.h,
-                            decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.3),
-                                    spreadRadius: 4,
-                                    blurRadius: 3,
-                                    offset: Offset(0, 1), // changes position of shadow
-                                  ),
-                                ],
-                                color: Colors.white70,
-                                //kBackgroundColor.withAlpha(50),
-                                borderRadius: BorderRadius.circular(10)),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
+        backgroundColor: Colors.grey.shade200,
+        body: FutureBuilder(
+            future: future,
+            builder: (BuildContext context, AsyncSnapshot snapshot) {
+              //해당 부분은 data를 아직 받아 오지 못했을때 실행되는 부분을 의미한다.
+              if (snapshot.hasData == false) {
+                return Container(
+                  child: Text("다니는 헬스장을 등록해보세요!"),
+                );
+              }
+              //error가 발생하게 될 경우 반환하게 되는 부분
+              else if (snapshot.hasError) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'Error: ${snapshot.error}',
+                    style: TextStyle(fontSize: 15),
+                  ),
+                );
+              }
+              // 데이터를 정상적으로 받아오게 되면 다음 부분을 실행하게 되는 것이다.
+              else {
+                return SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Container(
+                        width: 360.w,
+                        height: 180.h,
+                        decoration: BoxDecoration(
+                          color: kBottomColor,
+                          borderRadius: BorderRadius.only(
+
+                              bottomRight: Radius.circular(10.0),
+
+                              bottomLeft: Radius.circular(10.0)),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: InkWell(
-                                        onTap: () {
-                                          fillter(DateTime.now().toString());
-                                        },
-                                        child: Text(
-                                          "비나이더 안산점",
-                                          style: TextStyle(
-                                              fontSize: 18, fontFamily: "boldfont"),
-                                        ),
-                                      ),
-                                    ),
-                                    Text(
-                                      "$current_datetime",
-                                      style: TextStyle(fontSize: 12),
-                                    )
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: size.height * 0.05,
-                                ),
-                                Center(
-                                  child: Text(
-                                    "14명",
-                                    style: TextStyle(fontSize: 50, fontFamily: "boldfont"),
-                                  ),
-                                ),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    "평균보다 회원들이 없습니다",
-                                    style: TextStyle(fontSize: 18, fontFamily: "lightfont"),
+                                  child: InkWell(
+                                    onTap: () {
+                                      fillter(DateTime.now().toString());
+                                    },
+                                    child: Text(
+                                      "비나이더 안산점",
+                                      style: TextStyle(
+                                          color: kTextWhiteColor,
+                                          fontSize: 18, fontFamily: "boldfont"),
+                                    ),
                                   ),
+                                ),
+                                Text(
+                                  "$current_datetime",
+                                  style: TextStyle(fontSize: 12,color: kTextWhiteColor),
                                 )
                               ],
                             ),
-                          ),
+                            SizedBox(
+                              height: size.height * 0.05,
+                            ),
+                            Center(
+                              child: Text(
+                                "14명",
+                                style: TextStyle(fontSize: 50, fontFamily: "boldfont",color: kTextWhiteColor),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: Text(
+                                "평균보다 회원들이 없습니다",
+                                style: TextStyle(fontSize: 18, fontFamily: "lightfont",color: kTextWhiteColor),
+                              ),
+                            )
+                          ],
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child: Stack(
-                            children: [
-                              Center(
-                                child: Container(
-                                  width: 350.w,
-                                  height: 180.h,
-                                  decoration: BoxDecoration(
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.grey.withOpacity(0.3),
-                                          spreadRadius: 4,
-                                          blurRadius: 3,
-                                          offset:
-                                          Offset(0, 1), // changes position of shadow
-                                        ),
-                                      ],
-                                      color: Colors.white70,
-                                      //kBackgroundColor.withAlpha(50),
-                                      borderRadius: BorderRadius.circular(10)),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Text(
-                                          "평균 시간별 분표도",
-                                          style: TextStyle(
-                                              fontFamily: "boldfont", fontSize: 21),
-                                        ),
+                      ),
+
+
+                      Container(
+                        margin:  EdgeInsets.only(top: 30.h),
+                        child: Stack(
+                          children: [
+                            Center(
+                              child: Container(
+                                width: 350.w,
+                                height: 200.h,
+                                decoration: BoxDecoration(
+
+                                    color: Colors.grey.shade200,
+                                    //kBackgroundColor.withAlpha(50),
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      padding: const EdgeInsets.only(right: 200.0,bottom: 10),
+                                      child: Text(
+                                        "평균 시간별 분표도",
+                                        style: TextStyle(
+                                            fontFamily: "boldfont", fontSize: 16),
                                       ),
-                                      Center(
+                                    ),
+                                    Center(
+                                      child: Container(
+
+                                        decoration: BoxDecoration(
+                                            color: Color(0xffffffff),
+                                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                                            border: Border.all(color: Colors.grey.shade300)
+                                        ),
+                                        height: size.height * 0.2,
                                         child: Container(
-                                          height: size.height * 0.2,
+                                          margin:EdgeInsets.all(8.0),
                                           child: charts.BarChart(
                                             Bar_Chart_Data_Widget.time_data(),
                                             animate: true,
                                           ),
                                         ),
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child: Stack(
-                            children: [
-                              Center(
-                                child: Container(
-                                  width: 350.w,
-                                  height: 180.h,
-                                  decoration: BoxDecoration(
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.grey.withOpacity(0.3),
-                                          spreadRadius: 4,
-                                          blurRadius: 3,
-                                          offset:
-                                          Offset(0, 1), // changes position of shadow
-                                        ),
-                                      ],
-                                      color: Colors.white70,
-                                      //kBackgroundColor.withAlpha(50),
-                                      borderRadius: BorderRadius.circular(10)),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Text(
-                                          "평균 요일 분포도",
-                                          style: TextStyle(
-                                              fontFamily: "boldfont", fontSize: 21),
-                                        ),
+                      ),
+
+
+                      Container(
+                        margin:  EdgeInsets.only(top: 10.h),
+                        child: Stack(
+                          children: [
+                            Center(
+                              child: Container(
+                                width: 350.w,
+                                height: 200.h,
+                                decoration: BoxDecoration(
+
+                                    color: Colors.grey.shade200,
+                                    //kBackgroundColor.withAlpha(50),
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      padding: const EdgeInsets.only(right: 200.0,bottom: 10),
+                                      child: Text(
+                                        "평균 시간별 분표도",
+                                        style: TextStyle(
+                                            fontFamily: "boldfont", fontSize: 16),
                                       ),
-                                      Center(
+                                    ),
+                                    Center(
+                                      child: Container(
+
+                                        decoration: BoxDecoration(
+                                            color: Color(0xffffffff),
+                                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                                            border: Border.all(color: Colors.grey.shade300)
+                                        ),
+                                        height: size.height * 0.2,
                                         child: Container(
-                                          height: size.height * 0.2,
+                                          margin:EdgeInsets.all(8.0),
                                           child: charts.BarChart(
-                                            Bar_Chart_Data_Widget.date_data(),
+                                            Bar_Chart_Data_Widget.time_data(),
                                             animate: true,
                                           ),
                                         ),
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                      ],
-                    );
-                  }
-                }),
-          ],
-        )));
+                      ),
+                    ],
+                  ),
+                );
+              }
+            }),);
   }
 }

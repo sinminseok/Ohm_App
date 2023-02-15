@@ -41,8 +41,11 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
       _navBarItemList.add(buildNavBarItem(_iconList[i], i));
     }
 
-    return Row(
-      children: _navBarItemList,
+    return Container(
+      color: kBottomColor,
+      child: Row(
+        children: _navBarItemList,
+      ),
     );
   }
 
@@ -50,12 +53,6 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   Widget buildNavBarItem(IconData icon, int index) {
     return GestureDetector(
       onTap: () {
-        print(index);
-        // Navigator.push(
-        //     context,
-        //     PageTransition(
-        //         type: PageTransitionType.rightToLeftWithFade,
-        //         child: Signup_page()));
         widget.onChange(index);
         setState(() {
           _selectedIndex = index;
@@ -67,18 +64,15 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
         decoration: index == _selectedIndex
             ? BoxDecoration(
             border: Border(
-              bottom: BorderSide(width: 4, color: kPrimaryColor),
+              bottom: BorderSide(width: 4, color: kBottomColor),
             ),
-            gradient: LinearGradient(colors: [
-              kPrimaryColor.withOpacity(0.17),
-              kPrimaryColor.withOpacity(0.015),
-            ], begin: Alignment.bottomCenter, end: Alignment.topCenter)
+
           // color: index == _selectedItemIndex ? Colors.green : Colors.white,
         )
             : BoxDecoration(),
         child: Icon(
           icon,
-          color: index == _selectedIndex ? Colors.black : Colors.grey,
+          color: index == _selectedIndex ? Colors.white : Colors.grey,
         ),
       ),
     );
