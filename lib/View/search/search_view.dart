@@ -12,14 +12,14 @@ import '../../../Utils/constants.dart';
 import '../../../Utils/key_values.dart';
 import '../../Controller/provider/providers.dart';
 
-import 'widgets/Gym_Container.dart';
+import 'widgets/gym_widget.dart';
 
-class Search_Page extends StatefulWidget {
+class Search_View extends StatefulWidget {
   @override
-  _Search_PageState createState() => _Search_PageState();
+  _Search_View createState() => _Search_View();
 }
 
-class _Search_PageState extends State<Search_Page> {
+class _Search_View extends State<Search_View> {
   final TextEditingController _inputController = TextEditingController();
   Position? current_position;
 
@@ -28,42 +28,9 @@ class _Search_PageState extends State<Search_Page> {
   List<GymDto> find_gyms = [];
   var addrData;
 
-  //현재 사용자 위치 도로명주소 가져오는 함수
-  get_current_address() async {
-    Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
 
-    current_position = position;
 
-    var kakaoGeoUrl = Uri.parse(
-        'https://dapi.kakao.com/v2/local/geo/coord2address.json?x=${current_position!.longitude}&y=${current_position!.latitude}&input_coord=WGS84');
-    var kakaoGeo = await http.get(kakaoGeoUrl,
-        headers: {"Authorization": "KakaoAK $KaKao_RestAPI_KEY"});
 
-    String addr = kakaoGeo.body;
-    addrData = jsonDecode(addr);
-
-    return addrData;
-  }
-
-  //사용자가 구글맵에서 지정한 위치 도로명주소 가져오는 함수
-  get_move_address(user_longitude, user_latitude) async {
-    Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
-
-    current_position = position;
-
-    var kakaoGeoUrl = Uri.parse(
-        'https://dapi.kakao.com/v2/local/geo/coord2address.json?x=${user_longitude}&y=${user_latitude}&input_coord=WGS84');
-
-    var kakaoGeo = await http.get(kakaoGeoUrl,
-        headers: {"Authorization": "KakaoAK $KaKao_RestAPI_KEY"});
-
-    String addr = kakaoGeo.body;
-    addrData = jsonDecode(addr);
-
-    return addrData;
-  }
 
   get_allgym() async {
     all_gyms = await GymApi().search_allgym() as List<GymDto>;
@@ -73,29 +40,24 @@ class _Search_PageState extends State<Search_Page> {
   @override
   void initState() {
     // TODO: implement initState
-    get_current_address();
+
     super.initState();
   }
 
   @override
   void dispose(){
-    print("dispose");
     find_gyms = [];
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    double? user_latitude = Provider.of<Providers>(context).user_latitude;
-    double? user_longitude = Provider.of<Providers>(context).user_longitude;
+
     TextEditingController _searchController = TextEditingController();
 
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: kBackgroundColor,
-        ),
+
         backgroundColor: kBackgroundColor,
         body: InkWell(
           onTap: () {},
@@ -106,7 +68,7 @@ class _Search_PageState extends State<Search_Page> {
                 //user_latitude는 사용자가 직접 위치를 지정했는지 안했는지 판별하는 변수
                 Center(
                     child: Container(
-                        margin: EdgeInsets.only(bottom: 20.h),
+                        margin: EdgeInsets.only(bottom: 20.h,top: 40.h),
 
                         height: size.height * 0.05,
                         child: TextField(
@@ -149,10 +111,11 @@ class _Search_PageState extends State<Search_Page> {
                             ),
                           ),
                         ))),
+                Container(width: 330.w,height: 0.3,color: Colors.grey,),
 
                 find_gyms.length != 0 ?
                 Container(
-                    width: size.width * 0.9,
+                    width: 360.w,
                     height: 700.h,
                     child: ListView.builder(
                         itemCount: find_gyms.length,
@@ -184,7 +147,7 @@ class _Search_PageState extends State<Search_Page> {
                         );
                       } else {
                         return Container(
-                            width: size.width * 0.9,
+                            width: 360.w,
                             height: 700.h,
                             child: ListView.builder(
                                 itemCount: all_gyms.length,
@@ -194,6 +157,7 @@ class _Search_PageState extends State<Search_Page> {
                                 }));
                       }
                     }),
+                SizedBox(height: size.height*0.3,),
               ],
             ),
           ),

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import '../../../Utils/Ui/bottom_nav.dart';
-import '../Home/home_page.dart';
-import '../mypage/user_page.dart';
-import '../post/post_page.dart';
-import '../search/search_page.dart';
+import '../Home/home_view.dart';
+import '../gymInfo/gymInfo_view.dart';
+import '../menu/user_page.dart';
+import '../search/search_view.dart';
 
 class FramePage extends StatefulWidget {
   const FramePage({Key? key}) : super(key: key);
@@ -26,27 +26,25 @@ class _FramePage extends State<FramePage> {
   }
 
   final admin_screens = [
-    HomePage(),
-    PostPage(),
-    Search_Page(),
-    Mypage(),
+    Home_View(),
+    GymInfo_View(),
+    Search_View(),
+    Menu_View(),
   ];
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
 
     return Scaffold(
         resizeToAvoidBottomInset: false,
 
-        // drawer: Drawer(),
 
         bottomNavigationBar: CustomBottomNavigationBar(
           iconList: [
             Icons.home,
             Icons.speaker_notes_outlined,
             Icons.search,
-            Icons.person,
+            Icons.menu,
           ],
           onChange: (val) {
             setState(() {

@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:shopping_tool/Model/dto/gymPriceDto.dart';
+import 'package:shopping_tool/Model/dto/gymTimeDto.dart';
 import 'package:shopping_tool/Utils/toast.dart';
 
 import '../../Model/dto/gymDto.dart';
@@ -45,6 +47,25 @@ class GymApi with ChangeNotifier {
     }
   }
 
+  Future<String?> current_count(String gymId)async{
+    var res = await http.get(
+      Uri.parse(GymApi_Url().current_count + "${gymId}"),
+      headers: {'Content-Type': 'application/json'},
+    );
+    if (res.statusCode == 200) {
+      final decodeData = utf8.decode(res.bodyBytes);
+      final data = jsonDecode(decodeData);
+
+
+      print(data);
+      return data.toString();
+    } else {
+
+      return null;
+    }
+
+  }
+
 
 
     Future<GymDto?> search_byId(int gymId) async{
@@ -72,7 +93,7 @@ class GymApi with ChangeNotifier {
 
 
   Future<List<GymDto>> search_byname(gym_name) async {
-    //url 로 post(이메일 컨트롤러 , 패스워드 컨트롤러)
+    //url 로 gymInfo(이메일 컨트롤러 , 패스워드 컨트롤러)
     var res = await http.get(
       Uri.parse(GymApi_Url().find_byName + "${gym_name}"),
       headers: {'Content-Type': 'application/json'},
@@ -103,4 +124,72 @@ class GymApi with ChangeNotifier {
       return gymDto;
     }
   }
+
+
+  Future<GymTimeDto?> get_gymtime(String gymId)async{
+    var res = await http.get(
+      Uri.parse(GymApi_Url().get_gymTime + "${gymId}"),
+      headers: {'Content-Type': 'application/json'},
+    );
+    if (res.statusCode == 200) {
+      final decodeData = utf8.decode(res.bodyBytes);
+      final data = jsonDecode(decodeData);
+      GymTimeDto gymTimeDto = GymTimeDto.fromJson(data);
+
+      return gymTimeDto;
+    } else {
+
+      return null;
+    }
+
+  }
+
+  Future<List<double>?> get_timeavg(String gymId)async{
+
+    List<double> values = [];
+    var res = await http.get(
+      Uri.parse(GymApi_Url().time_avg + "${gymId}"),
+      headers: {'Content-Type': 'application/json'},
+    );
+    if (res.statusCode == 200) {
+      final decodeData = utf8.decode(res.bodyBytes);
+      final data = jsonDecode(decodeData);
+      print(data[10].runtimeType);
+      for(int i = 0 ;i<data.length;i++){
+        values.add(double.parse(data[i]));
+      }
+
+      return values;
+    } else {
+
+      return null;
+    }
+
+  }
+
+  Future<List<GymPriceDto>?> get_gymprices(String gymId)async{
+    List<GymPriceDto> prices = [];
+    var res = await http.get(
+      Uri.parse(GymApi_Url().get_gymPrice + "${gymId}"),
+      headers: {'Content-Type': 'application/json'},
+    );
+    if (res.statusCode == 200) {
+      final decodeData = utf8.decode(res.bodyBytes);
+      final data = jsonDecode(decodeData);
+      print(data);
+      print(data.runtimeType);
+      for(int i=0; i< data.length;i++){
+        prices.add(GymPriceDto.fromJson(data[i]));
+      }
+
+      return prices;
+    } else {
+
+      return null;
+    }
+
+  }
+
+
+
 }
