@@ -32,29 +32,28 @@ class _Home_ViewState extends State<Home_View> {
 
   @override
   void initState() {
-    future =get_gymInfo();
+    future = get_gymInfo();
     current_datetime = fillter(DateTime.now().toString());
     super.initState();
   }
 
-  Future<GymDto?> get_gymInfo()async{
+  Future<bool> get_gymInfo() async {
     final prefs = await SharedPreferences.getInstance();
     gymId = prefs.getInt("gymId");
-      current_count =await GymApi().current_count(gymId.toString());
-    if(gymId == null){
-      return null;
-    }else{
+    current_count = await GymApi().current_count(gymId.toString(), context);
+    if (gymId == null) {
+      return false;
+    } else {
       gymDto = await GymApi().search_byId(gymId);
       await get_avg();
 
-      return gymDto;
+      return true;
     }
   }
 
-  get_avg()async{
+  get_avg() async {
     final prefs = await SharedPreferences.getInstance();
     time_avg = (await GymApi().get_timeavg(prefs.getInt("gymId").toString()))!;
-    print(time_avg);
     return time_avg;
   }
 
@@ -65,42 +64,86 @@ class _Home_ViewState extends State<Home_View> {
 
   @override
   Widget build(BuildContext context) {
-
-    Size size = MediaQuery.of(context).size;
-
-
     return Scaffold(
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(30.h),
-          child: AppBar(
-            automaticallyImplyLeading: false,
-            backgroundColor: kBottomColor,
-
-            elevation: 0,
-          ),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(30.h),
+        child: AppBar(
+          automaticallyImplyLeading: false,
+          backgroundColor: kBottomColor,
+          elevation: 0.65,
         ),
-        backgroundColor: Colors.grey.shade200,
-        body: FutureBuilder(
-            future: future,
-            builder: (BuildContext context, AsyncSnapshot snapshot) {
-              //해당 부분은 data를 아직 받아 오지 못했을때 실행되는 부분을 의미한다.
-              if (snapshot.hasData == false) {
-                return Ready_View(currentdate: current_datetime,);
-              }
-              //error가 발생하게 될 경우 반환하게 되는 부분
-              else if (snapshot.hasError) {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    'Error: ${snapshot.error}',
-                    style: TextStyle(fontSize: 15),
-                  ),
-                );
-              }
-              // 데이터를 정상적으로 받아오게 되면 다음 부분을 실행하게 되는 것이다.
-              else {
-                return Home_Detail(curent_date: current_datetime, current_count: current_count, gymDto: gymDto, time_avg: time_avg,);
-              }
-            }),);
+      ),
+      backgroundColor: Colors.grey.shade200,
+      body: FutureBuilder(
+          future: future,
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            //해당 부분은 data를 아직 받아 오지 못했을때 실행되는 부분을 의미한다.
+
+            if (snapshot.data == null) {
+              return Column(
+                children: [
+                Container(
+                width: 360.w,
+                height: 200.h,
+                decoration: BoxDecoration(
+                  color: kBottomColor,
+                  borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(0.0),
+                      bottomLeft: Radius.circular(0.0)),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Container(
+                          width: 180.w,
+                          child: Text(""),
+                        ),
+                        Text(
+                          "${current_datetime}",
+                          style:
+                          TextStyle(fontSize: 13, color: kTextWhiteColor),
+                        )
+                      ],
+                    ),
+
+                  ],
+                ),
+              ),
+                  Container(height: 30.h,),
+                  Text("인터넷 연결중 ., ",style: TextStyle(fontFamily: "boldfont",fontSize: 18,color: kPrimaryColor),)
+                ],
+              );
+            }
+            if (snapshot.hasData == false) {
+              return Text("${snapshot.data}");
+            }
+            //error가 발생하게 될 경우 반환하게 되는 부분
+            else if (snapshot.hasError) {
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  'Error: ${snapshot.error}',
+                  style: TextStyle(fontSize: 15),
+                ),
+              );
+            }
+            // 데이터를 정상적으로 받아오게 되면 다음 부분을 실행하게 되는 것이다.
+            else {
+              return snapshot.data == false
+                  ? Ready_View(
+                      currentdate: current_datetime,
+                    )
+                  : Home_Detail(
+                      curent_date: current_datetime,
+                      current_count: current_count,
+                      gymDto: gymDto,
+                      time_avg: time_avg,
+                    );
+            }
+          }),
+    );
   }
 }

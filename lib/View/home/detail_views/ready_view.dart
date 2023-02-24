@@ -2,9 +2,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:shopping_tool/View/home/popup/phone_popup.dart';
 
 import '../../../Utils/constants.dart';
 import '../../../Utils/get_date.dart';
+import '../../gymsearch/detail_views/search_view2.dart';
 
 
 class Ready_View extends StatefulWidget {
@@ -79,24 +82,33 @@ class _Ready_ViewState extends State<Ready_View> {
             ],
           ),
         ),
-        Container(
+        InkWell(
+          onTap: (){
+            Navigator.push(
+                context,
+                PageTransition(
+                    type: PageTransitionType.fade,
+                    child: Search_View2()));
+          },
+          child: Container(
 
-            width: 330.w,
-            height: 80.h,
-            decoration: BoxDecoration(
-                color: kBoxColor,
-                borderRadius: BorderRadius.all(Radius.circular(10))
-            ),
-            margin: EdgeInsets.only(top: 20),
-            child: Row(
+              width: 330.w,
+              height: 80.h,
+              decoration: BoxDecoration(
+                  color: kBoxColor,
+                  borderRadius: BorderRadius.all(Radius.circular(10))
+              ),
+              margin: EdgeInsets.only(top: 20),
+              child: Row(
 
-              children: [
-                Container(
-                    margin: EdgeInsets.only(left: 15.w,right: 20.w),
-                    child: Icon(Icons.emergency_share,color: kPrimaryColor,size: 40,)),
-                Center(child: Text("다니는 헬스장을 등록해보세요!",style: TextStyle(fontSize: 18,color: kPrimaryColor,fontWeight: FontWeight.bold),)),
-              ],
-            )
+                children: [
+                  Container(
+                      margin: EdgeInsets.only(left: 15.w,right: 20.w),
+                      child: Icon(Icons.emergency_share,color: kPrimaryColor,size: 40,)),
+                  Center(child: Text("다니는 헬스장을 등록해보세요!",style: TextStyle(fontSize: 18,color: kPrimaryColor,fontWeight: FontWeight.bold),)),
+                ],
+              )
+          ),
         ),
         Container(
 
@@ -118,24 +130,29 @@ class _Ready_ViewState extends State<Ready_View> {
             )
         ),
 
-        Container(
+        InkWell(
+          onTap: (){
+            PhoneNumber_Popup().showDialog(context);
+          },
+          child: Container(
 
-            width: 330.w,
-            height: 80.h,
-            decoration: BoxDecoration(
-                color: kBoxColor,
-                borderRadius: BorderRadius.all(Radius.circular(10))
-            ),
-            margin: EdgeInsets.only(top: 140.h),
-            child: Row(
+              width: 330.w,
+              height: 80.h,
+              decoration: BoxDecoration(
+                  color: kBoxColor,
+                  borderRadius: BorderRadius.all(Radius.circular(10))
+              ),
+              margin: EdgeInsets.only(top: 140.h),
+              child: Row(
 
-              children: [
-                Container(
-                    margin: EdgeInsets.only(left: 15.w,right: 20.w),
-                    child: Icon(Icons.fitness_center,color: kPrimaryColor,size: 40,)),
-                Center(child: Text("헬스장을 운영중이면 \n오헬몇 서비스를 도입해보세요!",style: TextStyle(fontSize: 18,color: kPrimaryColor,fontWeight: FontWeight.bold),)),
-              ],
-            )
+                children: [
+                  Container(
+                      margin: EdgeInsets.only(left: 15.w,right: 20.w),
+                      child: Icon(Icons.fitness_center,color: kPrimaryColor,size: 40,)),
+                  Center(child: Text("헬스장을 운영중이면 \n오헬몇 서비스를 도입해보세요!",style: TextStyle(fontSize: 18,color: kPrimaryColor,fontWeight: FontWeight.bold),)),
+                ],
+              )
+          ),
         ),
       ],
     );

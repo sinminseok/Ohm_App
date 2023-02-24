@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:shopping_tool/View/message/message_view.dart';
 import '../../../Utils/Ui/bottom_nav.dart';
 import '../Home/home_view.dart';
 import '../gymInfo/gymInfo_view.dart';
-import '../menu/user_page.dart';
-import '../search/search_view.dart';
+import '../gymsearch/search_view.dart';
+import '../menu/menu_view.dart';
 
 class FramePage extends StatefulWidget {
   const FramePage({Key? key}) : super(key: key);
@@ -14,20 +15,19 @@ class FramePage extends StatefulWidget {
 }
 
 class _FramePage extends State<FramePage> {
-  int _selectedItem = 0;
   var authority;
 
   int admin_selectedItem = 0;
 
   @override
   void initState() {
-    // check_authority();
     super.initState();
   }
 
   final admin_screens = [
     Home_View(),
     GymInfo_View(),
+    Message_View(),
     Search_View(),
     Menu_View(),
   ];
@@ -41,8 +41,9 @@ class _FramePage extends State<FramePage> {
 
         bottomNavigationBar: CustomBottomNavigationBar(
           iconList: [
-            Icons.home,
+            Icons.people,
             Icons.speaker_notes_outlined,
+            Icons.email_outlined,
             Icons.search,
             Icons.menu,
           ],

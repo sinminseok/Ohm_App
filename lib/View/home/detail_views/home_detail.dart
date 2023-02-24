@@ -38,7 +38,7 @@ class _Home_DetailState extends State<Home_Detail> {
   refresh() async {
     final prefs = await SharedPreferences.getInstance();
     var gymId = prefs.getInt("gymId");
-    var r = await GymApi().current_count(gymId.toString());
+    var r = await GymApi().current_count(gymId.toString(),context);
     setState(() {
       widget.current_count = r;
     });
@@ -74,25 +74,21 @@ class _Home_DetailState extends State<Home_Detail> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: InkWell(
-                          onTap: () {
-                            fillter(DateTime.now().toString());
-                          },
-                          child: Text(
-                            "${widget.gymDto?.name}",
-                            style: TextStyle(
-                                color: kTextWhiteColor,
-                                fontSize: 21,
-                                fontFamily: "boldfont"),
-                          ),
+                      Container(
+                        width:180.w,
+                        child: Text(
+                          "${widget.gymDto?.name}",
+                          style: TextStyle(
+                              color: kTextWhiteColor,
+                              fontSize: 21,
+                              fontFamily: "boldfont"),
                         ),
                       ),
                       Text(
                         "${widget.curent_date}",
-                        style: TextStyle(fontSize: 12, color: kTextWhiteColor),
+                        style: TextStyle(fontSize: 13, color: kTextWhiteColor),
                       )
+
                     ],
                   ),
                   SizedBox(
@@ -130,7 +126,7 @@ class _Home_DetailState extends State<Home_Detail> {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.only(left: 30.h),
+                        margin: EdgeInsets.only(left: 27.h),
                         child: Text(
                           "${widget.current_count}",
                           style: TextStyle(
@@ -139,7 +135,11 @@ class _Home_DetailState extends State<Home_Detail> {
                               color: kTextWhiteColor),
                         ),
                       ),
+                      Container(
+                          margin: EdgeInsets.only(top: 10.h,left: 24.w),
+                          child: Text("명",style: TextStyle(color: kTextWhiteColor,fontSize: 23),))
                     ],
+
                   ),
                   Container(
                     margin: EdgeInsets.only(top: 20.h),
@@ -197,11 +197,11 @@ class _Home_DetailState extends State<Home_Detail> {
                        children: [
                          Container(
                            margin: EdgeInsets.only(left: 30,top: 25.h),
-                           child: Text("헬스장 현재 인원을 알려주는 ",style: TextStyle(fontWeight: FontWeight.bold,color: kPrimaryColor,fontSize: 21),),
+                           child: Text("헬스장 현재 인원을 알려주는 ",style: TextStyle(fontWeight: FontWeight.bold,color: kPrimaryColor,fontSize: 17.sp,fontFamily: "lightfont"),),
                          ),
                          Container(
-                           margin: EdgeInsets.only(left: 30),
-                           child: Text("오헬몇!",style: TextStyle(fontWeight: FontWeight.bold,color: kPrimaryColor,fontSize: 24),),
+                           margin: EdgeInsets.only(left: 30,top: 3.h),
+                           child: Text("오헬몇!",style: TextStyle(fontWeight: FontWeight.bold,color: kPrimaryColor,fontSize: 24,fontFamily: "boldfont"),),
                          )
                        ],
                      ),

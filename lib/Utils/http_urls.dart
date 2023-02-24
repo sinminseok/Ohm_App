@@ -1,5 +1,5 @@
 
-String endpoint = "http://localhost:8080/api/";
+String endpoint = "http://192.168.0.101:8080/api/";
 
 class ManagerApi_Url{
 
@@ -53,3 +53,16 @@ class PostApi_Url{
 
   String save_postimgs = endpoint +"gymInfo/img/";
 }
+
+
+class Question_Url{
+
+  String save = endpoint+"question/";
+
+  String findall = endpoint + "question/all/";
+
+
+}
+
+
+

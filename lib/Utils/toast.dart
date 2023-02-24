@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shopping_tool/Utils/constants.dart';
 
 void showtoast(String message) async {
   Fluttertoast.showToast(
     msg: message,
-    timeInSecForIosWeb: 3,
-    textColor: Colors.black,
-    backgroundColor: Colors.white,
+    timeInSecForIosWeb: 2,
+    textColor: kTextColor,
+    backgroundColor: kBoxColor,
+    fontSize: 14,
+
     toastLength: Toast.LENGTH_SHORT,
     gravity: ToastGravity.BOTTOM,
 

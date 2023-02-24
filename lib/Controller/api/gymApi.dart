@@ -47,11 +47,13 @@ class GymApi with ChangeNotifier {
     }
   }
 
-  Future<String?> current_count(String gymId)async{
+  Future<String?> current_count(String gymId,BuildContext context)async{
+    print("ddd");
     var res = await http.get(
       Uri.parse(GymApi_Url().current_count + "${gymId}"),
       headers: {'Content-Type': 'application/json'},
     );
+
     if (res.statusCode == 200) {
       final decodeData = utf8.decode(res.bodyBytes);
       final data = jsonDecode(decodeData);
@@ -60,6 +62,7 @@ class GymApi with ChangeNotifier {
       print(data);
       return data.toString();
     } else {
+
 
       return null;
     }
@@ -176,8 +179,7 @@ class GymApi with ChangeNotifier {
     if (res.statusCode == 200) {
       final decodeData = utf8.decode(res.bodyBytes);
       final data = jsonDecode(decodeData);
-      print(data);
-      print(data.runtimeType);
+
       for(int i=0; i< data.length;i++){
         prices.add(GymPriceDto.fromJson(data[i]));
       }

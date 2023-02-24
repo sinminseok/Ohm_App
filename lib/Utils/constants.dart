@@ -11,7 +11,7 @@ const kTextBlackColor = Color(0xff000003);
 
 const kBorderColor = Color(0xfff5e800);
 const kBottomColor = Color(0xff212124);
-const kBackgroundColor = Color(0XFFffffff);
+const kBackgroundColor = Color(0XFFffeeeeee);
 // const kBackgroundColor = Color(0XFFffeeeeee);
 const double kDefaultPadding = 20.0;
 //기본배경색

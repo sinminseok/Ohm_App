@@ -67,7 +67,7 @@ class _GymInfo_View extends State<GymInfo_View> {
     return Scaffold(
         appBar: AppBar(
           iconTheme: const IconThemeData(
-            color: kTextColor, //change your color here
+            color: kPrimaryColor, //change your color here
           ),
           automaticallyImplyLeading: false,
           backgroundColor: kBackgroundColor,
@@ -79,16 +79,18 @@ class _GymInfo_View extends State<GymInfo_View> {
                   ? Text(
                       "게시물",
                       style: TextStyle(
-                        fontSize: 21,
-                        color: kTextColor,
-                      ),
+                          fontSize: 21,
+                          color: kTextColor,
+                          fontFamily: "boldfont",
+                          fontWeight: FontWeight.bold),
                     )
                   : Text(
                       "트레이너",
                       style: TextStyle(
-                        fontSize: 21,
-                        color: kTextColor,
-                      ),
+                          fontSize: 21,
+                          color: kTextColor,
+                          fontFamily: "boldfont",
+                          fontWeight: FontWeight.bold),
                     ),
               InkWell(
                   onTap: () {
@@ -120,7 +122,7 @@ class _GymInfo_View extends State<GymInfo_View> {
                                 if (snapshot.hasData == false) {
                                   return Center(
                                       child: Text(
-                                    "다니는 센터를 먼저 등록해주세요!",
+                                    "",
                                     style: TextStyle(
                                         fontSize: 21,
                                         fontWeight: FontWeight.bold),
