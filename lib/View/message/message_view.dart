@@ -23,6 +23,10 @@ class _Message_ViewState extends State<Message_View> {
   List<QuestionDto> ok_answers = [];
   Future? myfuture;
   bool state = false;
+  List<String> dropdownList = ['답변전', '답변후'];
+  String selectedDropdown = '답변전';
+  List<QuestionDto> questions = [];
+  bool check_gym = false;
 
   get_questions() async {
     setState(() {
@@ -35,7 +39,10 @@ class _Message_ViewState extends State<Message_View> {
 
     if (gymId == null) {
     } else {
-      List<QuestionDto> questions = await QuestionApi().findall_question(gymId);
+      setState(() {
+        check_gym = true;
+      });
+      questions = await QuestionApi().findall_question(gymId);
 
       for (int i = 0; i < questions.length; i++) {
         //아직 답변이 안된 줄민
@@ -76,13 +83,12 @@ class _Message_ViewState extends State<Message_View> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "회원 문의",
+                "헬스장에 문의하기",
                 style: TextStyle(
                     fontSize: 21,
                     color: kTextColor,
                     fontFamily: "boldfont",
-                    fontWeight: FontWeight.bold
-                ),
+                    fontWeight: FontWeight.bold),
               ),
               InkWell(
                   onTap: () async {
@@ -130,177 +136,200 @@ class _Message_ViewState extends State<Message_View> {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        state == false
-                            ? Row(
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.only(
-                                        left: 15.w, bottom: 20.h, top: 22.h),
-                                    child: Text(
-                                      "답변전",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 21),
-                                    ),
+                        Container(
+                          margin: EdgeInsets.only(left: 15.w, top: 10),
+                          width: 100.w,
+                          decoration: BoxDecoration(
+                              color: kBoxColor,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          child: Container(
+                            margin: EdgeInsets.only(left: 12.w),
+                            child: DropdownButton(
+                              underline: SizedBox.shrink(),
+                              value: selectedDropdown,
+                              items: dropdownList.map((String item) {
+                                return DropdownMenuItem<String>(
+                                  child: Text(
+                                    '$item',
+                                    style: TextStyle(
+                                        fontFamily: "lightfont",
+                                        color: kPrimaryColor,
+                                        fontWeight: FontWeight.bold),
                                   ),
-                                  InkWell(
-                                      onTap: () {
-                                        setState(() {
-                                          state = !state;
-                                        });
-                                      },
-                                      child: Container(
-                                        margin: EdgeInsets.only(left: 10.w),
-                                        child: Icon(
-                                          Icons.autorenew,
-                                          size: 28,
-                                        ),
-                                      )),
-                                ],
-                              )
-                            : Row(
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.only(
-                                        left: 15.w, bottom: 20.h, top: 22.h),
-                                    child: Text(
-                                      "답변후",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 21),
-                                    ),
-                                  ),
-                                  InkWell(
-                                      onTap: () {
-                                        setState(() {
-                                          state = !state;
-                                        });
-                                      },
-                                      child: Container(
-                                        margin: EdgeInsets.only(left: 10.w),
-                                        child: Icon(
-                                          Icons.autorenew,
-                                          size: 28,
-                                        ),
-                                      )),
-                                ],
-                              ),
-                        state == false
+                                  value: item,
+                                );
+                              }).toList(),
+                              onChanged: (dynamic value) {
+                                setState(() {
+                                  selectedDropdown = value;
+                                });
+                              },
+                            ),
+                          ),
+                        ),
+                        check_gym == false
                             ? Container(
-                                margin: EdgeInsets.only(
-                                    left: 15.w,
-                                    bottom: 20.h,
-                                    top: 10.h,
-                                    right: 15.w),
-                                width: 360.w,
-                                height: 600.h,
-                                child: ListView.builder(
-                                    itemCount: not_answers.length,
-                                    itemBuilder: (BuildContext ctx, int idx) {
-                                      return Stack(
-                                        children: [
-                                          Container(
-                                            margin:
-                                                EdgeInsets.only(bottom: 10.h),
-                                            width: 340.w,
-                                            height: 60.h,
-                                            decoration: BoxDecoration(
-                                                color: kBoxColor,
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(10))),
-                                            child: InkWell(
-                                              onTap: () async {
-                                                showtoast("아직 답변이 등록되지 않았습니다");
-                                              },
-                                              child: Container(
-                                                  width: 320.w,
-                                                  margin: EdgeInsets.only(
-                                                      left: 10.w, right: 10),
-                                                  child: Center(
-                                                      child: Text(
-                                                    "${not_answers[idx].content}",
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    style: TextStyle(
-                                                        color: kPrimaryColor,
-                                                        fontSize: 16),
-                                                  ))),
-                                            ),
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Container(),
-                                            ],
-                                          )
-                                        ],
-                                      );
-                                    }))
-                            : Container(
-                                margin: EdgeInsets.only(
-                                    left: 15.w,
-                                    bottom: 20.h,
-                                    top: 10.h,
-                                    right: 15.w),
-                                width: 360.w,
-                                height: 600.h,
-                                child: ListView.builder(
-                                    itemCount: ok_answers.length,
-                                    itemBuilder: (BuildContext ctx, int idx) {
-                                      return Stack(
-                                        children: [
-                                          Container(
-                                            margin:
-                                                EdgeInsets.only(bottom: 10.h),
-                                            width: 340.w,
-                                            height: 60.h,
-                                            decoration: BoxDecoration(
-                                                color: kBoxColor,
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(10))),
-                                            child: InkWell(
-                                              onTap: () async {
-                                                await showModalBottomSheet<
-                                                        void>(
-                                                    context: context,
-                                                    builder:
-                                                        (BuildContext context) {
-                                                      return StatefulBuilder(
-                                                          builder: (BuildContext
-                                                                  context,
-                                                              StateSetter
-                                                                  bottomState) {
-                                                        return Answer_BottomSheet(
-                                                          questionDto:
-                                                              ok_answers[idx],
-                                                        );
-                                                      });
-                                                    });
+                                margin: EdgeInsets.only(top: 170.h),
+                                child: Center(
+                                  child: Text(
+                                    "다니는 헬스장을 먼저 등록해보세요!",
+                                    style: TextStyle(
+                                        fontFamily: "lightfont",
+                                        fontSize: 17.sp),
+                                  ),
+                                ))
+                            : selectedDropdown == "답변전"
+                                ? not_answers.length == 0
+                                    ? Container(
+                                        margin: EdgeInsets.only(top: 170.h),
+                                        child: Center(
+                                            child: Text("답변 대기중인 문의사항이 없습니다.",
+                                                style: TextStyle(
+                                                    fontFamily: "lightfont",
+                                                    fontSize: 17.sp))),
+                                      )
+                                    : Container(
+                                        margin: EdgeInsets.only(
+                                            left: 15.w,
+                                            bottom: 20.h,
+                                            top: 10.h,
+                                            right: 15.w),
+                                        width: 360.w,
+                                        height: 600.h,
+                                        child: ListView.builder(
+                                            itemCount: not_answers.length,
+                                            itemBuilder:
+                                                (BuildContext ctx, int idx) {
+                                              return Stack(
+                                                children: [
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        bottom: 10.h),
+                                                    width: 340.w,
+                                                    height: 60.h,
+                                                    decoration: BoxDecoration(
+                                                        color: kBoxColor,
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    10))),
+                                                    child: InkWell(
+                                                      onTap: () async {
+                                                        showtoast(
+                                                            "아직 답변이 등록되지 않았습니다");
+                                                      },
+                                                      child: Container(
+                                                          width: 320.w,
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                  left: 10.w,
+                                                                  right: 10),
+                                                          child: Center(
+                                                              child: Text(
+                                                            "${not_answers[idx].content}",
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .ellipsis,
+                                                            style: TextStyle(
+                                                                color:
+                                                                    kPrimaryColor,
+                                                                fontSize: 16),
+                                                          ))),
+                                                    ),
+                                                  ),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Container(),
+                                                    ],
+                                                  )
+                                                ],
+                                              );
+                                            }))
+                                : ok_answers.length == 0
+                                    ? Container(
+                                        margin: EdgeInsets.only(top: 170.h),
+                                        child: Center(
+                                            child: Text("답변이 완료된 문의사항이 아직 없습니다.",
+                                                style: TextStyle(
+                                                    fontFamily: "lightfont",
+                                                    fontSize: 17.sp))),
+                                      )
+                                    : Container(
+                                        margin: EdgeInsets.only(
+                                            left: 15.w,
+                                            bottom: 20.h,
+                                            top: 10.h,
+                                            right: 15.w),
+                                        width: 360.w,
+                                        height: 600.h,
+                                        child: ListView.builder(
+                                            itemCount: ok_answers.length,
+                                            itemBuilder:
+                                                (BuildContext ctx, int idx) {
+                                              return Stack(
+                                                children: [
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        bottom: 10.h),
+                                                    width: 340.w,
+                                                    height: 60.h,
+                                                    decoration: BoxDecoration(
+                                                        color: kBoxColor,
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    10))),
+                                                    child: InkWell(
+                                                      onTap: () async {
+                                                        await showModalBottomSheet<
+                                                                void>(
+                                                            context: context,
+                                                            builder:
+                                                                (BuildContext
+                                                                    context) {
+                                                              return StatefulBuilder(builder:
+                                                                  (BuildContext
+                                                                          context,
+                                                                      StateSetter
+                                                                          bottomState) {
+                                                                return Answer_BottomSheet(
+                                                                  questionDto:
+                                                                      ok_answers[
+                                                                          idx],
+                                                                );
+                                                              });
+                                                            });
 
-                                                setState(() {
-                                                  print("Dd");
-                                                  state;
-                                                });
-                                              },
-                                              child: Container(
-                                                  width: 320.w,
-                                                  margin: EdgeInsets.only(
-                                                      left: 10.w, right: 10),
-                                                  child: Center(
-                                                      child: Text(
-                                                    "${ok_answers[idx].content}",
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    style: TextStyle(
-                                                        color: kPrimaryColor,
-                                                        fontSize: 16),
-                                                  ))),
-                                            ),
-                                          ),
-                                        ],
-                                      );
-                                    }))
+                                                        setState(() {
+                                                          selectedDropdown;
+                                                        });
+                                                      },
+                                                      child: Container(
+                                                          width: 320.w,
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                  left: 10.w,
+                                                                  right: 10),
+                                                          child: Center(
+                                                              child: Text(
+                                                            "${ok_answers[idx].content}",
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .ellipsis,
+                                                            style: TextStyle(
+                                                                color:
+                                                                    kPrimaryColor,
+                                                                fontSize: 16),
+                                                          ))),
+                                                    ),
+                                                  ),
+                                                ],
+                                              );
+                                            }))
                       ],
                     );
                   }

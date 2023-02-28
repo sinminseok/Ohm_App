@@ -25,12 +25,12 @@ class _Ready_ViewState extends State<Ready_View> {
       children: [
         Container(
           width: 360.w,
-          height: 120 .h,
+          height: 200 .h,
           decoration: BoxDecoration(
               color: kBottomColor,
               borderRadius: BorderRadius.only(
-                  bottomRight: Radius.circular(10),
-                  bottomLeft: Radius.circular(10))),
+                  bottomRight: Radius.circular(0),
+                  bottomLeft: Radius.circular(0))),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -48,7 +48,7 @@ class _Ready_ViewState extends State<Ready_View> {
                 child: Column(
                   children: [
                     Container(
-                      margin: EdgeInsets.only(bottom: 10),
+                      margin: EdgeInsets.only(bottom: 10,top: 40.h),
                       child:  Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [

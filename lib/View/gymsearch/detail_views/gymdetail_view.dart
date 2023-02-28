@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shopping_tool/Controller/api/gymApi.dart';
 import 'package:shopping_tool/Model/dto/gymDto.dart';
@@ -9,6 +10,7 @@ import 'package:shopping_tool/Model/dto/gymPriceDto.dart';
 import 'package:shopping_tool/Model/dto/gymTimeDto.dart';
 import 'package:shopping_tool/Utils/constants.dart';
 import 'package:shopping_tool/Utils/toast.dart';
+import 'package:shopping_tool/View/frame/frame_page.dart';
 
 import '../popup/address_popup.dart';
 import '../widgets/gymPrice_widget.dart';
@@ -166,7 +168,11 @@ class _GymDetail_View extends State<GymDetail_View> {
                         }
                         showtoast("헬스장이 등록되었습니다.");
 
-                        Navigator.pop(context);
+                        Navigator.push(
+                            context,
+                            PageTransition(
+                                type: PageTransitionType.fade,
+                                child: FramePage()));
                       },
                       child: Container(
                         margin: EdgeInsets.only(left: 10,top: 15,bottom: 10),

@@ -64,7 +64,7 @@ class _Gym_ContainerState extends State<Gym_Container> {
                         child: Text(
                           "${widget.gymDto.name}",
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 22,color: kPrimaryColor),
+                              fontWeight: FontWeight.bold, fontSize: 22,color: kPrimaryColor,fontFamily: "boldfont"),
                         ),
                       ),
                       Container(
@@ -85,7 +85,7 @@ class _Gym_ContainerState extends State<Gym_Container> {
                         child: Text(
                             "${widget.gymDto.address}",
                           style: TextStyle(
-                              fontFamily: "boldfont", fontSize: 17),
+                              fontFamily: "lightfont", fontSize: 17,fontWeight: FontWeight.bold),
                         ),
                       )
                     ],

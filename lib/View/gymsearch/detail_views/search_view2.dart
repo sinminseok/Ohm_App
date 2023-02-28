@@ -11,7 +11,6 @@ import '../../../Model/dto/gymDto.dart';
 import '../../../Utils/constants.dart';
 import '../../../Utils/key_values.dart';
 
-
 import '../widgets/gym_widget.dart';
 
 class Search_View2 extends StatefulWidget {
@@ -41,67 +40,69 @@ class _Search_View2 extends State<Search_View2> {
   }
 
   @override
-  void dispose(){
+  void dispose() {
     find_gyms = [];
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-
     TextEditingController _searchController = TextEditingController();
-
 
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-        appBar: AppBar(
-          iconTheme: IconThemeData(
-            color: kIconColor, //change your color here
-          ),
-          shape: Border(
-              bottom: BorderSide(
-                  color: Colors.black26,
-                  width: 0.3
-              )
-          ),
-          backgroundColor: kBackgroundColor,
-          elevation: 0,
-        ),
-
-        backgroundColor: kBackgroundColor,
-        body: InkWell(
-          onTap: () {},
-          child: SingleChildScrollView(
-            child: Column(
-
+      backgroundColor: kBackgroundColor,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            //user_latitude는 사용자가 직접 위치를 지정했는지 안했는지 판별하는 변수
+            SizedBox(
+              height: 30.h,
+            ),
+            Row(
               children: [
-                //user_latitude는 사용자가 직접 위치를 지정했는지 안했는지 판별하는 변수
+                Container(
+                  margin: EdgeInsets.only(left: 10,top: 20),
+                  child: InkWell(
+                      onTap: (){
+                        Navigator.pop(context);
+                      },
+                      child: Icon(Icons.keyboard_arrow_left_sharp)),
+                ),
                 Center(
                     child: Container(
-                        margin: EdgeInsets.only(bottom: 15.h,top: 0.h),
+                        width: 300.w,
+                        height: 37.h,
+                        margin: EdgeInsets.only(
 
-                        height: size.height * 0.05,
+                          top: 15.h,left: 10
+
+                        ),
+                        decoration: BoxDecoration(
+                          color: kBoxColor,
+                          borderRadius: BorderRadius.all(Radius.circular(10))
+                        ),
+
                         child: TextField(
                           maxLines: 10,
                           textInputAction: TextInputAction.done,
                           controller: _searchController,
                           decoration: InputDecoration(
-                            contentPadding: EdgeInsets.only(left: 20, top: 20),
+                            contentPadding: EdgeInsets.only(left: 20, top: 8.h),
                             hintText: "헬스장 이름",
                             hintStyle: TextStyle(
-                                fontFamily: "gilogfont", fontSize: 21),
+                                fontFamily: "boldfont", fontSize: 17.sp),
                             border: InputBorder.none,
-                            suffixIcon: Padding(
-                              padding:
-                              const EdgeInsets.only(top: 10.0, right: 10),
+                            suffixIcon: Container(
+                              margin: EdgeInsets.only(left: 0),
                               child: IconButton(
-                                onPressed: () async{
-                                  if(_searchController.text == ""){
+                                onPressed: () async {
+                                  if (_searchController.text == "") {
                                     showtoast("내용을 입력해주세요");
-                                  }else{
-
-                                    var result = await GymApi().search_byname(_searchController.text);
-                                    if(result.length == 0){
+                                  } else {
+                                    var result = await GymApi()
+                                        .search_byname(_searchController.text);
+                                    if (result.length == 0) {
                                       showtoast("검색 결과가 없습니다.");
                                     }
 
@@ -109,8 +110,6 @@ class _Search_View2 extends State<Search_View2> {
                                       find_gyms = result;
                                     });
                                   }
-
-
                                 },
                                 icon: Icon(
                                   Icons.search,
@@ -120,10 +119,12 @@ class _Search_View2 extends State<Search_View2> {
                             ),
                           ),
                         ))),
-                Container(width: 330.w,height: 0.3,color: Colors.grey,),
+              ],
+            ),
 
-                find_gyms.length != 0 ?
-                Container(
+
+            find_gyms.length != 0
+                ? Container(
                     width: 360.w,
                     height: 700.h,
                     child: ListView.builder(
@@ -132,8 +133,7 @@ class _Search_View2 extends State<Search_View2> {
                           return Gym_Container(
                               size: size, gymDto: find_gyms[idx]);
                         }))
-
-                    : FutureBuilder(
+                : FutureBuilder(
                     future: get_allgym(),
                     builder: (BuildContext context, AsyncSnapshot snapshot) {
                       if (all_gyms.length == 0) {
@@ -166,10 +166,12 @@ class _Search_View2 extends State<Search_View2> {
                                 }));
                       }
                     }),
-                SizedBox(height: size.height*0.3,),
-              ],
+            SizedBox(
+              height: size.height * 0.3,
             ),
-          ),
-        ));
+          ],
+        ),
+      ),
+    );
   }
 }

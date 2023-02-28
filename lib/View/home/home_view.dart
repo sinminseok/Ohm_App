@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shopping_tool/Controller/api/gymApi.dart';
+import 'package:shopping_tool/Model/dto/countDto.dart';
 import 'package:shopping_tool/Model/dto/gymDto.dart';
 import 'package:shopping_tool/Utils/constants.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
@@ -24,6 +25,7 @@ class _Home_ViewState extends State<Home_View> {
   //현재 시d간
   var current_datetime;
   String? current_count;
+  String? count_string;
   var gymId;
   GymDto? gymDto;
   Future? future;
@@ -44,6 +46,7 @@ class _Home_ViewState extends State<Home_View> {
     if (gymId == null) {
       return false;
     } else {
+
       gymDto = await GymApi().search_byId(gymId);
       await get_avg();
 
@@ -65,14 +68,7 @@ class _Home_ViewState extends State<Home_View> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(30.h),
-        child: AppBar(
-          automaticallyImplyLeading: false,
-          backgroundColor: kBottomColor,
-          elevation: 0.65,
-        ),
-      ),
+
       backgroundColor: Colors.grey.shade200,
       body: FutureBuilder(
           future: future,
@@ -82,38 +78,45 @@ class _Home_ViewState extends State<Home_View> {
             if (snapshot.data == null) {
               return Column(
                 children: [
-                Container(
-                width: 360.w,
-                height: 200.h,
-                decoration: BoxDecoration(
-                  color: kBottomColor,
-                  borderRadius: BorderRadius.only(
-                      bottomRight: Radius.circular(0.0),
-                      bottomLeft: Radius.circular(0.0)),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  Container(
+                    width: 360.w,
+                    height: 200.h,
+                    decoration: BoxDecoration(
+                      color: kBottomColor,
+                      borderRadius: BorderRadius.only(
+                          bottomRight: Radius.circular(0.0),
+                          bottomLeft: Radius.circular(0.0)),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Container(
-                          width: 180.w,
-                          child: Text(""),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Container(
+                              width: 180.w,
+                              child: Text(""),
+                            ),
+                            Text(
+                              "${current_datetime}",
+                              style: TextStyle(
+                                  fontSize: 13, color: kTextWhiteColor),
+                            )
+                          ],
                         ),
-                        Text(
-                          "${current_datetime}",
-                          style:
-                          TextStyle(fontSize: 13, color: kTextWhiteColor),
-                        )
                       ],
                     ),
-
-                  ],
-                ),
-              ),
-                  Container(height: 30.h,),
-                  Text("인터넷 연결중 ., ",style: TextStyle(fontFamily: "boldfont",fontSize: 18,color: kPrimaryColor),)
+                  ),
+                  Container(
+                    height: 30.h,
+                  ),
+                  Text(
+                    "인터넷 연결중 ., ",
+                    style: TextStyle(
+                        fontFamily: "boldfont",
+                        fontSize: 18,
+                        color: kPrimaryColor),
+                  )
                 ],
               );
             }
@@ -137,6 +140,7 @@ class _Home_ViewState extends State<Home_View> {
                       currentdate: current_datetime,
                     )
                   : Home_Detail(
+                      count_string: count_string,
                       curent_date: current_datetime,
                       current_count: current_count,
                       gymDto: gymDto,
