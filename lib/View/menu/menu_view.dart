@@ -3,13 +3,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:provider/provider.dart';
 import 'package:shopping_tool/Utils/constants.dart';
 import 'package:shopping_tool/Utils/toast.dart';
 import 'package:shopping_tool/View/menu/detail_views/introduce_view.dart';
 import 'package:shopping_tool/View/menu/detail_views/question_view.dart';
 import 'package:shopping_tool/View/menu/detail_views/useage_view.dart';
 import 'package:shopping_tool/View/menu/popup/comumu_popup.dart';
+
+
 class Menu_View extends StatefulWidget {
   const Menu_View({Key? key}) : super(key: key);
 
@@ -38,7 +39,7 @@ class _Menu_View extends State<Menu_View> {
                 style: TextStyle(
                   fontSize: 21,
                   color: kTextColor,
-                  fontFamily: "boldfont",
+                  fontFamily: "lightfont",
                   fontWeight: FontWeight.bold
                 ),
               ),
@@ -77,11 +78,11 @@ class _Menu_View extends State<Menu_View> {
                       child: Row(
                         children: [
                           Container(
-                              margin: EdgeInsets.only(left: 20.w,top: 3.h),
+                              margin: EdgeInsets.only(left: 20.w,top: 5.h),
                               child: Icon(Icons.auto_stories,size: 30,color: kPrimaryColor,)),
                           Container(
-                              margin: EdgeInsets.only(left: 20.w,top: 5.h),
-                              child: Text("이용 방법",style: TextStyle(fontSize: 17,color: kPrimaryColor,fontWeight: FontWeight.bold),)),
+                              margin: EdgeInsets.only(left: 15.w,top: 5.h),
+                              child: Text("이용 방법",style: TextStyle(fontFamily: "lightfont",fontSize: 17,color: kPrimaryColor,fontWeight: FontWeight.bold),)),
                         ],
                       )
                   ),
@@ -106,11 +107,11 @@ class _Menu_View extends State<Menu_View> {
                     child: Row(
                       children: [
                         Container(
-                            margin: EdgeInsets.only(left: 20.w,top: 3.h),
+                            margin: EdgeInsets.only(left: 20.w,top: 5.h),
                             child: Icon(Icons.help_outline,size: 30,color: kPrimaryColor,)),
                         Container(
-                            margin: EdgeInsets.only(left: 20.w,top: 5.h),
-                            child: Text("자주 묻는 질문",style: TextStyle(fontSize: 17,color: kPrimaryColor,fontWeight: FontWeight.bold),)),
+                            margin: EdgeInsets.only(left: 15.w,top: 5.h),
+                            child: Text("자주 묻는 질문",style: TextStyle(fontFamily: "lightfont",fontSize: 17,color: kPrimaryColor,fontWeight: FontWeight.bold),)),
                       ],
                     )
                 ),
@@ -143,7 +144,7 @@ class _Menu_View extends State<Menu_View> {
                               child: Icon(Icons.support_agent,size: 30,color: kPrimaryColor,)),
                           Container(
                               margin: EdgeInsets.only(left: 20.w,top: 5.h),
-                              child: Text("고객센터",style: TextStyle(fontSize: 17,color: kPrimaryColor,fontWeight: FontWeight.bold),)),
+                              child: Text("고객센터",style: TextStyle(fontFamily: "lightfont",fontSize: 17,color: kPrimaryColor,fontWeight: FontWeight.bold),)),
                         ],
                       ),
                     )
@@ -156,6 +157,14 @@ class _Menu_View extends State<Menu_View> {
                 margin: EdgeInsets.only(top
                     : 30.h),
                 decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.3),
+                        spreadRadius:3,
+                        blurRadius: 10,
+                        offset: Offset(0, 3), // changes position of shadow
+                      ),
+                    ],
                     color: kPrimaryColor,
                     borderRadius: BorderRadius.all(Radius.circular(10))
                 ),
@@ -169,7 +178,7 @@ class _Menu_View extends State<Menu_View> {
                         margin: EdgeInsets.only(left: 15.h,right: 15.w),
                         child: Icon(Icons.fitness_center,size: 30,color: kTextWhiteColor,),
                       ),
-                      Text("헬스장을 운영중이면 \n오헬몇 서비스를 도입해보세요!",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17,color: kTextWhiteColor),)
+                      Text("헬스장을 운영중이면 \n오헬몇 서비스를 도입해보세요!",style: TextStyle(fontFamily: "lightfont",fontWeight: FontWeight.bold,fontSize: 17,color: kTextWhiteColor),)
                     ],
                   ),
                 ),

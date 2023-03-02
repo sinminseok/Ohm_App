@@ -11,7 +11,6 @@ import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:shopping_tool/View/Home/detail_views/ready_view.dart';
 import '../../../Utils/Ui/gray_line.dart';
 import '../../../Utils/get_date.dart';
-import 'Widgets/bar_chart_widget.dart';
 import 'detail_views/home_detail.dart';
 
 class Home_View extends StatefulWidget {
@@ -67,57 +66,57 @@ class _Home_ViewState extends State<Home_View> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-
-      backgroundColor: Colors.grey.shade200,
-      body: FutureBuilder(
+    return  FutureBuilder(
           future: future,
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             //해당 부분은 data를 아직 받아 오지 못했을때 실행되는 부분을 의미한다.
 
             if (snapshot.data == null) {
-              return Column(
-                children: [
-                  Container(
-                    width: 360.w,
-                    height: 200.h,
-                    decoration: BoxDecoration(
-                      color: kBottomColor,
-                      borderRadius: BorderRadius.only(
-                          bottomRight: Radius.circular(0.0),
-                          bottomLeft: Radius.circular(0.0)),
+              return Scaffold(
+                backgroundColor: snapshot.data == false?Colors.grey.shade200:kBottomColor,
+                body: Column(
+                  children: [
+                    Container(
+                      width: 360.w,
+                      height: 200.h,
+                      decoration: BoxDecoration(
+                        color: kBottomColor,
+                        borderRadius: BorderRadius.only(
+                            bottomRight: Radius.circular(0.0),
+                            bottomLeft: Radius.circular(0.0)),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Container(
+                                width: 180.w,
+                                child: Text(""),
+                              ),
+                              Text(
+                                "${current_datetime}",
+                                style: TextStyle(
+                                    fontSize: 13, color: kTextWhiteColor),
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Container(
-                              width: 180.w,
-                              child: Text(""),
-                            ),
-                            Text(
-                              "${current_datetime}",
-                              style: TextStyle(
-                                  fontSize: 13, color: kTextWhiteColor),
-                            )
-                          ],
-                        ),
-                      ],
+                    Container(
+                      height: 30.h,
                     ),
-                  ),
-                  Container(
-                    height: 30.h,
-                  ),
-                  Text(
-                    "인터넷 연결중 ., ",
-                    style: TextStyle(
-                        fontFamily: "boldfont",
-                        fontSize: 18,
-                        color: kPrimaryColor),
-                  )
-                ],
+                    Text(
+                      "인터넷 연결중 ., ",
+                      style: TextStyle(
+                          fontFamily: "boldfont",
+                          fontSize: 18,
+                          color: kPrimaryColor),
+                    )
+                  ],
+                ),
               );
             }
             if (snapshot.hasData == false) {
@@ -147,7 +146,7 @@ class _Home_ViewState extends State<Home_View> {
                       time_avg: time_avg,
                     );
             }
-          }),
+          }
     );
   }
 }

@@ -129,20 +129,20 @@ class _Ready_ViewState extends State<Ready_View> {
               ],
             )
         ),
+// PhoneNumber_Popup().showDialog(context);
+        Container(
 
-        InkWell(
-          onTap: (){
-            PhoneNumber_Popup().showDialog(context);
-          },
-          child: Container(
-
-              width: 330.w,
-              height: 80.h,
-              decoration: BoxDecoration(
-                  color: kBoxColor,
-                  borderRadius: BorderRadius.all(Radius.circular(10))
-              ),
-              margin: EdgeInsets.only(top: 140.h),
+            width: 330.w,
+            height: 80.h,
+            decoration: BoxDecoration(
+                color: kBoxColor,
+                borderRadius: BorderRadius.all(Radius.circular(10))
+            ),
+            margin: EdgeInsets.only(top: 140.h),
+            child: InkWell(
+              onTap: (){
+                PhoneNumber_Popup().showDialog(context);
+              },
               child: Row(
 
                 children: [
@@ -151,8 +151,8 @@ class _Ready_ViewState extends State<Ready_View> {
                       child: Icon(Icons.fitness_center,color: kPrimaryColor,size: 40,)),
                   Center(child: Text("헬스장을 운영중이면 \n오헬몇 서비스를 도입해보세요!",style: TextStyle(fontSize: 18,color: kPrimaryColor,fontWeight: FontWeight.bold),)),
                 ],
-              )
-          ),
+              ),
+            )
         ),
       ],
     );

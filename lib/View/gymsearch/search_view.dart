@@ -1,16 +1,12 @@
-import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:provider/provider.dart';
-import 'package:http/http.dart' as http;
 import 'package:shopping_tool/Utils/toast.dart';
 import '../../Controller/api/gymApi.dart';
 import '../../Model/dto/gymDto.dart';
 import '../../../Utils/constants.dart';
-import '../../../Utils/key_values.dart';
-import '../../Controller/provider/providers.dart';
 
 import 'widgets/gym_widget.dart';
 

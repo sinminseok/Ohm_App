@@ -20,7 +20,8 @@ class GymInfo_View extends StatefulWidget {
 
 class _GymInfo_View extends State<GymInfo_View> {
   bool mode = false;
-
+  List<String> dropdownList = ['게시물', '직원'];
+  String selectedDropdown = '게시물';
   List<PostDto> posts = [];
   List<TrainerDto> trainers = [];
 
@@ -75,30 +76,54 @@ class _GymInfo_View extends State<GymInfo_View> {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              mode == false
+              selectedDropdown == "게시물"
                   ? Text(
                       "게시물",
                       style: TextStyle(
                           fontSize: 21,
                           color: kTextColor,
-                          fontFamily: "boldfont",
+                          fontFamily: "lightfont",
                           fontWeight: FontWeight.bold),
                     )
                   : Text(
-                      "트레이너",
+                      "직원",
                       style: TextStyle(
                           fontSize: 21,
                           color: kTextColor,
-                          fontFamily: "boldfont",
+                          fontFamily: "lightfont",
                           fontWeight: FontWeight.bold),
                     ),
-              InkWell(
-                  onTap: () {
-                    setState(() {
-                      mode = !mode;
-                    });
-                  },
-                  child: Icon(Icons.cached))
+              Container(
+                margin: EdgeInsets.only(left: 15.w, top: 10),
+                width: 100.w,
+                decoration: BoxDecoration(
+                    color: kBoxColor,
+                    borderRadius: BorderRadius.all(Radius.circular(10))),
+                child: Container(
+                  margin: EdgeInsets.only(left: 12.w),
+                  child: DropdownButton(
+                    underline: SizedBox.shrink(),
+                    value: selectedDropdown,
+                    items: dropdownList.map((String item) {
+                      return DropdownMenuItem<String>(
+                        child: Text(
+                          '$item',
+                          style: TextStyle(
+                              fontFamily: "lightfont",
+                              color: kPrimaryColor,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        value: item,
+                      );
+                    }).toList(),
+                    onChanged: (dynamic value) {
+                      setState(() {
+                        selectedDropdown = value;
+                      });
+                    },
+                  ),
+                ),
+              ),
             ],
           ),
         ),
@@ -113,7 +138,7 @@ class _GymInfo_View extends State<GymInfo_View> {
                   Container(
                       margin: EdgeInsets.only(top: 10.h),
                       height: 590.h,
-                      child: mode == false
+                      child: selectedDropdown == "게시물"
                           ? FutureBuilder(
                               future: future_post,
                               builder: (BuildContext context,
@@ -140,16 +165,22 @@ class _GymInfo_View extends State<GymInfo_View> {
                                 }
                                 // 데이터를 정상적으로 받아오게 되면 다음 부분을 실행하게 되는 것이다.
                                 else {
-                                  return Container(
-                                      width: 360.w,
-                                      height: 600.h,
-                                      child: ListView.builder(
-                                          itemCount: posts.length,
-                                          itemBuilder:
-                                              (BuildContext ctx, int idx) {
-                                            return Post_Widget(
-                                                size, context, posts[idx]);
-                                          }));
+                                  return posts.length == 0
+                                      ? Container(
+                                          child: Center(
+                                            child: Text("아직 등록된 게시물이 없습니다.",style: TextStyle(fontSize: 17.sp,fontFamily: "lightfont"),),
+                                          ),
+                                        )
+                                      : Container(
+                                          width: 360.w,
+                                          height: 600.h,
+                                          child: ListView.builder(
+                                              itemCount: posts.length,
+                                              itemBuilder:
+                                                  (BuildContext ctx, int idx) {
+                                                return Post_Widget(
+                                                    size, context, posts[idx]);
+                                              }));
                                 }
                               })
                           : FutureBuilder(

@@ -1,20 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shopping_tool/View/frame/frame_page.dart';
-
-import 'Controller/provider/providers.dart';
 
 void main() {
   runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => Providers()),
-      ],
-      child: MyApp(),
-    ),
+      MyApp()
+
   );
 }
 

@@ -87,7 +87,7 @@ class _Message_ViewState extends State<Message_View> {
                 style: TextStyle(
                     fontSize: 21,
                     color: kTextColor,
-                    fontFamily: "boldfont",
+                    fontFamily: "lightfont",
                     fontWeight: FontWeight.bold),
               ),
               InkWell(
