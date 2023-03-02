@@ -228,8 +228,7 @@ class _DashboardState extends State<Dashboard>
         Container(
           width: 360.w,
           height: 340.h,
-          child: ListView(
-            padding: EdgeInsets.zero,
+          child: Column(
             children: [
 
               Padding(

@@ -60,20 +60,17 @@ class _Home_DetailState extends State<Home_Detail> {
           children: [
             Container(
 
-              width: 360.w,
-              height: 180.h,
+              width: 340.w,
+              height: 160.h,
+              margin: EdgeInsets.only(top: 70.h),
               decoration: BoxDecoration(
-                color: kBottomColor,
-                borderRadius: BorderRadius.only(
-                    bottomRight: Radius.circular(0.0),
-                    bottomLeft: Radius.circular(0.0)),
+                color: kBoxColor,
+                borderRadius: BorderRadius.all(Radius.circular(20)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SizedBox(
-                    height: 40.h,
-                  ),
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -86,7 +83,7 @@ class _Home_DetailState extends State<Home_Detail> {
                               child: Text(
                                 "${widget.gymDto?.name}",
                                 style: TextStyle(
-                                    color: kTextWhiteColor,
+                                    color: Colors.black,
                                     fontSize: 19.sp,
                                     fontFamily: "boldfont"),
                               ),
@@ -137,12 +134,12 @@ class _Home_DetailState extends State<Home_Detail> {
                         margin: EdgeInsets.only(left: 80.w),
                         child: Text(
                           "현재 약",
-                          style: TextStyle(color: kTextWhiteColor, fontSize: 17.sp,fontFamily: "lightfont"),
+                          style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold, fontSize: 17.sp,fontFamily: "lightfont"),
                         ),
                       ),
                       widget.current_count!.length == 1?
                       Container(
-                        margin: EdgeInsets.only(left: 26.h,right: 37.w),
+                        margin: EdgeInsets.only(left: 24.h,right: 37.w),
                         child: Text(
                           "${widget.current_count}",
                           style: TextStyle(
@@ -152,13 +149,13 @@ class _Home_DetailState extends State<Home_Detail> {
                         ),
                       )
                           :Container(
-                        margin: EdgeInsets.only(left: 17.h,right: 26),
+                        margin: EdgeInsets.only(left: 13.h,right: 26),
                         child: Text(
                           "${widget.current_count}",
                           style: TextStyle(
                               fontSize: 50,
                               fontFamily: "boldfont",
-                              color: kTextWhiteColor),
+                              color: kPrimaryColor),
                         ),
                       ),
                       Container(
@@ -166,7 +163,7 @@ class _Home_DetailState extends State<Home_Detail> {
                           child: Text(
                             "명",
                             style:
-                            TextStyle(fontFamily: "boldfont",color: kTextWhiteColor, fontSize: 23),
+                            TextStyle(fontFamily: "boldfont",color: kTextBlackColor, fontSize: 23),
                           ))
                     ],
                   ),
@@ -176,7 +173,7 @@ class _Home_DetailState extends State<Home_Detail> {
             Container(
                 width: 360.w,
                 height: 330.h,
-                margin: EdgeInsets.only(left: 20.w,right: 20.w),
+                margin: EdgeInsets.only(left: 20.w,right: 20.w,top: 25.h),
                 child: Dashboard(time_avg: widget.time_avg)),
             Container(
               width: 340.w,

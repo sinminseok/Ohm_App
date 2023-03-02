@@ -64,8 +64,8 @@ class _SlideSelectorState extends State<SlideSelector> {
             height: 50,
 
             decoration: BoxDecoration(
-              color: kPrimaryColor,
-              borderRadius: BorderRadius.circular(30),
+              color: Colors.grey,
+              borderRadius: BorderRadius.circular(10),
             ),
             child: Stack(
               children: <Widget>[
@@ -78,8 +78,8 @@ class _SlideSelectorState extends State<SlideSelector> {
                     width: buttonWidth,
                     height: 52,
                     decoration: BoxDecoration(
-                      color: kBoxColor,
-                      borderRadius: BorderRadius.circular(30),
+                      color: kContainerColor,
+                      borderRadius: BorderRadius.circular(10),
 
                     ),
                   ),
@@ -115,7 +115,7 @@ class _SlideSelectorState extends State<SlideSelector> {
                                 fontFamily: "boldfont",
                                 fontWeight: FontWeight.w600,
                                 color: index == activeItemIndex
-                                    ? Colors.black
+                                    ? kPrimaryColor
                                     : Colors.white,
                               ),
                             ),
