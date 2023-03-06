@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:shopping_tool/Model/dto/countDto.dart';
 import 'package:shopping_tool/Model/dto/gymPriceDto.dart';
 import 'package:shopping_tool/Model/dto/gymTimeDto.dart';
+import 'package:shopping_tool/Model/dto/statisticsDto.dart';
 import 'package:shopping_tool/Utils/toast.dart';
 
 import '../../Model/dto/gymDto.dart';
@@ -149,9 +150,9 @@ class GymApi with ChangeNotifier {
 
   }
 
-  Future<List<double>?> get_timeavg(String gymId)async{
+  Future<StatisticsDto?> get_timeavg(String gymId)async{
 
-    List<double> values = [];
+
     var res = await http.get(
       Uri.parse(GymApi_Url().time_avg + "${gymId}"),
       headers: {'Content-Type': 'application/json'},
@@ -159,12 +160,9 @@ class GymApi with ChangeNotifier {
     if (res.statusCode == 200) {
       final decodeData = utf8.decode(res.bodyBytes);
       final data = jsonDecode(decodeData);
-      print(data[10].runtimeType);
-      for(int i = 0 ;i<data.length;i++){
-        values.add(double.parse(data[i]));
-      }
+     var statisticsDto = StatisticsDto.fromJson(data);
 
-      return values;
+      return statisticsDto;
     } else {
 
       return null;

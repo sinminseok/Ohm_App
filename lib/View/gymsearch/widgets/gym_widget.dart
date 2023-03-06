@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shopping_tool/Utils/constants.dart';
+import 'package:shopping_tool/Utils/http_urls.dart';
 
 import '../../../Model/dto/gymDto.dart';
 import '../detail_views/gymdetail_view.dart';
@@ -45,14 +46,14 @@ class _Gym_ContainerState extends State<Gym_Container> {
               width: 340.w,
               child:ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
-                  child: Image.asset(
-                    "assets/images/gym_img.png",
+                  child: Image.network(
+                    awsimg_endpoint+widget.gymDto.imgs[0].filePath,
                     fit: BoxFit.cover,
                   )
               ),
             ),
             Container(
-              height: widget.size.height * 0.13,
+              height: 100.h,
               child: Column(
                 children: [
                   Row(
@@ -81,11 +82,13 @@ class _Gym_ContainerState extends State<Gym_Container> {
                     children: [
 
                       Container(
-                        margin: const EdgeInsets.only(left: 25.0,top: 10),
+                        width:320.w,
+                        margin: const EdgeInsets.only(left: 25.0,top: 10,right: 0),
                         child: Text(
                             "${widget.gymDto.address}",
                           style: TextStyle(
-                              fontFamily: "lightfont", fontSize: 17,fontWeight: FontWeight.bold),
+                              overflow: TextOverflow.fade,
+                              fontFamily: "lightfont", fontSize: 15.sp,fontWeight: FontWeight.bold),
                         ),
                       )
                     ],

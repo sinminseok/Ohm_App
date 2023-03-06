@@ -5,16 +5,19 @@ import 'package:page_transition/page_transition.dart';
 import 'package:shopping_tool/Model/dto/trainerDto.dart';
 import 'package:shopping_tool/Utils/constants.dart';
 
+import '../../../Utils/http_urls.dart';
 import '../detail_views/trainer_detail.dart';
 
-Widget Trainer_Widget(Size size, context, TrainerDto trainerDto) {
+Widget Trainer_Widget(Size size,context,TrainerDto trainerDto) {
   return InkWell(
-    onTap: () {
+
+    onTap: (){
+      // print(trainerDto.profile);
       Navigator.push(
           context,
           PageTransition(
               type: PageTransitionType.fade,
-              child: Trainer_Detail(trainerDto: trainerDto)));
+              child: Trainer_Detail(trainerDto: trainerDto,)));
     },
     child: Padding(
       padding: const EdgeInsets.all(8.0),
@@ -27,13 +30,26 @@ Widget Trainer_Widget(Size size, context, TrainerDto trainerDto) {
           children: [
             //  assets/images/img1.jpeg
 
+            trainerDto.profile == null?
             Container(
               width: 120.w,
+              height: 120.h,
               child: ClipRRect(
                   borderRadius: BorderRadius.circular(3.0),
                   child: Image.asset(
-                    "assets/images/teacher.jpeg",
-                    fit: BoxFit.cover,
+                    "assets/images/user.jpg",
+                    fit: BoxFit.fitHeight,
+                  )),
+            )
+                :Container(
+
+              width: 120.w,
+              height: 120.h,
+              child: ClipRRect(
+                  borderRadius: BorderRadius.circular(3.0),
+                  child:  Image.network(
+                    awsimg_endpoint+trainerDto.profile!,
+                    fit: BoxFit.fitHeight,
                   )),
             ),
             Column(
@@ -54,7 +70,7 @@ Widget Trainer_Widget(Size size, context, TrainerDto trainerDto) {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style:
-                        TextStyle(fontFamily: "boldfont", color: Colors.grey),
+                    TextStyle(fontFamily: "boldfont", color: Colors.grey),
                   ),
                 )
               ],

@@ -11,6 +11,7 @@ import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:shopping_tool/View/Home/detail_views/ready_view.dart';
 import '../../../Utils/Ui/gray_line.dart';
 import '../../../Utils/get_date.dart';
+import '../../Model/dto/statisticsDto.dart';
 import 'detail_views/home_detail.dart';
 
 class Home_View extends StatefulWidget {
@@ -29,7 +30,7 @@ class _Home_ViewState extends State<Home_View> {
   GymDto? gymDto;
   Future? future;
 
-  List<double> time_avg = [];
+  StatisticsDto? time_avg;
 
   @override
   void initState() {
@@ -91,15 +92,7 @@ class _Home_ViewState extends State<Home_View> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              Container(
-                                width: 180.w,
-                                child: Text(""),
-                              ),
-                              Text(
-                                "${current_datetime}",
-                                style: TextStyle(
-                                    fontSize: 13, color: kTextWhiteColor),
-                              )
+
                             ],
                           ),
                         ],
@@ -109,7 +102,7 @@ class _Home_ViewState extends State<Home_View> {
                       height: 30.h,
                     ),
                     Text(
-                      "인터넷 연결중 ., ",
+                      "인터넷 연결중 .. ",
                       style: TextStyle(
                           fontFamily: "boldfont",
                           fontSize: 18,
@@ -143,7 +136,7 @@ class _Home_ViewState extends State<Home_View> {
                       curent_date: current_datetime,
                       current_count: current_count,
                       gymDto: gymDto,
-                      time_avg: time_avg,
+                      time_avg: time_avg!,
                     );
             }
           }

@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shopping_tool/Model/dto/postDto.dart';
 import 'package:shopping_tool/Utils/constants.dart';
 
+import '../../../Utils/http_urls.dart';
 import '../../Components/basic_appbar.dart';
 
 class Post_Detail extends StatefulWidget {
@@ -35,17 +36,27 @@ class _Post_Detail extends State<Post_Detail> {
       body:SingleChildScrollView(
         child: Column(
           children: [
-            Container(
-              height: 240.h,
+            widget.postDto.imgs.length == 0
+                ? Container()
+                : Container(
               width: 360.w,
-              child:ClipRRect(
-                  borderRadius: BorderRadius.circular(0.0),
-                  child: Image.asset(
-                    "assets/images/gym_img.png",
-                    fit: BoxFit.cover,
-                  )
-              ),
-            ),
+              height: 340.h,
+
+              child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: widget.postDto.imgs.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Container(
+                      height: 340.h,
+                      width: 360.w,
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.circular(0.0),
+                          child: Image.network(
+                              awsimg_endpoint + widget.postDto.imgs[index].filePath,
+                              fit: BoxFit.fill
+                          )),
+                    );
+                  }),),
             Container(
               width: size.width,
 

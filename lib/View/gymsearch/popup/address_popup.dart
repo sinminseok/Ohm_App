@@ -31,10 +31,11 @@ class Address_Popup {
                       child: Column(
                         children: [
                           Container(
+                            margin: EdgeInsets.only(left: 15.w,right: 15.w),
 
                             height: 100.h,
                             width: 320.w,
-                            child: Center(child: Text("${address}",style: TextStyle(color: kPrimaryColor,fontWeight: FontWeight.bold),))
+                            child: Center(child: Text("${address}",style: TextStyle(color: kPrimaryColor,fontWeight: FontWeight.bold,fontFamily: 'lightfont'),))
                           ),
                           InkWell(
                               onTap: (){
@@ -51,7 +52,7 @@ class Address_Popup {
                                       borderRadius: BorderRadius.all(Radius.circular(20))
                                     ),
 
-                                    child: Center(child: Text("완료",style: TextStyle(color: kTextWhiteColor),))),
+                                    child: Center(child: Text("완료",style: TextStyle(color: kTextWhiteColor,fontFamily: "boldfont"),))),
                               ))
                         ],
                       ),

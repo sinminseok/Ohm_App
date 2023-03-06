@@ -57,5 +57,7 @@ class Question_Url{
 
 }
 
+const awsimg_endpoint = "https://d3mb3hod79zif1.cloudfront.net/";
+
 
 

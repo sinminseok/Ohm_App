@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shopping_tool/Controller/api/gymApi.dart';
 import 'package:shopping_tool/Model/dto/gymDto.dart';
+import 'package:shopping_tool/Model/dto/statisticsDto.dart';
 import 'package:shopping_tool/Utils/constants.dart';
 import 'package:shopping_tool/View/home/detail_views/chart_view.dart';
 import 'package:animate_icons/animate_icons.dart';
@@ -15,7 +16,7 @@ class Home_Detail extends StatefulWidget {
   String curent_date;
   String? current_count;
   String? count_string;
-  List<double> time_avg;
+  StatisticsDto time_avg;
 
   Home_Detail(
       {required this.time_avg,
@@ -44,12 +45,6 @@ class _Home_DetailState extends State<Home_Detail> {
 
   @override
   Widget build(BuildContext context) {
-    double max_value(List<double> data) {
-      var v = [...data];
-      v.sort();
-      double max = v.last;
-      return max;
-    }
 
     Size size = MediaQuery.of(context).size;
     return Scaffold(
@@ -145,7 +140,7 @@ class _Home_DetailState extends State<Home_Detail> {
                           style: TextStyle(
                               fontSize: 50,
                               fontFamily: "boldfont",
-                              color: kTextWhiteColor),
+                              color: kPrimaryColor),
                         ),
                       )
                           :Container(
@@ -173,9 +168,10 @@ class _Home_DetailState extends State<Home_Detail> {
             Container(
                 width: 360.w,
                 height: 330.h,
-                margin: EdgeInsets.only(left: 20.w,right: 20.w,top: 25.h),
+                margin: EdgeInsets.only(left: 10.w,right: 10.w,top: 25.h),
                 child: Dashboard(time_avg: widget.time_avg)),
             Container(
+              margin: EdgeInsets.only(top: 30.h),
               width: 340.w,
               height: 100.h,
               decoration: BoxDecoration(
