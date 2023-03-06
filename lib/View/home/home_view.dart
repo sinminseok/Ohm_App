@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shopping_tool/Controller/api/gymApi.dart';
 import 'package:shopping_tool/Model/dto/countDto.dart';
@@ -64,6 +65,16 @@ class _Home_ViewState extends State<Home_View> {
   void dispose() {
     super.dispose();
   }
+  final spinkit = SpinKitWanderingCubes(
+    itemBuilder: (BuildContext context, int index) {
+      return DecoratedBox(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(100)),
+          color: index.isEven ? kPrimaryColor : kBoxColor,
+        ),
+      );
+    },
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +85,7 @@ class _Home_ViewState extends State<Home_View> {
 
             if (snapshot.data == null) {
               return Scaffold(
-                backgroundColor: snapshot.data == false?Colors.grey.shade200:kBottomColor,
+                backgroundColor: snapshot.data == false?Colors.grey.shade200:kBackgroundColor,
                 body: Column(
                   children: [
                     Container(
@@ -89,25 +100,17 @@ class _Home_ViewState extends State<Home_View> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-
-                            ],
-                          ),
+                          Container(
+                            margin: EdgeInsets.only(top: 90.h),
+                            child: spinkit,
+                          )
                         ],
                       ),
                     ),
                     Container(
                       height: 30.h,
                     ),
-                    Text(
-                      "인터넷 연결중 .. ",
-                      style: TextStyle(
-                          fontFamily: "boldfont",
-                          fontSize: 18,
-                          color: kPrimaryColor),
-                    )
+
                   ],
                 ),
               );

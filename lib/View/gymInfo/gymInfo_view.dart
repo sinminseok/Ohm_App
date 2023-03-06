@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shopping_tool/Controller/api/trainerApi.dart';
@@ -24,7 +25,16 @@ class _GymInfo_View extends State<GymInfo_View> {
   String selectedDropdown = '게시물';
   List<PostDto> posts = [];
   List<TrainerDto> trainers = [];
-
+  final spinkit = SpinKitWanderingCubes(
+    itemBuilder: (BuildContext context, int index) {
+      return DecoratedBox(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(100)),
+          color: index.isEven ? kPrimaryColor : kBoxColor,
+        ),
+      );
+    },
+  );
   Future? future_post;
   Future? future_trainer;
 
@@ -145,13 +155,9 @@ class _GymInfo_View extends State<GymInfo_View> {
                                   AsyncSnapshot snapshot) {
                                 //해당 부분은 data를 아직 받아 오지 못했을때 실행되는 부분을 의미한다.
                                 if (snapshot.hasData == false) {
-                                  return Center(
-                                      child: Text(
-                                    "",
-                                    style: TextStyle(
-                                        fontSize: 21,
-                                        fontWeight: FontWeight.bold),
-                                  ));
+                                  return Container(
+                                    margin: EdgeInsets.only(top:0.h),
+                                    child: spinkit,);
                                 }
                                 //error가 발생하게 될 경우 반환하게 되는 부분
                                 else if (snapshot.hasError) {

@@ -24,6 +24,14 @@ Widget Trainer_Widget(Size size,context,TrainerDto trainerDto) {
       child: Container(
         height: 120.h,
         decoration: BoxDecoration(
+            // boxShadow: [
+            //   BoxShadow(
+            //     color: Colors.grey.withOpacity(0.1),
+            //     spreadRadius: 5,
+            //     blurRadius: 3,
+            //     offset: Offset(0, 3), // changes position of shadow
+            //   ),
+            // ],
             color: kContainerColor,
             borderRadius: BorderRadius.all(Radius.circular(10))),
         child: Row(

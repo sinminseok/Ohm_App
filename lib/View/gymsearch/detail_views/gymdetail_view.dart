@@ -91,7 +91,8 @@ class _GymDetail_View extends State<GymDetail_View> {
                       margin: EdgeInsets.all(0),
                       child:  Container(
                         width: 360.w,
-                        height: 250.h,
+                        height: 330.h,
+                        decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(20))),
 
                         child: ListView.builder(
                             scrollDirection: Axis.horizontal,
@@ -102,8 +103,9 @@ class _GymDetail_View extends State<GymDetail_View> {
                                 margin: EdgeInsets.only(left: 15.w,right: 20.w),
                                 height: 350.h,
                                 width: 330.w,
+                                decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(20))),
                                 child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(0.0),
+                                    borderRadius: BorderRadius.circular(20.0),
                                     child: Image.network(
                                         awsimg_endpoint + widget.gymDto.imgs[0].filePath,
                                         fit: BoxFit.fill

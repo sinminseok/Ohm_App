@@ -42,7 +42,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
     }
 
     return Container(
-      color: kBottomColor,
+      color: Colors.grey.shade300,
       child: Row(
         children: _navBarItemList,
       ),
@@ -72,7 +72,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
             : BoxDecoration(),
         child: Icon(
           icon,
-          color: index == _selectedIndex ? Colors.white : Colors.grey,
+          color: index == _selectedIndex ? kPrimaryColor : Colors.grey,
         ),
       ),
     );

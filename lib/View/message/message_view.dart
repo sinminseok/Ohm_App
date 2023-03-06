@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shopping_tool/Controller/api/questionApi.dart';
 import 'package:shopping_tool/Utils/constants.dart';
@@ -19,6 +20,16 @@ class Message_View extends StatefulWidget {
 }
 
 class _Message_ViewState extends State<Message_View> {
+  final spinkit = SpinKitWanderingCubes(
+    itemBuilder: (BuildContext context, int index) {
+      return DecoratedBox(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(100)),
+          color: index.isEven ? kPrimaryColor : kBoxColor,
+        ),
+      );
+    },
+  );
   List<QuestionDto> not_answers = [];
   List<QuestionDto> ok_answers = [];
   Future? myfuture;
@@ -27,6 +38,7 @@ class _Message_ViewState extends State<Message_View> {
   String selectedDropdown = '답변전';
   List<QuestionDto> questions = [];
   bool check_gym = false;
+  TextEditingController _contentController = TextEditingController();
 
   get_questions() async {
     setState(() {
@@ -68,6 +80,121 @@ class _Message_ViewState extends State<Message_View> {
 
   @override
   Widget build(BuildContext context) {
+    void showDialog( BuildContext context,TextEditingController _contentController) {
+      showGeneralDialog(
+          context: context,
+          barrierDismissible: true,
+          barrierLabel:
+          MaterialLocalizations.of(context).modalBarrierDismissLabel,
+          barrierColor: Colors.black45,
+          transitionDuration: const Duration(milliseconds: 200),
+          pageBuilder: (BuildContext buildContext, Animation animation,
+              Animation secondaryAnimation) {
+            return StatefulBuilder(builder: (context, s) {
+              return AlertDialog(
+                contentPadding: EdgeInsets.zero,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)),
+                content: DefaultTextStyle(
+                  style: TextStyle(fontSize: 16, color: Colors.black),
+                  child: SingleChildScrollView(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          color: kBackgroundColor,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  width: 180.w,
+                                  margin: EdgeInsets.only(left: 15.w,top: 20.h),
+                                  child: Text("문의내용 작성",style: TextStyle(fontSize: 17,color: kTextBlackColor,fontFamily: "boldfont"),),
+                                ),
+
+                                InkWell(
+                                  onTap: (){
+
+                                    Navigator.pop(context);
+                                  },
+                                  child: Container(
+                                    margin: EdgeInsets.only(right: 15.w,top: 5.h),
+                                    child: Icon(Icons.cancel,color: Colors.grey,size: 28,),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Container(
+                                margin: EdgeInsets.only(top: 20.h,left: 10.w,right: 10.w),
+                                width: 310.w,
+                                height: 250.h,
+                                decoration: BoxDecoration(
+                                    color: kContainerColor,
+                                    borderRadius: BorderRadius.all(Radius.circular(10))),
+                                child: TextFormField(
+                                  onTap: (){
+                                    setState(() {
+
+                                    });
+                                  },
+
+                                  controller: _contentController,
+                                  cursorColor: kPrimaryColor,
+                                  decoration: InputDecoration(
+                                    hintText: "질문",
+                                    border: InputBorder.none,
+                                    contentPadding: EdgeInsets.all(10.0),
+                                  ),
+                                )),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.h,bottom: 25.h),
+                              width: 260.w,
+                              height: 40.h,
+                              decoration: BoxDecoration(
+                                  color: kTextBlackColor,
+                                  borderRadius: BorderRadius.all(Radius.circular(10))),
+                              child: InkWell(
+                                onTap: ()async{
+                                  final prefs = await SharedPreferences.getInstance();
+                                  if(prefs.getInt("gymId") == null){
+                                    showtoast("다니는 헬스장을 먼저 등록해보세요!");
+                                  }else{
+                                    var s = await QuestionApi().save_question( _contentController.text,prefs.getInt("gymId"));
+                                    showtoast("질문 등록이 완료되었습니다!\n답변을 받으면 게시판에 올라옵니다");
+                                    setState(() {
+                                      myfuture = get_questions();
+                                    });
+                                    Navigator.pop(context);
+                                  }
+
+                                },
+                                child: Center(
+                                  child: Text(
+                                    "전송",
+                                    style: TextStyle(
+                                        fontFamily: "boldfont",
+                                        fontWeight: FontWeight.bold,
+                                        color: kTextWhiteColor,
+                                        fontSize: 17),
+                                  ),
+                                ),
+                              ),
+                            ),
+
+
+                          ],
+                        ),
+                      )
+                  ),
+                ),
+              );
+            });
+          });
+    }
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
@@ -92,16 +219,17 @@ class _Message_ViewState extends State<Message_View> {
               ),
               InkWell(
                   onTap: () async {
-                    await showModalBottomSheet<void>(
-                        context: context,
-                        isScrollControlled: true,
-                        builder: (BuildContext context) {
-                          return Bottom_Sheet();
-                        });
+                     showDialog(context,_contentController);
+                    // await showModalBottomSheet<void>(
+                    //     context: context,
+                    //     isScrollControlled: true,
+                    //     builder: (BuildContext context) {
+                    //       return Bottom_Sheet();
+                    //     });
 
-                    setState(() {
-                      myfuture = get_questions();
-                    });
+                    // setState(() {
+                    //   myfuture = get_questions();
+                    // });
                   },
                   child: Icon(
                     Icons.add,
@@ -120,7 +248,9 @@ class _Message_ViewState extends State<Message_View> {
                 future: myfuture,
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
                   if (snapshot.hasData == false) {
-                    return Container();
+                    return Container(
+                      margin: EdgeInsets.only(top:300.h),
+                      child: spinkit,);
                   }
 
                   //error가 발생하게 될 경우 반환하게 되는 부분
@@ -197,58 +327,63 @@ class _Message_ViewState extends State<Message_View> {
                                             right: 15.w),
                                         width: 360.w,
                                         height: 600.h,
-                                        child: ListView.builder(
-                                            itemCount: not_answers.length,
-                                            itemBuilder:
-                                                (BuildContext ctx, int idx) {
-                                              return Stack(
-                                                children: [
-                                                  Container(
-                                                    margin: EdgeInsets.only(
-                                                        bottom: 10.h),
-                                                    width: 340.w,
-                                                    height: 60.h,
-                                                    decoration: BoxDecoration(
-                                                        color: kBoxColor,
-                                                        borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius.circular(
-                                                                    10))),
-                                                    child: InkWell(
-                                                      onTap: () async {
-                                                        showtoast(
-                                                            "아직 답변이 등록되지 않았습니다");
-                                                      },
-                                                      child: Container(
-                                                          width: 320.w,
-                                                          margin:
-                                                              EdgeInsets.only(
-                                                                  left: 10.w,
-                                                                  right: 10),
-                                                          child: Center(
-                                                              child: Text(
-                                                            "${not_answers[idx].content}",
-                                                            overflow:
-                                                                TextOverflow
-                                                                    .ellipsis,
-                                                            style: TextStyle(
-                                                                color:
-                                                                    kPrimaryColor,
-                                                                fontSize: 16),
-                                                          ))),
+                                        child: Align(
+                                          alignment: Alignment.topCenter,
+                                          child: ListView.builder(
+                                              reverse: true,
+                                              shrinkWrap: true,
+                                              itemCount: not_answers.length,
+                                              itemBuilder:
+                                                  (BuildContext ctx, int idx) {
+                                                return Stack(
+                                                  children: [
+                                                    Container(
+                                                      margin: EdgeInsets.only(
+                                                          bottom: 10.h),
+                                                      width: 340.w,
+                                                      height: 60.h,
+                                                      decoration: BoxDecoration(
+                                                          color: kBoxColor,
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                                  Radius.circular(
+                                                                      10))),
+                                                      child: InkWell(
+                                                        onTap: () async {
+                                                          showtoast(
+                                                              "아직 답변이 등록되지 않았습니다");
+                                                        },
+                                                        child: Container(
+                                                            width: 320.w,
+                                                            margin:
+                                                                EdgeInsets.only(
+                                                                    left: 10.w,
+                                                                    right: 10),
+                                                            child: Center(
+                                                                child: Text(
+                                                              "${not_answers[idx].content}",
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .ellipsis,
+                                                              style: TextStyle(
+                                                                  color:
+                                                                      kPrimaryColor,
+                                                                  fontSize: 16),
+                                                            ))),
+                                                      ),
                                                     ),
-                                                  ),
-                                                  Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      Container(),
-                                                    ],
-                                                  )
-                                                ],
-                                              );
-                                            }))
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Container(),
+                                                      ],
+                                                    )
+                                                  ],
+                                                );
+                                              }),
+                                        ))
                                 : ok_answers.length == 0
                                     ? Container(
                                         margin: EdgeInsets.only(top: 170.h),
@@ -266,70 +401,75 @@ class _Message_ViewState extends State<Message_View> {
                                             right: 15.w),
                                         width: 360.w,
                                         height: 600.h,
-                                        child: ListView.builder(
-                                            itemCount: ok_answers.length,
-                                            itemBuilder:
-                                                (BuildContext ctx, int idx) {
-                                              return Stack(
-                                                children: [
-                                                  Container(
-                                                    margin: EdgeInsets.only(
-                                                        bottom: 10.h),
-                                                    width: 340.w,
-                                                    height: 60.h,
-                                                    decoration: BoxDecoration(
-                                                        color: kBoxColor,
-                                                        borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius.circular(
-                                                                    10))),
-                                                    child: InkWell(
-                                                      onTap: () async {
-                                                        await showModalBottomSheet<
-                                                                void>(
-                                                            context: context,
-                                                            builder:
-                                                                (BuildContext
-                                                                    context) {
-                                                              return StatefulBuilder(builder:
+                                        child: Align(
+                                          alignment: Alignment.topCenter,
+                                          child: ListView.builder(
+                                              shrinkWrap: true,
+                                              reverse: true,
+                                              itemCount: ok_answers.length,
+                                              itemBuilder:
+                                                  (BuildContext ctx, int idx) {
+                                                return Stack(
+                                                  children: [
+                                                    Container(
+                                                      margin: EdgeInsets.only(
+                                                          bottom: 10.h),
+                                                      width: 340.w,
+                                                      height: 60.h,
+                                                      decoration: BoxDecoration(
+                                                          color: kBoxColor,
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                                  Radius.circular(
+                                                                      10))),
+                                                      child: InkWell(
+                                                        onTap: () async {
+                                                          await showModalBottomSheet<
+                                                                  void>(
+                                                              context: context,
+                                                              builder:
                                                                   (BuildContext
-                                                                          context,
-                                                                      StateSetter
-                                                                          bottomState) {
-                                                                return Answer_BottomSheet(
-                                                                  questionDto:
-                                                                      ok_answers[
-                                                                          idx],
-                                                                );
+                                                                      context) {
+                                                                return StatefulBuilder(builder:
+                                                                    (BuildContext
+                                                                            context,
+                                                                        StateSetter
+                                                                            bottomState) {
+                                                                  return Answer_BottomSheet(
+                                                                    questionDto:
+                                                                        ok_answers[
+                                                                            idx],
+                                                                  );
+                                                                });
                                                               });
-                                                            });
 
-                                                        setState(() {
-                                                          selectedDropdown;
-                                                        });
-                                                      },
-                                                      child: Container(
-                                                          width: 320.w,
-                                                          margin:
-                                                              EdgeInsets.only(
-                                                                  left: 10.w,
-                                                                  right: 10),
-                                                          child: Center(
-                                                              child: Text(
-                                                            "${ok_answers[idx].content}",
-                                                            overflow:
-                                                                TextOverflow
-                                                                    .ellipsis,
-                                                            style: TextStyle(
-                                                                color:
-                                                                    kPrimaryColor,
-                                                                fontSize: 16),
-                                                          ))),
+                                                          setState(() {
+                                                            selectedDropdown;
+                                                          });
+                                                        },
+                                                        child: Container(
+                                                            width: 320.w,
+                                                            margin:
+                                                                EdgeInsets.only(
+                                                                    left: 10.w,
+                                                                    right: 10),
+                                                            child: Center(
+                                                                child: Text(
+                                                              "${ok_answers[idx].content}",
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .ellipsis,
+                                                              style: TextStyle(
+                                                                  color:
+                                                                      kPrimaryColor,
+                                                                  fontSize: 16),
+                                                            ))),
+                                                      ),
                                                     ),
-                                                  ),
-                                                ],
-                                              );
-                                            }))
+                                                  ],
+                                                );
+                                              }),
+                                        ))
                       ],
                     );
                   }
@@ -338,5 +478,7 @@ class _Message_ViewState extends State<Message_View> {
         ),
       ),
     );
+
+
   }
 }

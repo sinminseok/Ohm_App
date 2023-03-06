@@ -33,9 +33,9 @@ class GymApi with ChangeNotifier {
     if (res.statusCode == 200) {
       final decodeData = utf8.decode(res.bodyBytes);
       final data = jsonDecode(decodeData);
-      print(data);
-      print("datadatadatadata");
+      print(data.length);
       for (int i = 0; i < data.length; i++) {
+        print(data[i]);
         List<GymImgDto> imgs = [];
         for(int j=0;j<data[i]['imgs'].length;j++){
           imgs.add(GymImgDto.fromJson(data[i]['imgs'][j]));

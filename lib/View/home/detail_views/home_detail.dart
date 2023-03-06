@@ -48,19 +48,27 @@ class _Home_DetailState extends State<Home_Detail> {
 
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: kBottomColor,
+      backgroundColor: Colors.grey.shade200,
       body: SingleChildScrollView(
         child: Column(
 
           children: [
             Container(
 
-              width: 340.w,
-              height: 160.h,
-              margin: EdgeInsets.only(top: 70.h),
+              width: 360.w,
+              height: 200.h,
+              margin: EdgeInsets.only(top: 0.h),
               decoration: BoxDecoration(
-                color: kBoxColor,
-                borderRadius: BorderRadius.all(Radius.circular(20)),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.17),
+                    spreadRadius: 1,
+                    blurRadius: 3,
+                    offset: Offset(0, 2), // changes position of shadow
+                  ),
+                ],
+                color: kBottomColor,
+                borderRadius: BorderRadius.all(Radius.circular(0)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -74,18 +82,18 @@ class _Home_DetailState extends State<Home_Detail> {
                         child: Row(
                           children: [
                             Container(
-                              margin: EdgeInsets.only(left: 20.w,top: 10.h),
+                              margin: EdgeInsets.only(left: 20.w,top: 40.h),
                               child: Text(
                                 "${widget.gymDto?.name}",
                                 style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 19.sp,
+                                    color: kTextWhiteColor,
+                                    fontSize: 20.sp,
                                     fontFamily: "boldfont"),
                               ),
                             ),
                             InkWell(
                               child: Container(
-                                margin: EdgeInsets.only(left: 5.w,top: 10.h
+                                margin: EdgeInsets.only(left: 5.w,top: 40.h
                                 ),
                                 child: AnimateIcons(
                                   startIcon: Icons.refresh,
@@ -129,7 +137,7 @@ class _Home_DetailState extends State<Home_Detail> {
                         margin: EdgeInsets.only(left: 80.w),
                         child: Text(
                           "현재 약",
-                          style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold, fontSize: 17.sp,fontFamily: "lightfont"),
+                          style: TextStyle(color: kTextWhiteColor,fontWeight: FontWeight.bold, fontSize: 17.sp,fontFamily: "lightfont"),
                         ),
                       ),
                       widget.current_count!.length == 1?
@@ -140,7 +148,7 @@ class _Home_DetailState extends State<Home_Detail> {
                           style: TextStyle(
                               fontSize: 50,
                               fontFamily: "boldfont",
-                              color: kPrimaryColor),
+                              color: kTextWhiteColor),
                         ),
                       )
                           :Container(
@@ -150,7 +158,7 @@ class _Home_DetailState extends State<Home_Detail> {
                           style: TextStyle(
                               fontSize: 50,
                               fontFamily: "boldfont",
-                              color: kPrimaryColor),
+                              color: kTextWhiteColor),
                         ),
                       ),
                       Container(
@@ -158,7 +166,7 @@ class _Home_DetailState extends State<Home_Detail> {
                           child: Text(
                             "명",
                             style:
-                            TextStyle(fontFamily: "boldfont",color: kTextBlackColor, fontSize: 23),
+                            TextStyle(fontFamily: "boldfont",color: kTextWhiteColor, fontSize: 23),
                           ))
                     ],
                   ),
@@ -167,15 +175,17 @@ class _Home_DetailState extends State<Home_Detail> {
             ),
             Container(
                 width: 360.w,
-                height: 330.h,
-                margin: EdgeInsets.only(left: 10.w,right: 10.w,top: 25.h),
+                height: 350.h,
+                margin: EdgeInsets.only(left: 10.w,right: 10.w,top: 15.h),
                 child: Dashboard(time_avg: widget.time_avg)),
             Container(
-              margin: EdgeInsets.only(top: 30.h),
+              margin: EdgeInsets.only(top: 30.h,bottom: 30.h
+              ),
               width: 340.w,
               height: 100.h,
               decoration: BoxDecoration(
                   color: kBoxColor,
+
                   borderRadius: BorderRadius.all(Radius.circular(10))),
               child: Row(
                 children: [

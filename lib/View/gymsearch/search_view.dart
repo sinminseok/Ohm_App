@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:shopping_tool/Utils/toast.dart';
 import '../../Controller/api/gymApi.dart';
@@ -18,7 +19,16 @@ class Search_View extends StatefulWidget {
 class _Search_View extends State<Search_View> {
   TextEditingController _searchController = TextEditingController();
   Position? current_position;
-
+  final spinkit = SpinKitWanderingCubes(
+    itemBuilder: (BuildContext context, int index) {
+      return DecoratedBox(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(100)),
+          color: index.isEven ? kPrimaryColor : kBoxColor,
+        ),
+      );
+    },
+  );
   //모든 헬스장
   List<GymDto> all_gyms = [];
   List<GymDto> find_gyms = [];
@@ -90,7 +100,7 @@ class _Search_View extends State<Search_View> {
                           border: InputBorder.none,
                           suffixIcon: Padding(
                             padding:
-                                const EdgeInsets.only(top: 10.0, right: 10),
+                                const EdgeInsets.only(top: 0.0, right: 10),
                             child: IconButton(
                               onPressed: () async {
                                 if (_searchController.text == "") {
@@ -109,7 +119,7 @@ class _Search_View extends State<Search_View> {
                               },
                               icon: Icon(
                                 Icons.search,
-                                color: Colors.black,
+                                color: kPrimaryColor,
                               ),
                             ),
                           ),
@@ -131,7 +141,8 @@ class _Search_View extends State<Search_View> {
                       builder: (BuildContext context, AsyncSnapshot snapshot) {
                         if (all_gyms.length == 0) {
                           return Container(
-                            child: Text(""),
+                            margin: EdgeInsets.only(top:270.h),
+                            child: spinkit,
                           );
                         }
                         if (snapshot.connectionState == false) {

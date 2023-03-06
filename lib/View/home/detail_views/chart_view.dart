@@ -32,6 +32,8 @@ class _DashboardState extends State<Dashboard>
 
   @override
   void initState() {
+    print(widget.time_avg.one);
+
 
     hourData = [
       //오전
@@ -222,77 +224,80 @@ class _DashboardState extends State<Dashboard>
     return Stack(
       children: [
         const DashboardBackground(),
-        Container(
-          width: 360.w,
-          height: 340.h,
-          child: SingleChildScrollView(
-            child: Column(
+        Center(
+          child: Container(
+            width: 339.w,
+            height: 340.h,
 
-              children: [
+            child: SingleChildScrollView(
+              child: Column(
+
+                children: [
 
 
-                Padding(
-                  padding: const EdgeInsets.only(left: 90,right:90,top: 15),
-                  child: SlideSelector(
-                    defaultSelectedIndex: activeWeek - 2,
-                    items: <SlideSelectorItem>[
-                      SlideSelectorItem(
-                        text: '오전',
+                  Padding(
+                    padding: const EdgeInsets.only(left: 90,right:90,top: 15),
+                    child: SlideSelector(
+                      defaultSelectedIndex: activeWeek - 2,
+                      items: <SlideSelectorItem>[
+                        SlideSelectorItem(
+                          text: '오전',
 
-                        onTap: () {
-                          changeWeek(1);
-                        },
-                      ),
-                      SlideSelectorItem(
-                        text: '오후',
-                        onTap: () {
-                          changeWeek(2);
-                        },
-                      ),
+                          onTap: () {
+                            changeWeek(1);
+                          },
+                        ),
+                        SlideSelectorItem(
+                          text: '오후',
+                          onTap: () {
+                            changeWeek(2);
+                          },
+                        ),
 
-                    ],
+                      ],
+                    ),
                   ),
-                ),
 
-                Container(
-                  height: chartHeight + 83,
-                  color: kBoxColor,
-                  child: Stack(
-                    children: [
-                      ChartLaughLabels(
-                        chartHeight: chartHeight,
-                        topPadding: 30.h,
-                        leftPadding: leftPadding,
-                        rightPadding: rightPadding,
-                        weekData: hourData[activeWeek -1],
-                      ),
-
-                      const Positioned(
-                        bottom:-12,
-                        left: 0,
-                        right: 0,
-                        child: ChartDayLabels(
+                  Container(
+                    height: chartHeight + 83,
+                    color: Colors.grey.shade200,
+                    child: Stack(
+                      children: [
+                        ChartLaughLabels(
+                          chartHeight: chartHeight,
+                          topPadding: 30.h,
                           leftPadding: leftPadding,
                           rightPadding: rightPadding,
+                          weekData: hourData[activeWeek - 1],
                         ),
-                      ),
-                      Positioned(
-                        top: 33.h,
-                        left: 55.w,
 
-                        child: CustomPaint(
-                            size: Size(
-                                MediaQuery.of(context).size.width, chartHeight),
-                            painter: PathPainter(
-                              path: drawPath(false),
-                              fillPath: drawPath(true),
-                            )),
-                      )
-                    ],
+                        const Positioned(
+                          bottom:-10,
+                          left: 0,
+                          right: 0,
+                          child: ChartDayLabels(
+                            leftPadding: leftPadding,
+                            rightPadding: rightPadding,
+                          ),
+                        ),
+                        Positioned(
+                          top: 33.h,
+                          left: 55.w,
+
+                          child: CustomPaint(
+                              size: Size(
+                                  MediaQuery.of(context).size.width, chartHeight),
+                              painter: PathPainter(
+                                path: drawPath(false),
+                                fillPath: drawPath(true),
+                              )),
+                        )
+                      ],
+                    ),
                   ),
-                ),
 
-              ],
+                ],
+              ),
             ),
           ),
         ),
@@ -310,8 +315,17 @@ class DashboardBackground extends StatelessWidget {
         Expanded(
           child: Container(
             decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey.shade400,width: 0.7),
+              // boxShadow: [
+              //   BoxShadow(
+              //     color: Colors.grey.withOpacity(0.3),
+              //     spreadRadius: 1,
+              //     blurRadius: 3,
+              //     offset: Offset(0, 2), // changes position of shadow
+              //   ),
+              // ],
               borderRadius: BorderRadius.all(Radius.circular(10)),
-              color: kBoxColor,
+              color: Colors.grey.shade200,
             ),
 
           ),
