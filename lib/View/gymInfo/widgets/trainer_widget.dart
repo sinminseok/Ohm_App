@@ -24,6 +24,7 @@ Widget Trainer_Widget(Size size,context,TrainerDto trainerDto) {
       child: Container(
         height: 120.h,
         decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey,width: 0.5),
             // boxShadow: [
             //   BoxShadow(
             //     color: Colors.grey.withOpacity(0.1),
@@ -43,10 +44,10 @@ Widget Trainer_Widget(Size size,context,TrainerDto trainerDto) {
               width: 120.w,
               height: 120.h,
               child: ClipRRect(
-                  borderRadius: BorderRadius.circular(3.0),
+                  borderRadius: BorderRadius.circular(10.0),
                   child: Image.asset(
                     "assets/images/user.jpg",
-                    fit: BoxFit.fitHeight,
+                    fit: BoxFit.fill,
                   )),
             )
                 :Container(
@@ -54,10 +55,10 @@ Widget Trainer_Widget(Size size,context,TrainerDto trainerDto) {
               width: 120.w,
               height: 120.h,
               child: ClipRRect(
-                  borderRadius: BorderRadius.circular(3.0),
+                  borderRadius: BorderRadius.circular(10.0),
                   child:  Image.network(
                     awsimg_endpoint+trainerDto.profile!,
-                    fit: BoxFit.fitHeight,
+                    fit: BoxFit.fill,
                   )),
             ),
             Column(

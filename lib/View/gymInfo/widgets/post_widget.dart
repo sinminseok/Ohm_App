@@ -24,6 +24,7 @@ Widget Post_Widget(Size size,context,PostDto postDto) {
       padding: const EdgeInsets.only(bottom: 10.0,top: 10),
       child: Container(
         decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey,width: 0.5),
             // boxShadow: [
             //   BoxShadow(
             //     color: Colors.grey.withOpacity(0.5),

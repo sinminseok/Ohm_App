@@ -35,22 +35,16 @@ class _Gym_ContainerState extends State<Gym_Container> {
       child: Container(
         margin: EdgeInsets.only(top: 0.h,bottom: 15),
         decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.2),
-                spreadRadius: 5,
-                blurRadius: 7,
-                offset: Offset(0, 3), // changes position of shadow
-              ),
-            ],
-            color: kContainerColor,
+          border: Border.all(color: Colors.grey,width: 0.5),
+
+            color: Colors.grey.shade300,
             borderRadius: BorderRadius.all(Radius.circular(20))),
         child: Column(
           children: [
             Container(
 
-              height: widget.size.height * 0.34,
-              width: 340.w,
+              height: 280.h,
+              width: 350.w,
               child:ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
                   child: Image.network(

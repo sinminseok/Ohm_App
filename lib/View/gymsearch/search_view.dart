@@ -63,7 +63,7 @@ class _Search_View extends State<Search_View> {
               //user_latitude는 사용자가 직접 위치를 지정했는지 안했는지 판별하는 변수
 
               SizedBox(
-                height: 60.h,
+                height: 50.h,
               ),
               Center(
                   child: Container(

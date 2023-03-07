@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:chart_sparkline/chart_sparkline.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -25,7 +28,7 @@ class _DashboardState extends State<Dashboard>
   int activeWeek = 2;
   static const leftPadding = 10.0;
   static const rightPadding = 9.0;
-
+  var data;
 
   double chartHeight = 240;
   late List<ChartDataPoint> chartData;
@@ -33,7 +36,32 @@ class _DashboardState extends State<Dashboard>
   @override
   void initState() {
     print(widget.time_avg.one);
-
+     data = [
+      widget.time_avg.one,
+      widget.time_avg.two,
+      widget.time_avg.three,
+      widget.time_avg.four,
+      widget.time_avg.five,
+      widget.time_avg.six,
+      widget.time_avg.seven,
+      widget.time_avg.eight,
+      widget.time_avg.nine,
+      widget.time_avg.ten,
+      widget.time_avg.eleven,
+      widget.time_avg.twelve,
+      widget.time_avg.thirteen,
+      widget.time_avg.fourteen,
+      widget.time_avg.fifteen,
+      widget.time_avg.sixteen,
+      widget.time_avg.seventeen,
+      widget.time_avg.eighteen,
+      widget.time_avg.nineteen,
+      widget.time_avg.twenty,
+      widget.time_avg.twenty_one,
+      widget.time_avg.twenty_two,
+      widget.time_avg.twenty_three,
+      widget.time_avg.twenty_four
+    ];
 
     hourData = [
       //오전
@@ -221,84 +249,50 @@ class _DashboardState extends State<Dashboard>
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    return  Column(
       children: [
-        const DashboardBackground(),
+
         Center(
-          child: Container(
-            width: 339.w,
-            height: 340.h,
+          child: Column(
+            children: [
 
-            child: SingleChildScrollView(
-              child: Column(
+              Container(
+                width: 339.w,
+                height: 340.h,
 
-                children: [
+                child: SingleChildScrollView(
+                  child: Column(
+
+                    children: [
 
 
-                  Padding(
-                    padding: const EdgeInsets.only(left: 90,right:90,top: 15),
-                    child: SlideSelector(
-                      defaultSelectedIndex: activeWeek - 2,
-                      items: <SlideSelectorItem>[
-                        SlideSelectorItem(
-                          text: '오전',
 
-                          onTap: () {
-                            changeWeek(1);
-                          },
+
+                      Container(
+                        height: chartHeight + 83,
+                        color: Colors.grey.shade200,
+                        child: Stack(
+                          children: [
+                            ChartLaughLabels(
+                              chartHeight: chartHeight,
+                              topPadding: 30.h,
+                              leftPadding: leftPadding,
+                              rightPadding: rightPadding,
+                              weekData: hourData[activeWeek - 1],
+                            ),
+
+
+
+
+                          ],
                         ),
-                        SlideSelectorItem(
-                          text: '오후',
-                          onTap: () {
-                            changeWeek(2);
-                          },
-                        ),
+                      ),
 
-                      ],
-                    ),
+                    ],
                   ),
-
-                  Container(
-                    height: chartHeight + 83,
-                    color: Colors.grey.shade200,
-                    child: Stack(
-                      children: [
-                        ChartLaughLabels(
-                          chartHeight: chartHeight,
-                          topPadding: 30.h,
-                          leftPadding: leftPadding,
-                          rightPadding: rightPadding,
-                          weekData: hourData[activeWeek - 1],
-                        ),
-
-                        const Positioned(
-                          bottom:-10,
-                          left: 0,
-                          right: 0,
-                          child: ChartDayLabels(
-                            leftPadding: leftPadding,
-                            rightPadding: rightPadding,
-                          ),
-                        ),
-                        Positioned(
-                          top: 33.h,
-                          left: 55.w,
-
-                          child: CustomPaint(
-                              size: Size(
-                                  MediaQuery.of(context).size.width, chartHeight),
-                              painter: PathPainter(
-                                path: drawPath(false),
-                                fillPath: drawPath(true),
-                              )),
-                        )
-                      ],
-                    ),
-                  ),
-
-                ],
+                ),
               ),
-            ),
+            ],
           ),
         ),
       ],
