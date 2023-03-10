@@ -33,70 +33,57 @@ class _Gym_ContainerState extends State<Gym_Container> {
                 child: GymDetail_View(gymDto: widget.gymDto,)));
       },
       child: Container(
-        margin: EdgeInsets.only(top: 0.h,bottom: 15),
+        margin: EdgeInsets.only(top: 0.h,bottom: 10),
         decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey,width: 0.5),
+           border: Border.all(color: kBoxColor,width: 1.3),
 
-            color: Colors.grey.shade300,
-            borderRadius: BorderRadius.all(Radius.circular(20))),
+
+            borderRadius: BorderRadius.all(Radius.circular(5))),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
+              margin: EdgeInsets.all(0),
+              child:  Container(
+                margin: EdgeInsets.only(top: 10.h),
 
-              height: 280.h,
-              width: 350.w,
-              child:ClipRRect(
-                  borderRadius: BorderRadius.circular(8.0),
-                  child: Image.network(
-                    awsimg_endpoint+widget.gymDto.imgs[0].filePath,
-                    fit: BoxFit.cover,
-                  )
-              ),
+                width: 360.w,
+                height: 160.h,
+                decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10))),
+
+                child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: widget.gymDto.imgs.length,
+                    //widget.gymDto.imgs.length
+                    itemBuilder: (BuildContext context, int index) {
+                      return Container(
+                        margin: EdgeInsets.only(left: 10.w,right: 10.w),
+                        height: 350.h,
+                        width: 330.w,
+                        decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10))),
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(5.0),
+                            child: Image.network(
+                                awsimg_endpoint + widget.gymDto.imgs[index].filePath,
+                                fit: BoxFit.fill
+                            )),
+                      );
+                    }),),
             ),
             Container(
-              height: 100.h,
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(top: 15.h,left: 25),
-
-                        child: Text(
-                          "${widget.gymDto.name}",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 22,color: kPrimaryColor,fontFamily: "boldfont"),
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(top: 5.h,right: 25),
-                        child: Text(
-                          "",
-                          style: TextStyle(fontSize: 19),
-                        ),
-                      )
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-
-                      Container(
-                        width:320.w,
-                        margin: const EdgeInsets.only(left: 25.0,top: 10,right: 0),
-                        child: Text(
-                            "${widget.gymDto.address}",
-                          style: TextStyle(
-                              overflow: TextOverflow.fade,
-                              fontFamily: "lightfont", fontSize: 15.sp,fontWeight: FontWeight.bold),
-                        ),
-                      )
-                    ],
-                  ),
-                ],
-              ),
+              margin: EdgeInsets.only(left: 20.w,top: 10),
+              child: Text("${widget.gymDto.name}",style: TextStyle(color: kTextBlackColor,fontSize: 18.sp,fontWeight: FontWeight.bold,fontFamily: "boldfont"),),
             ),
+            Container(
+              margin: EdgeInsets.only(left: 20.w,top: 5),
+              child: Text("${widget.gymDto.address}",style: TextStyle(color: Colors.grey.shade800,fontSize: 12.sp,fontWeight: FontWeight.bold,fontFamily: "lightfont"),),
+            ), Container(
+              margin: EdgeInsets.only(left: 20.w,top: 5,bottom: 15),
+              child: Text("${widget.gymDto.oneline_introduce}",style: TextStyle(color: Colors.grey.shade800,fontSize: 12.sp,fontWeight: FontWeight.bold,fontFamily: "lightfont"),),
+            ),
+
+
+
           ],
         ),
       ),

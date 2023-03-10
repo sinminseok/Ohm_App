@@ -69,9 +69,9 @@ class _Search_View extends State<Search_View> {
                   child: Container(
                       margin: EdgeInsets.only(bottom: 0.h, top: 0.h),
                       decoration: BoxDecoration(
-                          color: kBoxColor,
+                          color: kContainerColor,
                           borderRadius: BorderRadius.all(Radius.circular(10))),
-                      height: 50.h,
+                      height: 45.h,
                       width: 340.w,
                       child: TextField(
                         maxLines: 10,
@@ -93,14 +93,13 @@ class _Search_View extends State<Search_View> {
                           }
                         },
                         decoration: InputDecoration(
-                          contentPadding: EdgeInsets.only(left: 20, top: 20),
+                          contentPadding: EdgeInsets.only(left: 20.w, top: 10.h),
                           hintText: "헬스장 이름",
                           hintStyle:
-                              TextStyle(fontFamily: "boldfont", fontSize: 18),
+                              TextStyle(fontFamily: "boldfont", fontSize: 16.sp),
                           border: InputBorder.none,
-                          suffixIcon: Padding(
-                            padding:
-                                const EdgeInsets.only(top: 0.0, right: 10),
+                          suffixIcon: Container(
+                            margin: EdgeInsets.only(right: 10.w,bottom: 3.h),
                             child: IconButton(
                               onPressed: () async {
                                 if (_searchController.text == "") {
@@ -162,7 +161,10 @@ class _Search_View extends State<Search_View> {
                           return Container(
                               width: 360.w,
                               height: 550.h,
+                              margin: EdgeInsets.only(top: 20.h,left: 6.w,right: 6.w),
+
                               child: ListView.builder(
+                                  padding: EdgeInsets.zero,
                                   itemCount: all_gyms.length,
                                   itemBuilder: (BuildContext ctx, int idx) {
                                     return Gym_Container(

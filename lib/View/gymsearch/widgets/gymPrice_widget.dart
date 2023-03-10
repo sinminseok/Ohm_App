@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shopping_tool/Utils/constants.dart';
 
@@ -10,6 +11,7 @@ Widget GymPrice_Widget(String during,String price){
     width: 130.w,
     height: 50.h,
     decoration: BoxDecoration(
+      border: Border.all(color: Colors.grey,width: 0.2),
       borderRadius: BorderRadius.all(Radius.circular(10)),
       color: kBoxColor
     ),

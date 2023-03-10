@@ -92,7 +92,7 @@ class _GymInfo_View extends State<GymInfo_View> {
                       style: TextStyle(
                           fontSize: 21,
                           color: kTextColor,
-                          fontFamily: "lightfont",
+                          fontFamily: "boldfont",
                           fontWeight: FontWeight.bold),
                     )
                   : Text(
@@ -100,7 +100,7 @@ class _GymInfo_View extends State<GymInfo_View> {
                       style: TextStyle(
                           fontSize: 21,
                           color: kTextColor,
-                          fontFamily: "lightfont",
+                          fontFamily: "boldfont",
                           fontWeight: FontWeight.bold),
                     ),
               Container(
@@ -116,12 +116,16 @@ class _GymInfo_View extends State<GymInfo_View> {
                     value: selectedDropdown,
                     items: dropdownList.map((String item) {
                       return DropdownMenuItem<String>(
-                        child: Text(
-                          '$item',
-                          style: TextStyle(
-                              fontFamily: "lightfont",
-                              color: kPrimaryColor,
-                              fontWeight: FontWeight.bold),
+                        child: Container(
+                          margin: EdgeInsets.only(left: 8.w),
+                          child: Text(
+                            '$item',
+                            style: TextStyle(
+                              fontSize: 14.sp,
+                                fontFamily: "lightfont",
+                                color: kPrimaryColor,
+                                fontWeight: FontWeight.bold),
+                          ),
                         ),
                         value: item,
                       );
@@ -146,7 +150,7 @@ class _GymInfo_View extends State<GymInfo_View> {
                   child: Column(
                 children: [
                   Container(
-                      margin: EdgeInsets.only(top: 10.h),
+                      margin: EdgeInsets.only(top: 10.h,bottom: 30.h),
                       height: 590.h,
                       child: selectedDropdown == "게시물"
                           ? FutureBuilder(
@@ -180,6 +184,7 @@ class _GymInfo_View extends State<GymInfo_View> {
                                       : Container(
                                           width: 360.w,
                                           height: 600.h,
+                                          margin: EdgeInsets.only(bottom: 50.h),
                                           child: ListView.builder(
                                               itemCount: posts.length,
                                               itemBuilder:

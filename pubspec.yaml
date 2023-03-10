@@ -126,11 +126,21 @@ flutter:
   fonts:
     - family: lightfont
       fonts:
-        - asset: assets/fonts/lightfont.ttf
+        - asset: assets/fonts/lightfont.otf
           weight: 200
     - family: boldfont
       fonts:
-        - asset: assets/fonts/boldfont.ttf
+        - asset: assets/fonts/boldfont.otf
+          weight: 200
+
+
+    - family: lightfont2
+      fonts:
+        - asset: assets/fonts/lightfont2.ttf
+          weight: 200
+    - family: boldfont2
+      fonts:
+        - asset: assets/fonts/boldfont2.ttf
           weight: 200
 
   #

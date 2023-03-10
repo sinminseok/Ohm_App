@@ -116,61 +116,79 @@ class _GymDetail_View extends State<GymDetail_View> {
 
 
 
-                    Container(
-                      margin: EdgeInsets.only(left: 20.w, top: 30.h),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "${widget.gymDto.name}",
-                            style: TextStyle(fontSize: 26, fontFamily: "boldfont"),
+                  Container(
+                    color: kBoxColor,
+                    margin: EdgeInsets.only(top: 20.h),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(left: 20.w, top: 25.h),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "${widget.gymDto.name}",
+                                style: TextStyle(fontSize: 19.sp, fontFamily: "boldfont2"),
+                              ),
+                              InkWell(
+                                  onTap: () async {
+                                    Address_Popup().showDialog(context, widget.gymDto.address);
+                                  },
+                                  child: Container(
+                                    margin: EdgeInsets.only(right: 10,bottom: 5),
+                                    child: Icon(
+
+                                      Icons.place,
+                                      size: 30,
+                                      color: kPrimaryColor,
+                                    ),
+                                  ))
+                            ],
                           ),
-                          InkWell(
-                              onTap: () async {
-                                Address_Popup().showDialog(context, widget.gymDto.address);
-                              },
-                              child: Container(
-                                margin: EdgeInsets.only(right: 10,bottom: 5),
-                                child: Icon(
-
-                                  Icons.place,
-                                  size: 30,
-                                  color: kPrimaryColor,
-                                ),
-                              ))
-                        ],
-                      ),
-                    ),
-
-
-                    InkWell(
-                      onTap: ()async{
-                        final prefs = await SharedPreferences.getInstance();
-                        if(prefs.getInt("gymId") == null){
-                          prefs.setInt("gymId", widget.gymDto.id);
-                        }else{
-                          prefs.remove("gymId");
-                          prefs.setInt("gymId", widget.gymDto.id);
-                        }
-                        showtoast("헬스장이 등록되었습니다.");
-
-                        Navigator.push(
-                            context,
-                            PageTransition(
-                                type: PageTransitionType.fade,
-                                child: FramePage()));
-                      },
-                      child: Container(
-                        margin: EdgeInsets.only(left: 10,top: 15,bottom: 10),
-                        width: 140.w,
-                        height: 30.h,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
-                            color: kPrimaryColor
                         ),
-                        child: Center(child: Text("내 헬스장 지정",style: TextStyle(color: kTextWhiteColor,fontWeight: FontWeight.bold),)),
-                      ),
+                        InkWell(
+                          onTap: ()async{
+                            final prefs = await SharedPreferences.getInstance();
+                            if(prefs.getInt("gymId") == null){
+                              prefs.setInt("gymId", widget.gymDto.id);
+                            }else{
+                              prefs.remove("gymId");
+                              prefs.setInt("gymId", widget.gymDto.id);
+                            }
+                            showtoast("헬스장이 등록되었습니다.");
+
+                            Navigator.push(
+                                context,
+                                PageTransition(
+                                    type: PageTransitionType.fade,
+                                    child: FramePage()));
+                          },
+                          child: Container(
+                            margin: EdgeInsets.only(left: 15.w,top: 15,bottom: 30),
+                            width: 140.w,
+                            height: 35.h,
+                            decoration: BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.7),
+                                    spreadRadius: 0,
+                                    blurRadius: 5.0,
+                                    offset: Offset(0, 4), // changes position of shadow
+                                  ),
+                                ],
+                                borderRadius: BorderRadius.all(Radius.circular(10)),
+                                color: kPrimaryColor
+                            ),
+                            child: Center(child: Text("내 헬스장 지정",style: TextStyle(fontFamily: "lightfont",color: kTextWhiteColor,fontWeight: FontWeight.bold),)),
+                          ),
+                        ),
+                      ],
                     ),
+                  )
+
+
+               ,
                     Container(
                         margin: EdgeInsets.only(top: 10.h),
                         width: 360.w,

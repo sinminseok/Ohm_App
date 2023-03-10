@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,10 +7,8 @@ import 'package:shopping_tool/Controller/api/gymApi.dart';
 import 'package:shopping_tool/Model/dto/gymDto.dart';
 import 'package:shopping_tool/Model/dto/statisticsDto.dart';
 import 'package:shopping_tool/Utils/constants.dart';
-import 'package:shopping_tool/View/home/detail_views/chart_view.dart';
 import 'package:animate_icons/animate_icons.dart';
 import 'package:chart_sparkline/chart_sparkline.dart';
-import 'package:scrollable_table_view/scrollable_table_view.dart';
 import 'package:shopping_tool/View/home/widgets/chart_bottom.dart';
 
 class Home_Detail extends StatefulWidget {
@@ -74,11 +71,11 @@ class _Home_DetailState extends State<Home_Detail> {
       widget.time_avg.twenty_three,
       widget.time_avg.twenty_four
     ];
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
         backgroundColor: Colors.grey.shade200,
         body: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
                 width: 360.w,
@@ -112,7 +109,7 @@ class _Home_DetailState extends State<Home_Detail> {
                                   "${widget.gymDto?.name}",
                                   style: TextStyle(
                                       color: kTextWhiteColor,
-                                      fontSize: 20.sp,
+                                      fontSize: 17.sp,
                                       fontFamily: "boldfont"),
                                 ),
                               ),
@@ -128,7 +125,7 @@ class _Home_DetailState extends State<Home_Detail> {
                                     startTooltip: 'Icons.refresh',
                                     // add this tooltip for the end icon
                                     endTooltip: 'Icons.add_circle_outline',
-                                    size: 35.0,
+                                    size: 30.0,
                                     onStartIconPress: () {
                                       refresh();
                                       return true;
@@ -156,7 +153,7 @@ class _Home_DetailState extends State<Home_Detail> {
                     Row(
                       children: [
                         Container(
-                          margin: EdgeInsets.only(left: 80.w),
+                          margin: EdgeInsets.only(left: 83.w),
                           child: Text(
                             "현재 약",
                             style: TextStyle(
@@ -205,8 +202,12 @@ class _Home_DetailState extends State<Home_Detail> {
               ),
 
               Container(
+                margin: EdgeInsets.only(top: 15.h,left: 15.w,),
+                child: Text("시간별 평균 인원",style: TextStyle(fontSize: 16.sp,fontFamily: "lightfont",fontWeight: FontWeight.bold),),
+              ),
+              Container(
                 width: 360.w,
-                margin: EdgeInsets.only(left: 10.w,right: 10.w,top: 30),
+                margin: EdgeInsets.only(left: 10.w,right: 10.w,top: 10),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                     border: Border.all(color: Colors.grey,width: 0.5)
@@ -247,11 +248,12 @@ class _Home_DetailState extends State<Home_Detail> {
                                     max: data.reduce(max)+2,
 
 
-                                    pointsMode: PointsMode.all,
+                                    // pointsMode: PointsMode.all,
+                                    lineColor: kPrimaryColor,
                                     pointSize: 8.0,
                                     fallbackHeight: 200.h,
                                     pointColor: kPrimaryColor,
-                                    lineWidth: 2.0,
+                                    lineWidth: 4.0,
                                     fallbackWidth : 700.w,
                                     sharpCorners:true,
 
@@ -278,52 +280,54 @@ class _Home_DetailState extends State<Home_Detail> {
               //     margin: EdgeInsets.only(left: 10.w, right: 10.w, top: 15.h),
               //     child: Dashboard(time_avg: widget.time_avg)),
 
-              Container(
-                margin: EdgeInsets.only(top: 30.h, bottom: 30.h),
-                width: 340.w,
-                height: 100.h,
-                decoration: BoxDecoration(
-                    color: kBoxColor,
-                    borderRadius: BorderRadius.all(Radius.circular(10))),
-                child: Row(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(left: 30, top: 25.h),
-                          child: Text(
-                            "헬스장 현재 인원을 알려주는 ",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: kPrimaryColor,
-                                fontSize: 17.sp,
-                                fontFamily: "lightfont"),
+              Center(
+                child: Container(
+                  margin: EdgeInsets.only(top: 30.h, bottom: 30.h),
+                  width: 340.w,
+                  height: 100.h,
+                  decoration: BoxDecoration(
+                      color: kBoxColor,
+                      borderRadius: BorderRadius.all(Radius.circular(10))),
+                  child: Row(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(left: 30, top: 25.h),
+                            child: Text(
+                              "헬스장 현재 인원을 알려주는 ",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: kPrimaryColor,
+                                  fontSize: 17.sp,
+                                  fontFamily: "lightfont"),
+                            ),
                           ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(left: 30, top: 3.h),
-                          child: Text(
-                            "오헬몇!",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: kPrimaryColor,
-                                fontSize: 24,
-                                fontFamily: "boldfont"),
-                          ),
-                        )
-                      ],
-                    ),
-                    Container(
-                      margin:
-                          EdgeInsets.only(left: 20, right: 10, bottom: 10.h),
-                      child: Icon(
-                        Icons.emergency_share,
-                        size: 45,
-                        color: kPrimaryColor,
+                          Container(
+                            margin: EdgeInsets.only(left: 30, top: 3.h),
+                            child: Text(
+                              "오헬몇!",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: kPrimaryColor,
+                                  fontSize: 24,
+                                  fontFamily: "boldfont"),
+                            ),
+                          )
+                        ],
                       ),
-                    ),
-                  ],
+                      Container(
+                        margin:
+                            EdgeInsets.only(left: 20, right: 10, bottom: 10.h),
+                        child: Icon(
+                          Icons.emergency_share,
+                          size: 45,
+                          color: kPrimaryColor,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],

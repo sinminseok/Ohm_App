@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shopping_tool/Utils/constants.dart';
 import 'package:shopping_tool/Utils/toast.dart';
+import 'package:shopping_tool/View/gymsearch/detail_views/search_view2.dart';
 import 'package:shopping_tool/View/menu/detail_views/introduce_view.dart';
 import 'package:shopping_tool/View/menu/detail_views/question_view.dart';
 import 'package:shopping_tool/View/menu/detail_views/useage_view.dart';
@@ -39,7 +40,7 @@ class _Menu_View extends State<Menu_View> {
                 style: TextStyle(
                   fontSize: 21,
                   color: kTextColor,
-                  fontFamily: "lightfont",
+                  fontFamily: "boldfont",
                   fontWeight: FontWeight.bold
                 ),
               ),
@@ -57,7 +58,36 @@ class _Menu_View extends State<Menu_View> {
 
             children: [
 
-
+              InkWell(
+                onTap: (){
+                  Navigator.push(
+                      context,
+                      PageTransition(
+                          type: PageTransitionType.fade,
+                          child: Search_View2()));
+                },
+                child: Center(
+                  child: Container(
+                      margin: EdgeInsets.only(top: 10),
+                      width: 330.w,
+                      height: 50.h,
+                      decoration: BoxDecoration(
+                          color: kBoxColor,
+                          borderRadius: BorderRadius.all(Radius.circular(10))
+                      ),
+                      child: Row(
+                        children: [
+                          Container(
+                              margin: EdgeInsets.only(left: 20.w,top: 5.h),
+                              child: Icon(Icons.fitness_center,size: 30,color: kPrimaryColor,)),
+                          Container(
+                              margin: EdgeInsets.only(left: 15.w,top: 5.h),
+                              child: Text("헬스장 변경",style: TextStyle(fontFamily: "lightfont",fontSize: 17,color: kPrimaryColor,fontWeight: FontWeight.bold),)),
+                        ],
+                      )
+                  ),
+                ),
+              ),
               InkWell(
                 onTap: (){
                   Navigator.push(
@@ -176,57 +206,16 @@ class _Menu_View extends State<Menu_View> {
                     children: [
                       Container(
                         margin: EdgeInsets.only(left: 15.h,right: 15.w),
-                        child: Icon(Icons.fitness_center,size: 30,color: kTextWhiteColor,),
+                        child: Icon(Icons.fitness_center,size: 34,color: kTextWhiteColor,),
                       ),
-                      Text("헬스장을 운영중이면 \n오헬몇 서비스를 도입해보세요!",style: TextStyle(fontFamily: "lightfont",fontWeight: FontWeight.bold,fontSize: 17,color: kTextWhiteColor),)
+                      Text("헬스장을 운영 중이신가요?",style: TextStyle(fontFamily: "lightfont2",fontWeight: FontWeight.bold,fontSize: 17.sp,color: kTextWhiteColor),)
                     ],
                   ),
                 ),
               ),
-              // InkWell(
-              //   onTap: (){
-              //     showtoast("서비스 준비중입니다.");
-              //   },
-              //   child: Container(
-              //       margin: EdgeInsets.only(top: 13),
-              //       width: 330.w,
-              //       height: 70.h,
-              //       decoration: BoxDecoration(
-              //           color: kPrimaryColor,
-              //           borderRadius: BorderRadius.all(Radius.circular(10))
-              //       ),
-              //       child: Column(
-              //         crossAxisAlignment: CrossAxisAlignment.start,
-              //         children: [
-              //           Row(
-              //             children: [
-              //               Container(
-              //                 margin: EdgeInsets.only(left: 15.h,right: 0.w,top: 23.h),
-              //                 child: Icon(Icons.support_agent,size: 30,color: kTextWhiteColor,),
-              //               ),
-              //               Column(
-              //                 children: [
-              //                   Container(
-              //                       margin: EdgeInsets.only(left: 10.w,top: 20.h),
-              //                       child: Text("카카오톡으로 문의하기",style: TextStyle(fontSize: 17,color: kTextWhiteColor,fontWeight: FontWeight.bold),)),
-              //                   Container(
-              //                       margin: EdgeInsets.only(left: 20.w,top: 0.h),
-              //                       child: Text("소중한 피드백을 보내주세요.",style: TextStyle(fontSize: 15,color: kTextWhiteColor,fontWeight: FontWeight.bold),)),
-              //                 ],
-              //               ),
-              //
-              //             ],
-              //           ),
-              //
-              //
-              //
-              //         ],
-              //       )
-              //   ),
-              // ),
 
               SizedBox(
-                height: 120.h,
+                height: 60.h,
               ),
               Column(
                 children: [
@@ -235,11 +224,11 @@ class _Menu_View extends State<Menu_View> {
                   ),
 
                   Text(
-                    "(주)코무무 | komumu",
+                    "(주)코무무 | comumu",
                     style: TextStyle(color: Colors.black38),
                   ),
                   Text(
-                    "@Copyright 신민석,김영솔",
+                    "@Copyright 신민석(CEO),김영솔(CTO)",
                     style: TextStyle(color: Colors.black38),
                   ),
                   Text(""),

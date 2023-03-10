@@ -28,7 +28,6 @@ class _FramePage extends State<FramePage> {
     Home_View(),
     GymInfo_View(),
     Message_View(),
-    Search_View(),
     Menu_View(),
   ];
 
@@ -41,10 +40,9 @@ class _FramePage extends State<FramePage> {
 
         bottomNavigationBar: CustomBottomNavigationBar(
           iconList: [
-            Icons.people,
+            Icons.fitness_center,
             Icons.speaker_notes_outlined,
             Icons.email_outlined,
-            Icons.search,
             Icons.menu,
           ],
           onChange: (val) {

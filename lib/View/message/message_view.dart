@@ -245,26 +245,17 @@ class _Message_ViewState extends State<Message_View> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "헬스장에 문의하기",
+                "마음의 소리",
                 style: TextStyle(
                     fontSize: 21,
                     color: kTextColor,
-                    fontFamily: "lightfont",
+                    fontFamily: "boldfont",
                     fontWeight: FontWeight.bold),
               ),
               InkWell(
                   onTap: () async {
                     showDialog(context, _contentController);
-                    // await showModalBottomSheet<void>(
-                    //     context: context,
-                    //     isScrollControlled: true,
-                    //     builder: (BuildContext context) {
-                    //       return Bottom_Sheet();
-                    //     });
 
-                    // setState(() {
-                    //   myfuture = get_questions();
-                    // });
                   },
                   child: Icon(
                     Icons.add,
@@ -362,7 +353,7 @@ class _Message_ViewState extends State<Message_View> {
                                             top: 10.h,
                                             right: 15.w),
                                         width: 360.w,
-                                        height: 600.h,
+                                        height: 670.h,
                                         child: Align(
                                           alignment: Alignment.topCenter,
                                           child: ListView.builder(
@@ -379,7 +370,8 @@ class _Message_ViewState extends State<Message_View> {
                                                       width: 340.w,
                                                       height: 60.h,
                                                       decoration: BoxDecoration(
-                                                          color: kBoxColor,
+                                                        border: Border.all(color: Colors.grey,width: 0.3),
+                                                          color: kContainerColor,
                                                           borderRadius:
                                                               BorderRadius.all(
                                                                   Radius
@@ -404,7 +396,7 @@ class _Message_ViewState extends State<Message_View> {
                                                                       .ellipsis,
                                                               style: TextStyle(
                                                                   color:
-                                                                      kPrimaryColor,
+                                                                  kTextBlackColor,
                                                                   fontSize: 16),
                                                             ))),
                                                       ),
@@ -455,7 +447,8 @@ class _Message_ViewState extends State<Message_View> {
                                                       width: 340.w,
                                                       height: 60.h,
                                                       decoration: BoxDecoration(
-                                                          color: kBoxColor,
+                                                        color: kContainerColor,
+                                                          border: Border.all(color: Colors.grey,width: 0.3),
                                                           borderRadius:
                                                               BorderRadius.all(
                                                                   Radius
@@ -500,15 +493,16 @@ class _Message_ViewState extends State<Message_View> {
                                                                       .ellipsis,
                                                               style: TextStyle(
                                                                   color:
-                                                                      kPrimaryColor,
-                                                                  fontSize: 16),
+                                                                      kTextBlackColor,
+                                                                  fontSize: 17),
                                                             ))),
                                                       ),
                                                     ),
                                                   ],
                                                 );
                                               }),
-                                        ))
+                                        )),
+
                       ],
                     );
                   }
