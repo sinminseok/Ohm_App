@@ -33,7 +33,7 @@ class TrainerDto {
       position: json['position'],
       id: json['id'],
       profile: json['profile'],
-      oneline_introduce: json['oneline_introduce'],
+      oneline_introduce: json['onelineIntroduce'],
       introduce: json['introduce'],
       nickname: json['nickname'],
     );

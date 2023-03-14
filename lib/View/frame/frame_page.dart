@@ -4,7 +4,6 @@ import 'package:shopping_tool/View/message/message_view.dart';
 import '../../../Utils/Ui/bottom_nav.dart';
 import '../Home/home_view.dart';
 import '../gymInfo/gymInfo_view.dart';
-import '../gymsearch/search_view.dart';
 import '../menu/menu_view.dart';
 
 class FramePage extends StatefulWidget {

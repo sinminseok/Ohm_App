@@ -57,7 +57,7 @@ class Question_Url{
 
 }
 
-const awsimg_endpoint = "https://d3mb3hod79zif1.cloudfront.net/";
+const awsimg_endpoint = "https://ohm-bucket.s3.ap-northeast-2.amazonaws.com/";
 
 
 

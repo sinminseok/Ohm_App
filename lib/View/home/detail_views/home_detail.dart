@@ -207,7 +207,7 @@ class _Home_DetailState extends State<Home_Detail> {
               ),
               Container(
                 width: 360.w,
-                margin: EdgeInsets.only(left: 10.w,right: 10.w,top: 10),
+                margin: EdgeInsets.only(left: 10.w,right: 10.w,top: 15),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                     border: Border.all(color: Colors.grey,width: 0.5)
@@ -282,11 +282,19 @@ class _Home_DetailState extends State<Home_Detail> {
 
               Center(
                 child: Container(
-                  margin: EdgeInsets.only(top: 30.h, bottom: 30.h),
+                  margin: EdgeInsets.only(top: 15.h, bottom: 30.h),
                   width: 340.w,
                   height: 100.h,
                   decoration: BoxDecoration(
                       color: kBoxColor,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.9),
+                          blurRadius: 3.0,
+                          spreadRadius: 0.0,
+                          offset: const Offset(0,2),
+                        )
+                      ],
                       borderRadius: BorderRadius.all(Radius.circular(10))),
                   child: Row(
                     children: [

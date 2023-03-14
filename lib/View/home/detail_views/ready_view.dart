@@ -6,7 +6,7 @@ import 'package:shopping_tool/View/home/popup/phone_popup.dart';
 
 import '../../../Utils/constants.dart';
 import '../../../Utils/get_date.dart';
-import '../../gymsearch/detail_views/search_view2.dart';
+import '../../gymsearch/search_view.dart';
 
 class Ready_View extends StatefulWidget {
   String currentdate;
@@ -82,14 +82,14 @@ class _Ready_ViewState extends State<Ready_View> {
                     Navigator.push(
                         context,
                         PageTransition(
-                            type: PageTransitionType.fade, child: Search_View2()));
+                            type: PageTransitionType.fade, child: Search_View()));
                   },
                   child: Center(
                     child: Container(
                         width: 250.w,
                         height: 60.h,
                         decoration: BoxDecoration(
-                            color: kContainerColor,
+                            color: kBoxColor,
                             borderRadius: BorderRadius.all(Radius.circular(10))),
                         margin: EdgeInsets.only(top: 20),
                         child: Row(
@@ -97,18 +97,18 @@ class _Ready_ViewState extends State<Ready_View> {
                             Container(
                                 margin: EdgeInsets.only(left: 15.w, right: 20.w),
                                 child: Icon(
-                                  Icons.emergency_share,
+                                  Icons.add,
                                   color: kPrimaryColor,
                                   size: 30,
                                 )),
                             Center(
 
                                 child: Container(
-                                  margin: EdgeInsets.only(left: 14.w),
+                                  margin: EdgeInsets.only(left: 10.w),
                                   child: Text(
                                     "헬스장 등록하기",
                                     style: TextStyle(
-                                        fontSize: 16.sp,
+                                        fontSize: 18.sp,
                                         color: kPrimaryColor,
                                         fontWeight: FontWeight.bold),
                                   ),

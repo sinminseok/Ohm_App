@@ -5,11 +5,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shopping_tool/Utils/constants.dart';
 import 'package:shopping_tool/Utils/toast.dart';
-import 'package:shopping_tool/View/gymsearch/detail_views/search_view2.dart';
 import 'package:shopping_tool/View/menu/detail_views/introduce_view.dart';
 import 'package:shopping_tool/View/menu/detail_views/question_view.dart';
 import 'package:shopping_tool/View/menu/detail_views/useage_view.dart';
 import 'package:shopping_tool/View/menu/popup/comumu_popup.dart';
+
+import '../gymsearch/search_view.dart';
+
+
 
 
 class Menu_View extends StatefulWidget {
@@ -64,7 +67,7 @@ class _Menu_View extends State<Menu_View> {
                       context,
                       PageTransition(
                           type: PageTransitionType.fade,
-                          child: Search_View2()));
+                          child: Search_View()));
                 },
                 child: Center(
                   child: Container(
@@ -72,6 +75,14 @@ class _Menu_View extends State<Menu_View> {
                       width: 330.w,
                       height: 50.h,
                       decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.9),
+                              blurRadius: 3.0,
+                              spreadRadius: 0.0,
+                              offset: const Offset(0,2),
+                            )
+                          ],
                           color: kBoxColor,
                           borderRadius: BorderRadius.all(Radius.circular(10))
                       ),
@@ -102,6 +113,14 @@ class _Menu_View extends State<Menu_View> {
                       width: 330.w,
                       height: 50.h,
                       decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.9),
+                              blurRadius: 3.0,
+                              spreadRadius: 0.0,
+                              offset: const Offset(0,2),
+                            )
+                          ],
                           color: kBoxColor,
                           borderRadius: BorderRadius.all(Radius.circular(10))
                       ),
@@ -131,6 +150,14 @@ class _Menu_View extends State<Menu_View> {
                     width: 330.w,
                     height: 50.h,
                     decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.9),
+                            blurRadius: 3.0,
+                            spreadRadius: 0.0,
+                            offset: const Offset(0,2),
+                          )
+                        ],
                         color: kBoxColor,
                         borderRadius: BorderRadius.all(Radius.circular(10))
                     ),
@@ -159,6 +186,14 @@ class _Menu_View extends State<Menu_View> {
                     width: 330.w,
                     height: 50.h,
                     decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.9),
+                            blurRadius: 3.0,
+                            spreadRadius: 0.0,
+                            offset: const Offset(0,2),
+                          )
+                        ],
                         color: kBoxColor,
                         borderRadius: BorderRadius.all(Radius.circular(10))
                     ),
@@ -189,11 +224,11 @@ class _Menu_View extends State<Menu_View> {
                 decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey.withOpacity(0.3),
-                        spreadRadius:3,
-                        blurRadius: 10,
-                        offset: Offset(0, 3), // changes position of shadow
-                      ),
+                        color: Colors.grey.withOpacity(0.9),
+                        blurRadius: 3.0,
+                        spreadRadius: 0.0,
+                        offset: const Offset(0,2),
+                      )
                     ],
                     color: kPrimaryColor,
                     borderRadius: BorderRadius.all(Radius.circular(10))
@@ -206,6 +241,7 @@ class _Menu_View extends State<Menu_View> {
                     children: [
                       Container(
                         margin: EdgeInsets.only(left: 15.h,right: 15.w),
+
                         child: Icon(Icons.fitness_center,size: 34,color: kTextWhiteColor,),
                       ),
                       Text("헬스장을 운영 중이신가요?",style: TextStyle(fontFamily: "lightfont2",fontWeight: FontWeight.bold,fontSize: 17.sp,color: kTextWhiteColor),)
