@@ -23,7 +23,7 @@ class GymDto {
       address: json['address'],
       count: json['count'],
       introduce: json['introduce'],
-      oneline_introduce: json['oneline_introduce'],
+      oneline_introduce: json['onelineIntroduce'],
        imgs: imgs,
     );
   }

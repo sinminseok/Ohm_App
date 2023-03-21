@@ -52,17 +52,18 @@ class GymApi with ChangeNotifier {
   }
 
   Future<String?> current_count(String gymId,BuildContext context)async{
+
     var res = await http.get(
       Uri.parse(GymApi_Url().current_count + "${gymId}"),
       headers: {'Content-Type': 'application/json'},
     );
+    print(res);
 
     if (res.statusCode == 200) {
       final decodeData = utf8.decode(res.bodyBytes);
       final data = jsonDecode(decodeData);
 
 
-      print(data);
       return data.toString();
     } else {
 

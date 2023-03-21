@@ -5,12 +5,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shopping_tool/Controller/api/gymApi.dart';
-import 'package:shopping_tool/Model/dto/countDto.dart';
 import 'package:shopping_tool/Model/dto/gymDto.dart';
 import 'package:shopping_tool/Utils/constants.dart';
-import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:shopping_tool/View/Home/detail_views/ready_view.dart';
-import '../../../Utils/Ui/gray_line.dart';
 import '../../../Utils/get_date.dart';
 import '../../Model/dto/statisticsDto.dart';
 import 'detail_views/home_detail.dart';
@@ -43,7 +40,11 @@ class _Home_ViewState extends State<Home_View> {
   Future<bool> get_gymInfo() async {
     final prefs = await SharedPreferences.getInstance();
     gymId = prefs.getInt("gymId");
+    print(gymId);
+    print("Dasd");
     current_count = await GymApi().current_count(gymId.toString(), context);
+    print(current_count);
+    print("current_count");
     if (gymId == null) {
       return false;
     } else {

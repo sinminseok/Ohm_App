@@ -7,7 +7,6 @@ import 'package:shopping_tool/Model/dto/postDto.dart';
 import 'package:shopping_tool/Utils/constants.dart';
 
 import '../../../Utils/http_urls.dart';
-import '../../Components/basic_appbar.dart';
 
 class Post_Detail extends StatefulWidget {
 

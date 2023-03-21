@@ -224,9 +224,9 @@ class _Home_DetailState extends State<Home_Detail> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text("${data.reduce(max)}"),
-                          Text("${(data.reduce(max)+data.reduce(min))/2}"),
-                          Text("${data.reduce(min)}"),
+                          Text("${data.reduce(max).ceil()} 명"),
+                          Text("${((data.reduce(max)+data.reduce(min))/2).ceil()} 명"),
+                          Text("${data.reduce(min).ceil()} 명"),
                         ],
                       ),
                     ),

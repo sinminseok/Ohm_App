@@ -8,7 +8,6 @@ import 'package:shopping_tool/Model/dto/trainerDto.dart';
 import 'package:shopping_tool/Utils/constants.dart';
 
 import '../../../Utils/http_urls.dart';
-import '../../Components/basic_appbar.dart';
 
 class Trainer_Detail extends StatefulWidget {
 
