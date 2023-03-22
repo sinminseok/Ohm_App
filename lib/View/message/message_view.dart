@@ -60,22 +60,27 @@ class _Message_ViewState extends State<Message_View> {
   List<QuestionDto> questions = [];
   bool check_gym = false;
   TextEditingController _contentController = TextEditingController();
-
+  int? gymId;
   get_questions() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    setState(() {
+      gymId = prefs.getInt("gymId");
+    });
     setState(() {
       not_answers = [];
       ok_answers = [];
     });
 
-    final prefs = await SharedPreferences.getInstance();
-    String gymId = prefs.getInt("gymId").toString();
+
 
     if (gymId == null) {
+      return null;
     } else {
       setState(() {
         check_gym = true;
       });
-      questions = await QuestionApi().findall_question(gymId);
+      questions = await QuestionApi().findall_question(gymId!.toString());
 
       for (int i = 0; i < questions.length; i++) {
         //아직 답변이 안된 줄민
@@ -230,7 +235,6 @@ class _Message_ViewState extends State<Message_View> {
           });
     }
 
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(40.h),
@@ -254,7 +258,13 @@ class _Message_ViewState extends State<Message_View> {
               ),
               InkWell(
                   onTap: () async {
-                    showDialog(context, _contentController);
+                    print(gymId);
+                    if(gymId == null){
+                      showtoast("헬스장을 먼저 등록해주세요!");
+                    }else{
+                      showDialog(context, _contentController);
+                    }
+
 
                   },
                   child: Icon(
@@ -266,7 +276,11 @@ class _Message_ViewState extends State<Message_View> {
         ),
       ),
       backgroundColor: kBackgroundColor,
-      body: SingleChildScrollView(
+      body: gymId == null?Container(
+        child: Center(
+          child: Text("헬스장을 먼저 등록해주세요!",style: TextStyle(fontSize: 18.sp,fontFamily: "lightfont"),),
+        ),
+      ):SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -325,18 +339,7 @@ class _Message_ViewState extends State<Message_View> {
                             ),
                           ),
                         ),
-                        check_gym == false
-                            ? Container(
-                                margin: EdgeInsets.only(top: 170.h),
-                                child: Center(
-                                  child: Text(
-                                    "다니는 헬스장을 먼저 등록해보세요!",
-                                    style: TextStyle(
-                                        fontFamily: "lightfont",
-                                        fontSize: 17.sp),
-                                  ),
-                                ))
-                            : selectedDropdown == "답변전"
+                         selectedDropdown == "답변전"
                                 ? not_answers.length == 0
                                     ? Container(
                                         margin: EdgeInsets.only(top: 170.h),

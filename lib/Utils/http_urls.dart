@@ -1,6 +1,7 @@
 
-String endpoint = "http://192.168.0.101:8080/api/";
+String endpoint = "http://172.20.10.2:8080/api/";
 //  #172.20.10.2 핫스팟
+// 192.168.0.101집
 class ManagerApi_Url{
   String findall_trainer = endpoint + "admin/findall/";
 

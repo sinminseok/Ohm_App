@@ -37,10 +37,16 @@ class _GymInfo_View extends State<GymInfo_View> {
   );
   Future? future_post;
   Future? future_trainer;
+  int? gymId;
 
   Future<List<PostDto>?> load_posts() async {
     final prefs = await SharedPreferences.getInstance();
-    int? gymId = prefs.getInt("gymId");
+    setState(() {
+      gymId = prefs.getInt("gymId");
+    });
+
+       print("Dd");
+       print(gymId);
     //gymId
     if (gymId == null) {
       posts = [];
@@ -146,7 +152,11 @@ class _GymInfo_View extends State<GymInfo_View> {
           children: [
             Align(
               alignment: Alignment.center,
-              child: SingleChildScrollView(
+              child: gymId == null?Container(
+                child: Center(
+                  child: Text("헬스장을 먼저 등록해주세요!",style: TextStyle(fontSize: 18.sp,fontFamily: "lightfont"),),
+                ),
+              ):SingleChildScrollView(
                   child: Column(
                 children: [
                   Container(
