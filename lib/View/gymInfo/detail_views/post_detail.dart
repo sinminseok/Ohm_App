@@ -3,10 +3,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shopping_tool/Model/dto/postDto.dart';
-import 'package:shopping_tool/Utils/constants.dart';
+import 'package:shopping_tool/Model/post/postDto.dart';
+import 'package:shopping_tool/Utils/sundry/constants.dart';
 
-import '../../../Utils/http_urls.dart';
+import '../../../Utils/sundry/http_urls.dart';
 
 class Post_Detail extends StatefulWidget {
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:shopping_tool/Utils/constants.dart';
+import 'package:shopping_tool/Utils/sundry/constants.dart';
 
 class Useage_Page extends StatelessWidget {
   const Useage_Page({Key? key}) : super(key: key);

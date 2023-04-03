@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../Utils/constants.dart';
+import '../../../Utils/sundry/constants.dart';
 
 class Introduce_View extends StatelessWidget {
   const Introduce_View({Key? key}) : super(key: key);
@@ -61,23 +61,7 @@ class Introduce_View extends StatelessWidget {
               ),
             ),
 
-            Container(
-              margin: EdgeInsets.only(left: 10.w,bottom: 10.h,top: 20.h),
-              child: Text("오헬몇 서비스는 무료인가요?",style: TextStyle(color: kPrimaryColor,fontWeight: FontWeight.bold,fontSize: 21),),
-            ),
-            Center(
-              child: Container(
-                width: 340.w,
-                height: 170.h,
-                decoration: BoxDecoration(
-                    color: kBoxColor,
-                    borderRadius: BorderRadius.all(Radius.circular(10))
-                ),
-                child: Container(
-                    margin: EdgeInsets.all(20.h),
-                    child: Text("오헬몇 서비스는 현재 무료로 사용하실수 있습니다! 추후 사용자가 증가해 서버비,유지보수를 위한 비용이 필요할 경우 최소한의 금액만을 측정해 헬스장측에 청구드릴 예정입니다 ㅜ",style: TextStyle(fontSize: 21),)),
-              ),
-            ),
+
           ],
         ),
       ),

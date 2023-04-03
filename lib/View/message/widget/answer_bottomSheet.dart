@@ -6,9 +6,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:shopping_tool/Controller/api/questionApi.dart';
 
-import '../../../Model/dto/questionDto.dart';
+import '../../../Model/message/questionDto.dart';
 import '../../../Utils/Ui/button_widget.dart';
-import '../../../Utils/constants.dart';
+import '../../../Utils/sundry/constants.dart';
 
 class Answer_BottomSheet extends StatefulWidget {
   QuestionDto questionDto;

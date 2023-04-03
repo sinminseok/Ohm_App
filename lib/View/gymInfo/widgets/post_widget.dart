@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:shopping_tool/Model/dto/postDto.dart';
-import 'package:shopping_tool/Utils/http_urls.dart';
-import '../../../Utils/constants.dart';
+import 'package:shopping_tool/Model/post/postDto.dart';
+import 'package:shopping_tool/Utils/sundry/http_urls.dart';
+import '../../../Utils/sundry/constants.dart';
 import '../detail_views/post_detail.dart';
 
 Widget Post_Widget(Size size,context,PostDto postDto) {

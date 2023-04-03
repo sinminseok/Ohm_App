@@ -4,12 +4,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shopping_tool/Controller/api/gymApi.dart';
-import 'package:shopping_tool/Model/dto/gymDto.dart';
-import 'package:shopping_tool/Model/dto/gymPriceDto.dart';
-import 'package:shopping_tool/Model/dto/gymTimeDto.dart';
-import 'package:shopping_tool/Utils/constants.dart';
-import 'package:shopping_tool/Utils/http_urls.dart';
-import 'package:shopping_tool/Utils/toast.dart';
+import 'package:shopping_tool/Model/gym/gymDto.dart';
+import 'package:shopping_tool/Model/gym/gymPriceDto.dart';
+import 'package:shopping_tool/Model/gym/gymTimeDto.dart';
+import 'package:shopping_tool/Utils/sundry/constants.dart';
+import 'package:shopping_tool/Utils/sundry/http_urls.dart';
+import 'package:shopping_tool/Utils/sundry/toast.dart';
 import 'package:shopping_tool/View/frame/frame_page.dart';
 
 import '../popup/address_popup.dart';
@@ -95,7 +95,7 @@ class _GymDetail_View extends State<GymDetail_View> {
 
                         child: ListView.builder(
                             scrollDirection: Axis.horizontal,
-                            itemCount: 2,
+                            itemCount: widget.gymDto.imgs.length,
                             //widget.gymDto.imgs.length
                             itemBuilder: (BuildContext context, int index) {
                               return Container(
@@ -308,7 +308,7 @@ class _GymDetail_View extends State<GymDetail_View> {
                                         EdgeInsets.only(bottom: 5.h),
                                         child: Text(
                                             "공휴일 : ${gymTime?.holiday}")),
-                                    gymTime?.closeDay == "없음"
+                                    gymTime?.closeDay == "없음" || gymTime?.closeDay ==  null
                                         ? Container()
                                         : Container(
                                         margin:

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:shopping_tool/Utils/constants.dart';
-import 'package:shopping_tool/Utils/http_urls.dart';
+import 'package:shopping_tool/Utils/sundry/constants.dart';
+import 'package:shopping_tool/Utils/sundry/http_urls.dart';
 
-import '../../../Model/dto/gymDto.dart';
+import '../../../Model/gym/gymDto.dart';
 import '../detail_views/gymdetail_view.dart';
 
 
@@ -75,11 +75,12 @@ class _Gym_ContainerState extends State<Gym_Container> {
               child: Text("${widget.gymDto.name}",style: TextStyle(color: kTextBlackColor,fontSize: 18.sp,fontWeight: FontWeight.bold,fontFamily: "boldfont"),),
             ),
             Container(
-              margin: EdgeInsets.only(left: 20.w,top: 5),
-              child: Text("${widget.gymDto.address}",style: TextStyle(color: Colors.grey.shade800,fontSize: 12.sp,fontWeight: FontWeight.bold,fontFamily: "lightfont"),),
-            ), Container(
-              margin: EdgeInsets.only(left: 20.w,top: 5,bottom: 15),
+              margin: EdgeInsets.only(left: 20.w,top: 8.h,bottom: 0),
               child: Text("${widget.gymDto.oneline_introduce}",style: TextStyle(color: Colors.grey.shade800,fontSize: 12.sp,fontWeight: FontWeight.bold,fontFamily: "lightfont"),),
+            ),
+            Container(
+              margin: EdgeInsets.only(left: 20.w,top: 10.h,bottom: 15.h),
+              child: Text("${widget.gymDto.address}",style: TextStyle(color: Colors.grey.shade800,fontSize: 12.sp,fontWeight: FontWeight.bold,fontFamily: "lightfont"),),
             ),
 
 

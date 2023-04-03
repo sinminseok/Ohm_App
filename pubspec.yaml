@@ -100,17 +100,19 @@ flutter:
     - assets/images/kakao.png
     - assets/images/facebook.png
     - assets/images/user.jpg
-    - assets/images/img1.jpeg
-    - assets/images/img2.jpeg
     - assets/images/refresh.png
-    - assets/images/mark.png
-    - assets/images/img3.jpeg
     - assets/images/splash.png
-    - assets/images/main_logo.png
     - assets/images/gym_img.png
-    - assets/images/main_text.png
-    - assets/images/teacher.jpeg
     - assets/images/spsp.png
+    - assets/images/guide/guide1.png
+    - assets/images/guide/guide2.png
+    - assets/images/guide/guide3.png
+    - assets/images/guide/guide4.png
+    - assets/images/guide/guide5.png
+    - assets/images/guide/guide6.png
+    - assets/images/guide/guide7.png
+    - assets/images/guide/guide8.png
+    - assets/images/guide/guide9.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

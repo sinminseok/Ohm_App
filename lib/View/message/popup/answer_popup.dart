@@ -4,8 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../Controller/api/questionApi.dart';
-import '../../../Utils/constants.dart';
-import '../../../Utils/toast.dart';
+import '../../../Utils/sundry/constants.dart';
+import '../../../Utils/sundry/toast.dart';
 
 class Question_Popup {
   void showDialog( BuildContext context,TextEditingController _contentController,Future<dynamic> myfu) {

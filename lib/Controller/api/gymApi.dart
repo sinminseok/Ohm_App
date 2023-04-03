@@ -2,22 +2,19 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:shopping_tool/Model/dto/countDto.dart';
-import 'package:shopping_tool/Model/dto/gymPriceDto.dart';
-import 'package:shopping_tool/Model/dto/gymTimeDto.dart';
-import 'package:shopping_tool/Model/dto/statisticsDto.dart';
-import 'package:shopping_tool/Utils/toast.dart';
+import 'package:shopping_tool/Model/gym/gymPriceDto.dart';
+import 'package:shopping_tool/Model/gym/gymTimeDto.dart';
+import 'package:shopping_tool/Model/statistic/statisticsDto.dart';
+import 'package:shopping_tool/Utils/sundry/toast.dart';
 
-import '../../Model/dto/gymDto.dart';
-import '../../Model/dto/gymImgDto.dart';
-import '../../../../Utils/http_urls.dart';
+import '../../Model/gym/gymDto.dart';
+import '../../Utils/sundry/http_urls.dart';
 import 'package:http/http.dart' as http;
 
+import '../../Model/gym/gymImgDto.dart';
 
-class GymApi with ChangeNotifier {
-  String? _gym_name;
 
-  String? get gym_name => _gym_name;
+class GymApi {
 
   Future<List<GymDto>?> search_allgym() async {
 

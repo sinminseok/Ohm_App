@@ -7,10 +7,10 @@ import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
-import 'package:shopping_tool/Utils/toast.dart';
+import 'package:shopping_tool/Utils/sundry/toast.dart';
 import '../../Controller/api/gymApi.dart';
-import '../../Model/dto/gymDto.dart';
-import '../../Utils/constants.dart';
+import '../../Model/gym/gymDto.dart';
+import '../../Utils/sundry/constants.dart';
 
 import 'widgets/gym_widget.dart';
 
@@ -90,8 +90,24 @@ class _Search_View extends State<Search_View> {
                             borderRadius:
                                 BorderRadius.all(Radius.circular(10))),
                         child: TextField(
+
                           maxLines: 10,
                           textInputAction: TextInputAction.done,
+                          onSubmitted: (value) async{
+                            if (_searchController.text == "") {
+                              showtoast("내용을 입력해주세요");
+                            } else {
+                              var result = await GymApi()
+                                  .search_byname(_searchController.text);
+                              if (result.length == 0) {
+                                showtoast("검색 결과가 없습니다.");
+                              }
+
+                              setState(() {
+                                find_gyms = result;
+                              });
+                            }
+                          },
                           controller: _searchController,
                           decoration: InputDecoration(
                             contentPadding:

@@ -1,6 +1,6 @@
 import 'dart:ffi';
 
-import 'package:shopping_tool/Model/dto/gymDto.dart';
+import 'package:shopping_tool/Model/gym/gymDto.dart';
 
 class TrainerDto {
   late int id;
@@ -15,12 +15,15 @@ class TrainerDto {
   //자기소개
   late String introduce;
 
+  late bool showProfile;
+
   late String nickname;
 
 
 
   TrainerDto(
       {
+        required this.showProfile,
         required this.position,
       required this.id,
       required this.profile,
@@ -30,6 +33,7 @@ class TrainerDto {
 
   factory TrainerDto.fromJson(Map<String, dynamic> json) {
     return TrainerDto(
+      showProfile : json['showProfile'],
       position: json['position'],
       id: json['id'],
       profile: json['profile'],

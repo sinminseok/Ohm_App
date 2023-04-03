@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:shopping_tool/Utils/constants.dart';
+import 'package:shopping_tool/Utils/sundry/constants.dart';
 
 void showtoast(String message) async {
   Fluttertoast.showToast(

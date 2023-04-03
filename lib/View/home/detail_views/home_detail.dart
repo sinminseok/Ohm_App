@@ -4,12 +4,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shopping_tool/Controller/api/gymApi.dart';
-import 'package:shopping_tool/Model/dto/gymDto.dart';
-import 'package:shopping_tool/Model/dto/statisticsDto.dart';
-import 'package:shopping_tool/Utils/constants.dart';
+import 'package:shopping_tool/Model/gym/gymDto.dart';
+import 'package:shopping_tool/Model/statistic/statisticsDto.dart';
 import 'package:animate_icons/animate_icons.dart';
 import 'package:chart_sparkline/chart_sparkline.dart';
 import 'package:shopping_tool/View/home/widgets/chart_bottom.dart';
+
+import '../../../Utils/sundry/constants.dart';
 
 class Home_Detail extends StatefulWidget {
   GymDto? gymDto;
@@ -46,30 +47,30 @@ class _Home_DetailState extends State<Home_Detail> {
   @override
   Widget build(BuildContext context) {
     var data = [
-      widget.time_avg.one,
-      widget.time_avg.two,
-      widget.time_avg.three,
-      widget.time_avg.four,
-      widget.time_avg.five,
-      widget.time_avg.six,
-      widget.time_avg.seven,
-      widget.time_avg.eight,
-      widget.time_avg.nine,
-      widget.time_avg.ten,
-      widget.time_avg.eleven,
-      widget.time_avg.twelve,
-      widget.time_avg.thirteen,
-      widget.time_avg.fourteen,
-      widget.time_avg.fifteen,
-      widget.time_avg.sixteen,
-      widget.time_avg.seventeen,
-      widget.time_avg.eighteen,
-      widget.time_avg.nineteen,
-      widget.time_avg.twenty,
-      widget.time_avg.twenty_one,
-      widget.time_avg.twenty_two,
-      widget.time_avg.twenty_three,
-      widget.time_avg.twenty_four
+      widget.time_avg.one.toDouble(),
+      widget.time_avg.two.toDouble(),
+      widget.time_avg.three.toDouble(),
+      widget.time_avg.four.toDouble(),
+      widget.time_avg.five.toDouble(),
+      widget.time_avg.six.toDouble(),
+      widget.time_avg.seven.toDouble(),
+      widget.time_avg.eight.toDouble(),
+      widget.time_avg.nine.toDouble(),
+      widget.time_avg.ten.toDouble(),
+      widget.time_avg.eleven.toDouble(),
+      widget.time_avg.twelve.toDouble(),
+      widget.time_avg.thirteen.toDouble(),
+      widget.time_avg.fourteen.toDouble(),
+      widget.time_avg.fifteen.toDouble(),
+      widget.time_avg.sixteen.toDouble(),
+      widget.time_avg.seventeen.toDouble(),
+      widget.time_avg.eighteen.toDouble(),
+      widget.time_avg.nineteen.toDouble(),
+      widget.time_avg.twenty.toDouble(),
+      widget.time_avg.twentyOne.toDouble(),
+      widget.time_avg.twentyTwo.toDouble(),
+      widget.time_avg.twentyThree.toDouble(),
+      widget.time_avg.zero.toDouble(),
     ];
     return Scaffold(
         backgroundColor: Colors.grey.shade200,
@@ -151,9 +152,11 @@ class _Home_DetailState extends State<Home_Detail> {
                       height: 10.h,
                     ),
                     Row(
+
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
-                          margin: EdgeInsets.only(left: 83.w),
+                          margin: EdgeInsets.only(left: 0.w),
                           child: Text(
                             "현재 약",
                             style: TextStyle(
@@ -163,20 +166,9 @@ class _Home_DetailState extends State<Home_Detail> {
                                 fontFamily: "lightfont"),
                           ),
                         ),
-                        widget.current_count!.length == 1
-                            ? Container(
+                        Container(
                                 margin:
-                                    EdgeInsets.only(left: 24.h, right: 37.w),
-                                child: Text(
-                                  "${widget.current_count}",
-                                  style: TextStyle(
-                                      fontSize: 50,
-                                      fontFamily: "boldfont",
-                                      color: kTextWhiteColor),
-                                ),
-                              )
-                            : Container(
-                                margin: EdgeInsets.only(left: 13.h, right: 26),
+                                    EdgeInsets.only(left: 24.h, right: 30.w),
                                 child: Text(
                                   "${widget.current_count}",
                                   style: TextStyle(
@@ -245,11 +237,11 @@ class _Home_DetailState extends State<Home_Detail> {
                                     enableGridLines: true,
 
 
-                                    max: data.reduce(max)+2,
+                                    max: data.reduce(max)+2.5.h,
 
 
-                                    // pointsMode: PointsMode.all,
-                                    lineColor: kPrimaryColor,
+                                    pointsMode: PointsMode.all,
+                                    lineColor: Colors.blue,
                                     pointSize: 8.0,
                                     fallbackHeight: 200.h,
                                     pointColor: kPrimaryColor,
@@ -274,17 +266,12 @@ class _Home_DetailState extends State<Home_Detail> {
                   ],
                 ),
               ),
-              // Container(
-              //     width: 360.w,
-              //     height: 350.h,
-              //     margin: EdgeInsets.only(left: 10.w, right: 10.w, top: 15.h),
-              //     child: Dashboard(time_avg: widget.time_avg)),
 
               Center(
                 child: Container(
                   margin: EdgeInsets.only(top: 15.h, bottom: 30.h),
                   width: 340.w,
-                  height: 100.h,
+                  height: 110.h,
                   decoration: BoxDecoration(
                       color: kBoxColor,
                       boxShadow: [
@@ -297,37 +284,41 @@ class _Home_DetailState extends State<Home_Detail> {
                       ],
                       borderRadius: BorderRadius.all(Radius.circular(10))),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(left: 30, top: 25.h),
-                            child: Text(
-                              "헬스장 현재 인원을 알려주는 ",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: kPrimaryColor,
-                                  fontSize: 17.sp,
-                                  fontFamily: "lightfont"),
+                      Container(
+                        margin: EdgeInsets.only(left: 30, top: 23.h),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+
+                              child: Text(
+                                "헬스장 현재 인원을 알려주는 ",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: kPrimaryColor,
+                                    fontSize: 17.sp,
+                                    fontFamily: "lightfont"),
+                              ),
                             ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(left: 30, top: 3.h),
-                            child: Text(
-                              "오헬몇!",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: kPrimaryColor,
-                                  fontSize: 24,
-                                  fontFamily: "boldfont"),
-                            ),
-                          )
-                        ],
+                            Container(
+                              margin: EdgeInsets.only(left: 0, top: 3.h),
+                              child: Text(
+                                "오헬몇!",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: kPrimaryColor,
+                                    fontSize: 24,
+                                    fontFamily: "boldfont"),
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                       Container(
                         margin:
-                            EdgeInsets.only(left: 20, right: 10, bottom: 10.h),
+                            EdgeInsets.only( right: 15.w, bottom: 0.h),
                         child: Icon(
                           Icons.emergency_share,
                           size: 45,

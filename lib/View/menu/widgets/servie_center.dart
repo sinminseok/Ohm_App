@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:shopping_tool/Utils/constants.dart';
+import 'package:shopping_tool/Utils/sundry/constants.dart';
 
 class ServiceCenter_Page extends StatelessWidget {
 

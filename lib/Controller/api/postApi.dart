@@ -2,90 +2,58 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:http_parser/http_parser.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:shopping_tool/Model/dto/gymDto.dart';
-import 'package:shopping_tool/Model/dto/postDto.dart';
-import 'package:shopping_tool/Model/dto/postImgDto.dart';
-import 'package:shopping_tool/Model/dto/trainerDto.dart';
+import 'package:shopping_tool/Model/post/postDto.dart';
+import 'package:shopping_tool/Model/post/postImgDto.dart';
 import 'package:http/http.dart' as http;
-import 'package:shopping_tool/Utils/http_urls.dart';
-import 'package:shopping_tool/Utils/toast.dart';
+import 'package:shopping_tool/Utils/sundry/http_urls.dart';
+import 'package:shopping_tool/Utils/sundry/toast.dart';
 
-import 'gymApi.dart';
-
-class PostApi with ChangeNotifier {
-
-
-    Future<String?> save_post(String title, String content, List<File> imageFileList,
-      String gymId, String token) async {
-    PostDto postDto = PostDto.makeDto(title, content);
-
-    String postdto = jsonEncode(postDto);
-
-
-
-    var res = await http.post(Uri.parse(PostApi_Url().save_post+"${gymId}"),
+class PostApi {
+  Future<String?> save_post(String title, String content,
+      List<File> imageFileList, String gymId, String token) async {
+    var res = await http.post(Uri.parse(PostApi_Url().save_post + "${gymId}"),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token'
         },
-        body: json.encode({
-          'title': title,
-          'content':content
-
-        }));
+        body: json.encode({'title': title, 'content': content}));
 
     if (res.statusCode == 200) {
-
       final decodeData = utf8.decode(res.bodyBytes);
       final data = jsonDecode(decodeData);
-      print(data.runtimeType);
-
       return data.toString();
-
-    }else{
+    } else {
       showtoast("ERRORR");
       return null;
     }
-
   }
 
+  save_postimg(String postId, List<File> imageFileList, String token) async {
+    FormData _formData;
 
-    save_postimg(String postId,List<File> imageFileList,
-        String token) async {
+    if (imageFileList.isNotEmpty) {
+      final List<MultipartFile> _files = imageFileList
+          .map((img) => MultipartFile.fromFileSync(img.path,
+              contentType: MediaType("image", "jpg")))
+          .toList();
 
+      final baseOptions = BaseOptions(
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'Authorization': 'Bearer $token'
+        },
 
+      );
+      Dio dio = Dio(baseOptions);
 
-      FormData _formData;
+      _formData = FormData.fromMap({
+        "images": _files,
+      });
 
-      if(imageFileList.isNotEmpty){
-
-        final List<MultipartFile> _files = imageFileList.map((img) => MultipartFile.fromFileSync(img.path,contentType: MediaType("image", "jpg"))).toList();
-
-        final baseOptions = BaseOptions(
-
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            'Authorization': 'Bearer $token' },
-
-          // contentType = 'multipart/form-data' // 'Application/json'
-        );
-        Dio dio = Dio(baseOptions);
-
-
-
-        // if(imgList.isNotEmpty){
-        _formData = FormData.fromMap({
-          "images": _files,
-
-        });
-
-        var res =await dio.post(PostApi_Url().save_postimgs + "${postId}", data :_formData);
-        print(res.data);
-
-
-
-      }}
+      var res = await dio.post(PostApi_Url().save_postimgs + "${postId}",
+          data: _formData);
+    }
+  }
 
   //Gym에 종속된 Post 모두 조회
   Future<List<PostDto>?> findall_posts(String gymId) async {
@@ -111,7 +79,6 @@ class PostApi with ChangeNotifier {
         }
         posts.add(PostDto.fromJson(data['content'][i], imgs));
       }
-      print(posts);
 
       return posts;
     } else {
@@ -119,7 +86,7 @@ class PostApi with ChangeNotifier {
     }
   }
 
-  //Gym에 종속된 Post 모두 조회
+  //Post 단일 조회
   Future<List<PostDto>?> find_post(String postId) async {
     var res = await http.get(
       Uri.parse(PostApi_Url().find_byId + "${postId}"),

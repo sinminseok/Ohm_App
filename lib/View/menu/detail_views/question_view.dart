@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../Utils/constants.dart';
+import '../../../Utils/sundry/constants.dart';
 
 class Question_View extends StatelessWidget {
   const Question_View({Key? key}) : super(key: key);
@@ -26,13 +26,13 @@ class Question_View extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              margin: EdgeInsets.only(left: 10.w,bottom: 10.h,top: 20.h),
-              child: Text("오헬몇은 무슨 서비스인가요?",style: TextStyle(color: kPrimaryColor,fontWeight: FontWeight.bold,fontSize: 21),),
+              margin: EdgeInsets.only(left: 15.w,bottom: 10.h,top: 20.h),
+              child: Text("오헬몇은 무슨 서비스인가요?",style: TextStyle(fontFamily: "lightfont2",color: kPrimaryColor,fontWeight: FontWeight.bold,fontSize: 21),),
             ),
             Center(
               child: Container(
                 width: 340.w,
-                height: 250.h,
+
                 decoration: BoxDecoration(
                     color: kBoxColor,
                     borderRadius: BorderRadius.all(Radius.circular(10))
@@ -44,40 +44,24 @@ class Question_View extends StatelessWidget {
             ),
 
             Container(
-              margin: EdgeInsets.only(left: 10.w,bottom: 10.h,top: 20.h),
-              child: Text("헬스장에 오헬몇 서비스를 도입하고싶어요!",style: TextStyle(color: kPrimaryColor,fontWeight: FontWeight.bold,fontSize: 21),),
+              margin: EdgeInsets.only(left: 15.w,bottom: 10.h,top: 20.h),
+              child: Text("헬스장에 오헬몇 서비스를 도입하고싶어요!",style: TextStyle(fontFamily: "lightfont2",color: kPrimaryColor,fontWeight: FontWeight.bold,fontSize: 18.sp),),
             ),
             Center(
               child: Container(
                 width: 340.w,
-                height: 170.h,
+                margin: EdgeInsets.only(bottom: 20.h),
+
                 decoration: BoxDecoration(
                     color: kBoxColor,
                     borderRadius: BorderRadius.all(Radius.circular(10))
                 ),
                 child: Container(
                     margin: EdgeInsets.all(20.h),
-                    child: Text("오헬몇 서비스 소유권은 Comumu가 가지고 있습니다\n 010-8313-1764로 전화 혹은 문자를 남겨주시면 빠르고 친절하게 입점 안내를 도와드립니다.!",style: TextStyle(fontSize: 21),)),
+                    child: Text("제휴를 맺은 헬스장만이 오헬몇 서비스를 이용할 수 있습니다!\n\n010 -8313 -1764 문자나 전화를 남겨주시면 빠르게 입점을 도와드립니다!",style: TextStyle(fontSize: 21),)),
               ),
             ),
 
-            Container(
-              margin: EdgeInsets.only(left: 10.w,bottom: 10.h,top: 20.h),
-              child: Text("오헬몇 서비스는 무료인가요?",style: TextStyle(color: kPrimaryColor,fontWeight: FontWeight.bold,fontSize: 21),),
-            ),
-            Center(
-              child: Container(
-                width: 340.w,
-                height: 170.h,
-                decoration: BoxDecoration(
-                    color: kBoxColor,
-                    borderRadius: BorderRadius.all(Radius.circular(10))
-                ),
-                child: Container(
-                    margin: EdgeInsets.all(20.h),
-                    child: Text("오헬몇 서비스는 현재 무료로 사용하실수 있습니다! 추후 사용자가 증가해 서버비,유지보수를 위한 비용이 필요할 경우 최소한의 금액만을 측정해 헬스장측에 청구드릴 예정입니다 ㅜ",style: TextStyle(fontSize: 21),)),
-              ),
-            ),
           ],
         ),
       ),

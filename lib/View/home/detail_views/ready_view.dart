@@ -3,9 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shopping_tool/View/home/popup/phone_popup.dart';
+import 'package:shopping_tool/View/menu/detail_views/useage_view.dart';
 
-import '../../../Utils/constants.dart';
-import '../../../Utils/get_date.dart';
+import '../../../Utils/sundry/constants.dart';
+import '../../../Utils/sundry/get_date.dart';
 import '../../gymsearch/search_view.dart';
 
 class Ready_View extends StatefulWidget {
@@ -36,7 +37,7 @@ class _Ready_ViewState extends State<Ready_View> {
               children: [
                 Container(
                     width: 360.w,
-                    height: 130.h,
+                    height: 140.h,
                     decoration: BoxDecoration(
                       color: kBottomColor,
                       borderRadius: BorderRadius.only(
@@ -123,32 +124,40 @@ class _Ready_ViewState extends State<Ready_View> {
           ),
           SizedBox(height: 180.h,),
 
-          Container(
-              width: 330.w,
-              height: 80.h,
-              decoration: BoxDecoration(
-                  color: kBoxColor,
-                  borderRadius: BorderRadius.all(Radius.circular(10))),
-              margin: EdgeInsets.only(top: 20),
-              child: Row(
-                children: [
-                  Container(
-                      margin: EdgeInsets.only(left: 15.w, right: 20.w),
-                      child: Icon(
-                        Icons.info_outline,
-                        color: kPrimaryColor,
-                        size: 40,
-                      )),
-                  Center(
-                      child: Text(
-                    "이용방법",
-                    style: TextStyle(
-                        fontSize: 18.sp,
-                        color: kButtonColor,
-                        fontWeight: FontWeight.bold),
-                  )),
-                ],
-              )),
+          InkWell(
+            onTap: (){
+              Navigator.push(
+                  context,
+                  PageTransition(
+                      type: PageTransitionType.fade, child: Useage_View()));
+            },
+            child: Container(
+                width: 330.w,
+                height: 80.h,
+                decoration: BoxDecoration(
+                    color: kBoxColor,
+                    borderRadius: BorderRadius.all(Radius.circular(10))),
+                margin: EdgeInsets.only(top: 20),
+                child: Row(
+                  children: [
+                    Container(
+                        margin: EdgeInsets.only(left: 15.w, right: 20.w),
+                        child: Icon(
+                          Icons.info_outline,
+                          color: kPrimaryColor,
+                          size: 40,
+                        )),
+                    Center(
+                        child: Text(
+                      "이용방법",
+                      style: TextStyle(
+                          fontSize: 18.sp,
+                          color: kButtonColor,
+                          fontWeight: FontWeight.bold),
+                    )),
+                  ],
+                )),
+          ),
 // PhoneNumber_Popup().showDialog(context);
           Container(
               width: 330.w,

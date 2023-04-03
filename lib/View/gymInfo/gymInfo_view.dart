@@ -5,11 +5,11 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shopping_tool/Controller/api/trainerApi.dart';
-import 'package:shopping_tool/Model/dto/trainerDto.dart';
+import 'package:shopping_tool/Model/manager/trainerDto.dart';
 import 'package:shopping_tool/View/gymInfo/widgets/trainer_widget.dart';
 import '../../Controller/api/postApi.dart';
-import '../../Model/dto/postDto.dart';
-import '../../../Utils/constants.dart';
+import '../../Model/post/postDto.dart';
+import '../../Utils/sundry/constants.dart';
 import 'widgets/post_widget.dart';
 
 class GymInfo_View extends StatefulWidget {
@@ -25,6 +25,7 @@ class _GymInfo_View extends State<GymInfo_View> {
   String selectedDropdown = '게시물';
   List<PostDto> posts = [];
   List<TrainerDto> trainers = [];
+  List<TrainerDto> showtrainers = [];
   final spinkit = SpinKitWanderingCubes(
     itemBuilder: (BuildContext context, int index) {
       return DecoratedBox(
@@ -45,8 +46,6 @@ class _GymInfo_View extends State<GymInfo_View> {
       gymId = prefs.getInt("gymId");
     });
 
-       print("Dd");
-       print(gymId);
     //gymId
     if (gymId == null) {
       posts = [];
@@ -65,6 +64,11 @@ class _GymInfo_View extends State<GymInfo_View> {
       return trainers;
     } else {
       trainers = (await TrainerApi().findall_trainer(gymId.toString()))!;
+      for(int i = 0;i<trainers.length;i++){
+        if(trainers[i].showProfile == true){
+          showtrainers.add(trainers[i]);
+        }
+      }
       return trainers;
     }
   }
@@ -95,22 +99,24 @@ class _GymInfo_View extends State<GymInfo_View> {
               selectedDropdown == "게시물"
                   ? Text(
                       "게시물",
-                      style: TextStyle(
-                          fontSize: 21,
-                          color: kTextColor,
-                          fontFamily: "boldfont",
-                          fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontSize: 21,
+                    color: kTextColor,
+                    fontFamily: "lightfont2",
+                    fontWeight: FontWeight.bold
+                ),
                     )
                   : Text(
                       "직원",
-                      style: TextStyle(
-                          fontSize: 21,
-                          color: kTextColor,
-                          fontFamily: "boldfont",
-                          fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontSize: 21,
+                    color: kTextColor,
+                    fontFamily: "lightfont2",
+                    fontWeight: FontWeight.bold
+                ),
                     ),
               Container(
-                margin: EdgeInsets.only(left: 15.w, top: 10),
+                margin: EdgeInsets.only(left: 15.w, top: 0),
                 width: 100.w,
                 decoration: BoxDecoration(
                     color: kBoxColor,
@@ -234,11 +240,11 @@ class _GymInfo_View extends State<GymInfo_View> {
                                       width: 360.w,
                                       height: 600.h,
                                       child: ListView.builder(
-                                          itemCount: trainers.length,
+                                          itemCount: showtrainers.length,
                                           itemBuilder:
                                               (BuildContext ctx, int idx) {
                                             return Trainer_Widget(
-                                                size, context, trainers[idx]);
+                                                size, context, showtrainers[idx]);
                                           }));
                                 }
                               }))

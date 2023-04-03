@@ -3,8 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:shopping_tool/Utils/constants.dart';
-import 'package:shopping_tool/Utils/toast.dart';
+import 'package:shopping_tool/Utils/sundry/constants.dart';
+import 'package:shopping_tool/Utils/sundry/toast.dart';
 import 'package:shopping_tool/View/menu/detail_views/introduce_view.dart';
 import 'package:shopping_tool/View/menu/detail_views/question_view.dart';
 import 'package:shopping_tool/View/menu/detail_views/useage_view.dart';
@@ -30,7 +30,7 @@ class _Menu_View extends State<Menu_View> {
     return Scaffold(
         appBar: AppBar(
           iconTheme: IconThemeData(
-            color: kTextColor, //change your color here
+            color: kPrimaryColor, //change your color here
           ),
           automaticallyImplyLeading: false,
           backgroundColor: kBackgroundColor,
@@ -43,15 +43,15 @@ class _Menu_View extends State<Menu_View> {
                 style: TextStyle(
                   fontSize: 21,
                   color: kTextColor,
-                  fontFamily: "boldfont",
+                  fontFamily: "lightfont2",
                   fontWeight: FontWeight.bold
                 ),
               ),
-              InkWell(
-                  onTap: () {
-                    showtoast("기능 개발중입니다 ㅜ");
-                  },
-                  child: Icon(Icons.notifications,size: 30,))
+              // InkWell(
+              //     onTap: () {
+              //       showtoast("기능 개발중입니다 ㅜ");
+              //     },
+              //     child: Icon(Icons.notifications,size: 30,))
             ],
           ),
         ),
@@ -264,7 +264,7 @@ class _Menu_View extends State<Menu_View> {
                     style: TextStyle(color: Colors.black38),
                   ),
                   Text(
-                    "@Copyright 신민석(CEO),김영솔(CTO)",
+                    "@Copyright 신민석,김영솔",
                     style: TextStyle(color: Colors.black38),
                   ),
                   Text(""),

@@ -40,8 +40,8 @@ class _FramePage extends State<FramePage> {
         bottomNavigationBar: CustomBottomNavigationBar(
           iconList: [
             Icons.fitness_center,
-            Icons.speaker_notes_outlined,
-            Icons.email_outlined,
+            Icons.speaker_notes,
+            Icons.email,
             Icons.menu,
           ],
           onChange: (val) {
