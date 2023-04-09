@@ -1,5 +1,5 @@
 
-String endpoint = "http://172.20.10.2:8080/api/";
+String endpoint = "http://ec2-3-37-169-45.ap-northeast-2.compute.amazonaws.com:8080/api/";
 //  #172.20.10.2 핫스팟
 // 192.168.0.101집
 class ManagerApi_Url{

@@ -46,7 +46,6 @@ class _GymDetail_View extends State<GymDetail_View> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
 
     return Scaffold(
       appBar: AppBar(
@@ -229,7 +228,6 @@ class _GymDetail_View extends State<GymDetail_View> {
                     Container(
                         margin: EdgeInsets.only(top: 10.h),
                         width: 360.w,
-                        height: 240.h,
                         decoration: BoxDecoration(color: kContainerColor),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -312,7 +310,7 @@ class _GymDetail_View extends State<GymDetail_View> {
                                         ? Container()
                                         : Container(
                                         margin:
-                                        EdgeInsets.only(bottom: 5.h),
+                                        EdgeInsets.only(bottom: 15.h),
                                         child: Text(
                                             "휴관일 : ${gymTime?.closeDay}")),
                                   ],
@@ -338,7 +336,7 @@ class _GymDetail_View extends State<GymDetail_View> {
                             ),
                             Container(
                                 margin: EdgeInsets.only(top: 20, left: 20,right: 20),
-                                child: Text("dajsbdjhasvfdjhavfhjasdvfhjdsbvfjhdsfhjbdsfhjvdsfhjdshjfbvdshjfv"))
+                                child: Text("${widget.gymDto.introduce}"))
                           ],
                         )),
                   ],
