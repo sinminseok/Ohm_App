@@ -1,4 +1,4 @@
-package com.example.shopping_tool
+package com.comumu.ohm
 
 import io.flutter.embedding.android.FlutterActivity
 
