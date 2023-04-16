@@ -40,14 +40,13 @@ class _Home_ViewState extends State<Home_View> {
   Future<bool> get_gymInfo() async {
     final prefs = await SharedPreferences.getInstance();
     gymId = prefs.getInt("gymId");
-    current_count = await GymApi().current_count(gymId.toString(), context);
+
     if (gymId == null) {
       return false;
     } else {
-
+      current_count = await GymApi().current_count(gymId.toString(), context);
       gymDto = await GymApi().search_byId(gymId);
       await get_avg();
-
       return true;
     }
   }

@@ -1,21 +1,18 @@
-
 String endpoint = "http://ec2-3-37-169-45.ap-northeast-2.compute.amazonaws.com:8080/api/";
 
-
-class ManagerApi_Url{
+//ec2-3-37-169-45.ap-northeast-2.compute.amazonaws.com
+class ManagerApi_Url {
   String findall_trainer = endpoint + "admin/findall/";
 
   String findall_byGymId = endpoint + "manager/findall/";
 
   String find_byId = endpoint + "manager/";
-
 }
 
-class GymApi_Url{
-
+class GymApi_Url {
   String find_byId = endpoint + "gym/";
 
-  String time_avg = endpoint+"gym/avg/";
+  String time_avg = endpoint + "gym/avg/";
 
   String decrease_count = endpoint + "gym/count-decrease/";
 
@@ -25,37 +22,27 @@ class GymApi_Url{
 
   String find_byName = endpoint + "gym/name/";
 
-  String get_gymTime = endpoint+"gym/time/";
+  String get_gymTime = endpoint + "gym/time/";
 
-  String get_gymPrice = endpoint+"gym/price/";
+  String get_gymPrice = endpoint + "gym/price/";
 
   String findall = endpoint + "gyms";
-
 }
 
-
-class PostApi_Url{
-
-  String find_byId = endpoint+"gymInfo/";
+class PostApi_Url {
+  String find_byId = endpoint + "gymInfo/";
 
   String findall_bygymId = endpoint + "posts/";
 
-  String save_post = endpoint +"gymInfo/";
+  String save_post = endpoint + "gymInfo/";
 
-  String save_postimgs = endpoint +"gymInfo/img/";
+  String save_postimgs = endpoint + "gymInfo/img/";
 }
 
-
-class Question_Url{
-
-  String save = endpoint+"question/";
+class Question_Url {
+  String save = endpoint + "question/";
 
   String findall = endpoint + "question/all/";
-
-
 }
 
 const awsimg_endpoint = "https://ohm-image.s3.ap-northeast-2.amazonaws.com/";
-
-
-

@@ -102,7 +102,6 @@ class GymApi {
       Uri.parse(GymApi_Url().find_byName + "${gym_name}"),
       headers: {'Content-Type': 'application/json'},
     );
-    print(res.statusCode);
 
 
     List<GymDto> result = [];
@@ -158,6 +157,7 @@ class GymApi {
     if (res.statusCode == 200) {
       final decodeData = utf8.decode(res.bodyBytes);
       final data = jsonDecode(decodeData);
+      print(data);
      var statisticsDto = StatisticsDto.fromJson(data);
 
       return statisticsDto;

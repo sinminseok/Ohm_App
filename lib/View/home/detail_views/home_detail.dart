@@ -47,6 +47,7 @@ class _Home_DetailState extends State<Home_Detail> {
   @override
   Widget build(BuildContext context) {
     var data = [
+
       widget.time_avg.one.toDouble(),
       widget.time_avg.two.toDouble(),
       widget.time_avg.three.toDouble(),
@@ -78,6 +79,7 @@ class _Home_DetailState extends State<Home_Detail> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+
               Container(
                 width: 360.w,
                 height: 200.h,

@@ -4,9 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
-import 'package:http/http.dart' as http;
 import 'package:shopping_tool/Utils/sundry/toast.dart';
 import '../../Controller/api/gymApi.dart';
 import '../../Model/gym/gymDto.dart';
@@ -32,6 +29,8 @@ class _Search_View extends State<Search_View> {
       );
     },
   );
+
+
   //모든 헬스장
   List<GymDto> all_gyms = [];
   List<GymDto> find_gyms = [];
@@ -45,7 +44,6 @@ class _Search_View extends State<Search_View> {
   @override
   void initState() {
     // TODO: implement initState
-
     super.initState();
   }
 
@@ -69,6 +67,11 @@ class _Search_View extends State<Search_View> {
             SizedBox(
               height: 30.h,
             ),
+            InkWell(
+                onTap: (){
+                  print(all_gyms);
+                },
+                child: Text("dataa")),
             Row(
               children: [
                 Container(
@@ -85,15 +88,15 @@ class _Search_View extends State<Search_View> {
                         height: 43.h,
                         margin: EdgeInsets.only(top: 15.h, left: 10),
                         decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey.shade400,width: 0.5),
+                            border: Border.all(
+                                color: Colors.grey.shade400, width: 0.5),
                             color: kBackgroundColor,
                             borderRadius:
                                 BorderRadius.all(Radius.circular(10))),
                         child: TextField(
-
                           maxLines: 10,
                           textInputAction: TextInputAction.done,
-                          onSubmitted: (value) async{
+                          onSubmitted: (value) async {
                             if (_searchController.text == "") {
                               showtoast("내용을 입력해주세요");
                             } else {
@@ -114,7 +117,6 @@ class _Search_View extends State<Search_View> {
                                 EdgeInsets.only(left: 20.w, top: 10.h),
                             hintText: "헬스장 이름",
                             hintStyle: TextStyle(
-
                                 fontFamily: "boldfont", fontSize: 15.sp),
                             border: InputBorder.none,
                             suffixIcon: Container(
@@ -136,9 +138,8 @@ class _Search_View extends State<Search_View> {
                                   }
                                 },
                                 icon: Icon(
-
                                   Icons.search,
-                                  size:19,
+                                  size: 19,
                                   color: Colors.black,
                                 ),
                               ),
@@ -147,6 +148,7 @@ class _Search_View extends State<Search_View> {
                         ))),
               ],
             ),
+
 
             find_gyms.length != 0
                 ? Container(

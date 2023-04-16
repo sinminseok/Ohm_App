@@ -269,7 +269,7 @@ class _Menu_View extends State<Menu_View> {
                   ),
                   Text(""),
                   Text(
-                    "오늘 헬스 몇시에가지? 오헬몇 version : 1.0.0",
+                    "오늘 헬스 몇시에가지? 오헬몇 version : 1.0.4",
                     style: TextStyle(color: Colors.black38),
                   ),
                 ],
